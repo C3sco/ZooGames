@@ -39,3 +39,6 @@ comunità:
     -chat con altri utenti
     -controllo prenotazioni
     
+aggiustare:
+    -apertura barra in modalità mobile
+    
