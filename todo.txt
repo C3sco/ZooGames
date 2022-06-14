@@ -1,0 +1,42 @@
+giochi:
+    -che animale sei
+      -domande a caso
+      -pool randomica finale della risposta
+      -0.1% esce vitali
+  
+    -impiccato
+  
+    -quiz
+
+servizi:
+    -e-commerce:
+      -negozio online di
+       animali
+      -gadjet per animali
+      -prenota un canile
+  
+    -dog sitter:
+      -registrati (opzionale)
+      -trova
+      -contatta
+      -prenota
+
+    -adotta un animale
+      -seleziona un animale da una pool
+      -aggiungere info sul animale
+      -mettere link a paypal per adozione
+      
+curiosità:    
+    -trova uno zoo
+    
+    -genera un animale a caso con info
+    
+    -generatore meme animali
+
+comunità:
+    -chat con altri utenti
+    
+    -login
+    
+    -controllo prenotazioni
+    
