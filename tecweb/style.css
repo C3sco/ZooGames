@@ -48,7 +48,22 @@
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
+.card-text{
+  text-align:center;
+}
+.btn-group{
+  width:150%;
+}
 
-.search-item{
-  
+.start{
+  background-color: transparent;
+  border: solid 1px grey;
+  border-radius:5px;
+  color:grey;
+  width:80%;
+  margin:auto;
+}
+.start:hover{
+  background-color: rgba(255, 0, 0, 0.979);
+  color:white;
 }
