@@ -34,9 +34,11 @@ curiosità:
     -generatore meme animali
 
 comunità:
+    -login NECESSARIO 
+      -finesta moldale di avertimento
     -chat con altri utenti
-    
-    -login
-    
     -controllo prenotazioni
+    
+aggiustare:
+    -apertura barra in modalità mobile
     
