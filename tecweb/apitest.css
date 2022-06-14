@@ -1,0 +1,55 @@
+body {
+  font-family: Courier New;
+  padding: 10px;
+  margin-right: 20%;
+  margin-left: 20%;
+  background-color: #b0d1b8;
+}
+
+
+a {
+  background-color: white;  
+  font-size: 150%;
+}
+
+ol {
+  font-style: italic;
+  border: 3px dashed #8f89cc;
+}
+
+h1 {
+  text-align:center;
+}
+
+img {
+  width: 100%;
+  float: right;
+  padding: 20px;
+}
+
+span {
+  color: white;
+  background-color: #8f89cc;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.button-1 {
+  background-color: #c0a3c2;
+  font-family: Courier New;
+}
+
+.button-1:hover,
+.button-1:focus {
+  background-color: #be76c2;
+}
