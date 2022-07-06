@@ -73,15 +73,22 @@
                           <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Inserisci il tuo Username"> </div>
                           <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Inserisci la tua password"> </div>
                           <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Mantienimi connesso</label> </div>
-                          <div class="group"> <input type="submit" class="button" value="Login"> </div>
+                          <div class="group"> <input type="submit" class="button" value="Login" id="myButton"> </div>
                           <div class="foot"> <a href="#">Password dimenticata?</a> </div>
+
+                          <script type="text/javascript">
+                            document.getElementById("myButton").onclick = function () {
+                                location.href = "leaderboard.html";
+                            };
+                        </script>
+                        
                       </div>
                       <div class="sign-up-form">
                           <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Crea un Username"> </div>
                           <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Inserisci una password"> </div>
                           <div class="group"> <label for="pass" class="label">Ripeti Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Ripeti la password"> </div>
                           <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input id="pass" type="text" class="input" placeholder="Inserisci la tua email"> </div>
-                          <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+                          <div class="group"> <input type="submit" class="button" value="Sign Up" > </div>
                       </div>
                   </div>
               </div>
