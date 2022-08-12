@@ -1,11 +1,13 @@
 import {Link, useMatch, useResolvedPath} from "react-router-dom"
 import './navbar.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function Navbar(){
     return <nav class="navbar">
         <ul>
+            <CustomLink class="a" id="title" to="/Homepage/Homepage">Animal Party</CustomLink>
             <CustomLink class="a" to="/Homepage/Giochi">Giochi</CustomLink>
-            <CustomLink class="a" to="/Homepage/Login">Login</CustomLink>
+            <CustomLink class="a"  to="/Homepage/Login">Login</CustomLink>
         </ul>
 
     </nav>
