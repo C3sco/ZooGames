@@ -1,0 +1,36 @@
+.navbar{
+    background-color:rgb(48, 47, 47);
+    overflow: hidden;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    text-decoration: none;
+}
+ul{
+    text-decoration: none;
+}
+CustomLink{
+    text-decoration: none;
+
+}
+
+.a{
+    color:white;
+    display: block;
+    border: 1px solid white;
+    float:left;
+    padding:1%;
+}
+
+.a:hover{
+    background-color: lightcoral;
+}
+
+#right{
+    float:right;
+    color:white;
+    display: block;
+    border: 1px solid white;
+    padding:1%;
+    text-decoration: none;
+}
