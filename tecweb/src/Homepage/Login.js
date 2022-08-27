@@ -1,8 +1,60 @@
-import "./login.css"
+import { useState } from 'react';
+import './login.css'
+import { ReigsterHandler } from './RegisterHandler';
+
 export default function Login() {
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+
+    const [submit, setSubmit] = useState(false);
+    const [error, setError] = useState(false);
+
+    const handleUsername = (e) => {
+        setUsername(e.target.value);
+        setSubmit(false);
+    }
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+        setSubmit(false);
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+        setSubmit(false);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (username === '' || password === '' || email === '') {
+            setError(true);
+        } else {
+            setSubmit(true);
+            setError(false);
+        }
+    }
+    const onSuccess = () => {
+        return (
+            //inserire la homepage utente
+            <>
+            </>
+        )
+    }
+
+    const onError = () => {
+        //errore
+        return (
+        <>
+        </>
+        )
+    }
 
     return (
         <>
+            <div className="messages">
+                {onError()}
+                {onSuccess()}
+            </div>
             <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/"></link>
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -30,11 +82,11 @@ export default function Login() {
 
                                     </div>
                                     <div class="sign-up-form">
-                                        <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Crea un Username"></input> </div>
-                                        <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
+                                        <div class="group"> <label for="user" class="label">Username</label> <input onChange={handleUsername} value={username} id="user" type="text" class="input" placeholder="Crea un Username"></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Password</label> <input onChange={handlePassword} value={password} id="pass" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
                                         <div class="group"> <label for="pass" class="label">Ripeti Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Ripeti la password"></input> </div>
-                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input id="pass" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
-                                        <div class="group"> <input type="submit" class="button" value="Sign Up" ></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input onChange={handleEmail} value={email} id="pass" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
+                                        <div class="group"> <input onClick={handleSubmit} type="submit" class="button" value="Sign Up" ></input> </div>
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +95,11 @@ export default function Login() {
 
                 </div>
             </main>
+
+
+
         </>
     )
+
+
 }

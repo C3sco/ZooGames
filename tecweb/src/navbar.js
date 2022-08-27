@@ -7,6 +7,8 @@ export default function Navbar(){
         <ul>
             <CustomLink class="a" id="title" to="/Homepage/Homepage">Animal Party</CustomLink>
             <CustomLink class="a" to="/Homepage/Giochi">Giochi</CustomLink>
+            <CustomLink class="a" to="/Homepage/Comunita">Comunita</CustomLink>
+            <CustomLink class="a" to="/Homepage/Curiosita">Curiosita</CustomLink>
             <CustomLink class="a"  to="/Homepage/Login">Login</CustomLink>
         </ul>
 

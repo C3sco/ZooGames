@@ -14,7 +14,6 @@ function App() {
   return (
     <>
       <Navbar />
-
       <div className="container">
         <Routes>
           <Route path="/Homepage/Homepage" index element={<Homepage />} />
