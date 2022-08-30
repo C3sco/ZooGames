@@ -29,6 +29,76 @@ function animalPresent(animalJSON) {
   document.getElementById("image_link").src= animalJSON.image_link;
 }
 
+setAllQuestion=(newArr, data)=>{
+  for(var i=0; i<newArr.length; i++){
+      switch(newArr[i].testoDomanda){
+          case "What's animal's name in the photo?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "name");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "What's the latin name of the animal in the photo?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "latin_name");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "What kind of animal is it?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "animal_type");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "What's the lenght of this animal?(m)":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "length_max");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "How heavy is the animal?(kg)":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "weight_max");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "How long does the animal's life last?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "lifespan");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "What's the animal's natural habitat ?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "habitat");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "What does the animal in the photo eat?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "diet");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;
+          case "Where does the animal live?":
+              this.setQuestion(newArr[i].opzioniRisposte, data, "geo_range");
+              newArr[i].img=data[0]["image_link"];
+              var element=data[0];
+              data.shift();
+              data.push(element);
+              break;  
+      }
+  }
+  this.setState({quiz:newArr});
+}
 
 function memeRequest() {
   let request = new XMLHttpRequest();
