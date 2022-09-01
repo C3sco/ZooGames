@@ -26,7 +26,7 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (username === '' || password === '' || email === '') {
+        if (username === '' || password === '') {
             setError(true);
         } else {
             setSubmit(true);
@@ -79,7 +79,6 @@ export default function Login() {
                                         <div class="group"> <input id="check" type="checkbox" class="check" checked></input> <label for="check"><span class="icon"></span> Mantienimi connesso</label> </div>
                                         <div class="group"> <input type="submit" class="button" value="Login" id="myButton"></input> </div>
                                         <div class="foot"> <a href="#">Password dimenticata?</a> </div>
-
                                     </div>
                                     <div class="sign-up-form">
                                         <div class="group"> <label for="user" class="label">Username</label> <input onChange={handleUsername} value={username} id="user" type="text" class="input" placeholder="Crea un Username"></input> </div>
@@ -95,8 +94,6 @@ export default function Login() {
 
                 </div>
             </main>
-
-
 
         </>
     )

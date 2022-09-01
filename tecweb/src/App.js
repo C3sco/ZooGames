@@ -8,7 +8,8 @@ import Curiosita from './Homepage/Curiosita'
 import Navbar from './navbar'
 import Login from "./Homepage/Login";
 import Comunita from "./Homepage/Comunita";
-
+import Notizie from "./Giochi/Notizie"
+import Video from "./Giochi/Video"
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route path="/Homepage/Login" element={<Login />} />
           <Route path="/Homepage/Curiosita" element={<Curiosita />} />
           <Route path="/Homepage/Comunita" element={<Comunita />} />
+          <Route path="/Giochi/Notizie" element={<Notizie/>}/>
+          <Route path="/Giochi/Video" element={<Video />} />
         </Routes>
       </div>
 

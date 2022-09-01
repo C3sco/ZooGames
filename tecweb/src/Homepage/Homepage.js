@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
-import "./games3.png"
+
 
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
         <div class="carousel-inner">
 
           <div class="carousel-item active">
-            <img src={require("./games3.png")} class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" alt="" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+            <img src={require("./Immagini/games3.png")} class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" alt="" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
             <div class="container">
               <div class="carousel-caption text-start">
                 <h1>Giochi</h1>
@@ -45,7 +45,7 @@ const Home = () => {
           </div>
 
           <div class="carousel-item">
-            <img src={require("./bg.jpg")} class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" alt="" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+            <img src={require("./Immagini/bg.jpg")} class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" alt="" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
             <div class="container">
               <div class="carousel-caption">
                 <h1>Curiosità</h1>
