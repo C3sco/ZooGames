@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./styleCard.css"
 
 const AnimalNews = () => {
     let newsArray = connect();
@@ -10,7 +10,7 @@ const AnimalNews = () => {
 
     const NewsCard = (props) => {
         return(
-            <div className="card my-1 border-3 shadow-sm" key={props.element.url}>
+            <div className="notizia" key={props.element.url}>
                 <div className="card-body">
                     <div className="float-end ms-5 p-3" style={imageContainerStyle}>
                         <img src={props.element.urlToImage} style={imageStyle}></img>
@@ -21,7 +21,7 @@ const AnimalNews = () => {
                     <a 
                         href={props.element.url} 
                         className="btn btn-outline-primary fs-5">
-                            Read full article
+                            Continua a leggere
                     </a>
                 </div>
             </div>
@@ -55,16 +55,16 @@ const AnimalNews = () => {
     
     return(
         <div id="News" className="container">
-            <h1 className="mb-3">Latest news</h1>
+            <h1>Notizie sugli animali</h1>
             <form className="d-flex my-3" role="search" onSubmit={(e) => e.preventDefault()}>
                 <input 
                     className="form-control me-2" 
                     type="search" 
-                    placeholder="Search" 
+                    placeholder="Cerca.." 
                     aria-label="Search"
                     onChange={(e) => searchItems(e.target.value)}
                 />
-                <button className="btn btn-outline-success" type="submit">Search</button>
+                <button className="btn btn-outline-success" type="submit">Cerca</button>
             </form>
             <div className="d-flex flex-column flex-wrap">
                 {

@@ -3,6 +3,30 @@ import './login.css'
 import { ReigsterHandler } from './RegisterHandler';
 
 export default function Login() {
+/*
+    let registerService = new RegisterService();
+        registerService.saveUser(
+            {
+                username: username,
+                password: password,
+                admin:false
+            }
+        )
+        .then(data1 => {
+            switch(data1.status){
+                case 201: //Utente creato
+                this.props.navigate("/Giochi/Video"+username);
+                break;
+                case 304: //Utente gia' esistente
+                    this.error="Utente già esistente";
+                break;
+                default:
+                    throw 'Stato non gestito';
+                    break;
+            }
+            console.log(data1)
+        });
+*/
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -10,6 +34,8 @@ export default function Login() {
 
     const [submit, setSubmit] = useState(false);
     const [error, setError] = useState(false);
+
+  
 
     const handleUsername = (e) => {
         setUsername(e.target.value);
@@ -26,13 +52,18 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (username === '' || password === '') {
+        if (username === '' || password === '' || email === '') {
             setError(true);
         } else {
             setSubmit(true);
             setError(false);
         }
     }
+
+    if(submit==true){
+        ReigsterHandler(username);
+    }
+
     const onSuccess = () => {
         return (
             //inserire la homepage utente
@@ -44,8 +75,8 @@ export default function Login() {
     const onError = () => {
         //errore
         return (
-        <>
-        </>
+            <>
+            </>
         )
     }
 
@@ -81,10 +112,10 @@ export default function Login() {
                                         <div class="foot"> <a href="#">Password dimenticata?</a> </div>
                                     </div>
                                     <div class="sign-up-form">
-                                        <div class="group"> <label for="user" class="label">Username</label> <input onChange={handleUsername} value={username} id="user" type="text" class="input" placeholder="Crea un Username"></input> </div>
-                                        <div class="group"> <label for="pass" class="label">Password</label> <input onChange={handlePassword} value={password} id="pass" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
+                                        <div class="group"> <label for="user" class="label">Username</label> <input /*onChange={handleUsername} value={username}*/ id="user" type="text" class="input" placeholder="Crea un Username"></input></div>
+                                        <div class="group"> <label for="pass" class="label">Password</label> <input /*onChange={handlePassword} value={password}*/ id="pass" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
                                         <div class="group"> <label for="pass" class="label">Ripeti Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Ripeti la password"></input> </div>
-                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input onChange={handleEmail} value={email} id="pass" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input /*onChange={handleEmail} value={email}*/ id="pass" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
                                         <div class="group"> <input onClick={handleSubmit} type="submit" class="button" value="Sign Up" ></input> </div>
                                     </div>
                                 </div>

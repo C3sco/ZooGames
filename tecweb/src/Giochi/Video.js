@@ -37,7 +37,7 @@ const Youtube = () => {
 
             
             <div id="youtubeBody" className="container mt-5">
-                <p className="lead display-5" id="youtubeTitle">Our choices</p>
+                <h1>Video migliori della settimana</h1>
                 <div className="d-flex justify-content-evenly align-items-center flex-wrap gap-3 my-5">
                         <iframe 
                             height="200"
@@ -64,7 +64,7 @@ const Youtube = () => {
                             allowFullScreen>
                         </iframe>
                 </div>
-                <p className="lead display-5" id="youtubeTitle">Funny Youtube Videos</p>
+                <h1>Video divertenti</h1>
                 <form className="d-flex my-5" role="search" onSubmit={(e) => e.preventDefault()}>
                     <input 
                         className="form-control me-2" 
@@ -75,37 +75,41 @@ const Youtube = () => {
                     />
                     <button className="btn btn-outline-success" type="submit">Search</button>
                 </form>
-                <div className="row row-cols-1 row-cols-md-3 g-4">
+
+
+                <div className="card-fuori">
                     {
                         searchInput.length > 1 ?
                             filteredResults.map((element) => (
-                            <div className="col" key={element.id.videoId}>
-                                <div className="card border-3 mb-3">
-                                    <img src={element.snippet.thumbnails.high.url} className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
+                            <div className="bordo" key={element.id.videoId}>
+                                
+                                <div className="bordo">
+                                    <img src={element.snippet.thumbnails.high.url} className="" alt="..."></img>
+                                    
                                         <h5 className="card-title">{element.snippet.title}</h5>
                                         <p className="card-text">{element.snippet.channelTitle}</p>
-                                        <a href={ytLink + element.id.videoId} className="btn btn-outline-primary">Watch Video</a>
+                                        <a href={ytLink + element.id.videoId} className="btn btn-outline-primary">Guarda il video</a>
                                     </div>
                                     <div className="card-footer">
                                         <small className="text-muted">{formatDate(element.snippet.publishedAt)}</small>
                                     </div>
                                 </div>
-                            </div>
+                            
                             )) : 
                             videoList.map((element) => (
-                            <div className="col" key={element.id.videoId}>
-                                <div className="card mb-3 border-3" id="youtubeCard">
-                                    <img src={element.snippet.thumbnails.high.url} className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
+                            <div className="bordo" key={element.id.videoId}>
+ 
+                                <div className="">
+                                    <img src={element.snippet.thumbnails.high.url} className="" alt="..."></img>
+                                    
                                         <h5 className="card-title">{element.snippet.title}</h5>
                                         <p className="card-text">{element.snippet.channelTitle}</p>
-                                        <a href={ytLink + element.id.videoId} className="btn btn-outline-primary">Watch Video</a>
+                                        <a href={ytLink + element.id.videoId} className="btn btn-outline-primary">Guarda il video</a>
                                     </div>
                                     <div className="card-footer">
                                         <small className="text-muted">{formatDate(element.snippet.publishedAt)}</small>
                                     </div>
-                                </div>
+                                
                             </div>
                             ))
                         }
