@@ -10,6 +10,7 @@ import Login from "./Homepage/Login";
 import Comunita from "./Homepage/Comunita";
 import Notizie from "./Giochi/Notizie"
 import Video from "./Giochi/Video"
+import Impiccato from "./Giochi/Impiccato"
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Homepage/Comunita" element={<Comunita />} />
           <Route path="/Giochi/Notizie" element={<Notizie/>}/>
           <Route path="/Giochi/Video" element={<Video />} />
+          <Route path="/Giochi/Impiccato" element={<Impiccato />} />
         </Routes>
       </div>
 

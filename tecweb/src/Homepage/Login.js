@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './login.css'
+import { LoginHelper } from './LoginHelper';
 import { ReigsterHandler } from './RegisterHandler';
+//import * as fs from 'fs';
 
 export default function Login() {
 /*
@@ -64,6 +66,28 @@ export default function Login() {
         ReigsterHandler(username);
     }
 
+    let dati = {
+        username: username,
+        password: password
+    }
+
+/*
+    var fs = require('fs');
+    fs.writeFile('users.json','utf8',function readFileCallback(err,data){
+        if (err){
+            console.log(err);
+        } else {
+        obj=JSON.parse(data);
+        obj.push(dati);
+        datiInsert=JSON.stringify(obj);
+        fs.writeFile('users.json', datiInsert, 'utf8', callback); // write it back 
+    }});
+*/
+
+
+
+
+
     const onSuccess = () => {
         return (
             //inserire la homepage utente
@@ -81,7 +105,8 @@ export default function Login() {
     }
 
     return (
-        <>
+        <html>
+            
             <div className="messages">
                 {onError()}
                 {onSuccess()}
@@ -104,6 +129,7 @@ export default function Login() {
                         <div class="login-box">
                             <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked></input><label for="tab-1" class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"></input><label for="tab-2" class="tab">Registrati</label>
                                 <div class="login-space">
+                            
                                     <div class="login">
                                         <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Inserisci il tuo Username"></input> </div>
                                         <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Inserisci la tua password"></input> </div>
@@ -112,10 +138,10 @@ export default function Login() {
                                         <div class="foot"> <a href="#">Password dimenticata?</a> </div>
                                     </div>
                                     <div class="sign-up-form">
-                                        <div class="group"> <label for="user" class="label">Username</label> <input /*onChange={handleUsername} value={username}*/ id="user" type="text" class="input" placeholder="Crea un Username"></input></div>
-                                        <div class="group"> <label for="pass" class="label">Password</label> <input /*onChange={handlePassword} value={password}*/ id="pass" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
+                                        <div class="group"> <label for="user" class="label">Username</label> <input /*onChange={handleUsername} value={username}*/ id="userRegister" type="text" class="input" placeholder="Crea un Username"></input></div>
+                                        <div class="group"> <label for="pass" class="label">Password</label> <input /*onChange={handlePassword} value={password}*/ id="passRegister" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
                                         <div class="group"> <label for="pass" class="label">Ripeti Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Ripeti la password"></input> </div>
-                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input /*onChange={handleEmail} value={email}*/ id="pass" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input /*onChange={handleEmail} value={email}*/ id="passRegister" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
                                         <div class="group"> <input onClick={handleSubmit} type="submit" class="button" value="Sign Up" ></input> </div>
                                     </div>
                                 </div>
@@ -126,7 +152,7 @@ export default function Login() {
                 </div>
             </main>
 
-        </>
+        </html>
     )
 
 

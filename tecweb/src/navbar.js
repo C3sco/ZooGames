@@ -10,6 +10,7 @@ export default function Navbar(){
             <CustomLink class="a"  to="/Giochi/Notizie">News</CustomLink>
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/Homepage/Login">Login</CustomLink>
+            <CustomLink class="a" to="/Giochi/Impiccato">Test</CustomLink>
             
         </ul>
 
