@@ -3,32 +3,158 @@ import './login.css'
 import { LoginHelper } from './LoginHelper';
 import { ReigsterHandler } from './RegisterHandler';
 //import * as fs from 'fs';
+import utenti from '../JSON/utenti.json';
+import {loadJSON} from '../JsonReader';
 
-export default function Login() {
-/*
-    let registerService = new RegisterService();
-        registerService.saveUser(
-            {
-                username: username,
-                password: password,
-                admin:false
-            }
-        )
-        .then(data1 => {
-            switch(data1.status){
-                case 201: //Utente creato
-                this.props.navigate("/Giochi/Video"+username);
-                break;
-                case 304: //Utente gia' esistente
-                    this.error="Utente già esistente";
-                break;
-                default:
-                    throw 'Stato non gestito';
-                    break;
-            }
-            console.log(data1)
-        });
-*/
+import AuthService from "./services/auth.service";
+
+import Login from "../components/login.component";
+import Register from "../components/register.component";
+import Home from "../components/home.component";
+import Profile from "../components/profile.component";
+import BoardUser from "../components/board-user.component";
+import BoardModerator from "../components/board-moderator.component";
+import BoardAdmin from "../components/board-admin.component";
+
+
+// import AuthVerify from "./common/auth-verify";
+import EventBus from "./common/EventBus";
+
+const start = () => {
+
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      showModeratorBoard: false,
+      showAdminBoard: false,
+      currentUser: undefined,
+    };
+  
+
+  componentDidMount(); {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+      });
+    }
+    
+    EventBus.on("logout", () => {
+      this.logOut();
+    });
+  }
+
+  componentWillUnmount(); {
+    EventBus.remove("logout");
+  }
+
+  logOut(); {
+    AuthService.logout();
+    this.setState({
+      showModeratorBoard: false,
+      showAdminBoard: false,
+      currentUser: undefined,
+    });
+  }
+    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+
+    return (
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/"} className="navbar-brand">
+            bezKoder
+          </Link>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/home"} className="nav-link">
+                Home
+              </Link>
+            </li>
+
+            {showModeratorBoard && (
+              <li className="nav-item">
+                <Link to={"/mod"} className="nav-link">
+                  Moderator Board
+                </Link>
+              </li>
+            )}
+
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/admin"} className="nav-link">
+                  Admin Board
+                </Link>
+              </li>
+            )}
+
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  User
+                </Link>
+              </li>
+            )}
+          </div>
+
+          {currentUser ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/profile"} className="nav-link">
+                  {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={this.logOut}>
+                  LogOut
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            </div>
+          )}
+        </nav>
+
+        {/* <AuthVerify logOut={this.logOut}/> */}
+      </div>
+    );
+  }
+
+
+
+
+
+
+    /*
+    //const dataJson = utenti.map((utenti));
+    const getDati=()=>{
+        fetch('utenti.json'
+        ,{
+
+            headers : { 
+      
+              'Content-Type': 'application/json',
+      
+              'Accept': 'application/json'
+      
+             }
+      
+          })
+    }
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -36,8 +162,6 @@ export default function Login() {
 
     const [submit, setSubmit] = useState(false);
     const [error, setError] = useState(false);
-
-  
 
     const handleUsername = (e) => {
         setUsername(e.target.value);
@@ -62,31 +186,26 @@ export default function Login() {
         }
     }
 
-    if(submit==true){
-        ReigsterHandler(username);
+    if (submit == true) {
+        // ReigsterHandler(username);
+        let datiUser = {
+            username: username,
+            password: password
+        }
+
+        //getDati.push(datiUser)
+
+        //saveJSON('users.json', getDati)
+        
     }
 
-    let dati = {
-        username: username,
-        password: password
+    function saveJSON(filename = '', json = '""') {
+        return fs.writeFileSync(filename, JSON.stringify(json))
     }
+    const fs = require('fs');
+    
 
-/*
-    var fs = require('fs');
-    fs.writeFile('users.json','utf8',function readFileCallback(err,data){
-        if (err){
-            console.log(err);
-        } else {
-        obj=JSON.parse(data);
-        obj.push(dati);
-        datiInsert=JSON.stringify(obj);
-        fs.writeFile('users.json', datiInsert, 'utf8', callback); // write it back 
-    }});
-*/
-
-
-
-
+    
 
     const onSuccess = () => {
         return (
@@ -104,9 +223,13 @@ export default function Login() {
         )
     }
 
+   //const datiJSON = loadJSON('../JSON/utenti.json');
+
+
+
     return (
         <html>
-            
+
             <div className="messages">
                 {onError()}
                 {onSuccess()}
@@ -129,7 +252,6 @@ export default function Login() {
                         <div class="login-box">
                             <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked></input><label for="tab-1" class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"></input><label for="tab-2" class="tab">Registrati</label>
                                 <div class="login-space">
-                            
                                     <div class="login">
                                         <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Inserisci il tuo Username"></input> </div>
                                         <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Inserisci la tua password"></input> </div>
@@ -138,22 +260,27 @@ export default function Login() {
                                         <div class="foot"> <a href="#">Password dimenticata?</a> </div>
                                     </div>
                                     <div class="sign-up-form">
-                                        <div class="group"> <label for="user" class="label">Username</label> <input /*onChange={handleUsername} value={username}*/ id="userRegister" type="text" class="input" placeholder="Crea un Username"></input></div>
-                                        <div class="group"> <label for="pass" class="label">Password</label> <input /*onChange={handlePassword} value={password}*/ id="passRegister" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
+                                        <div class="group"> <label for="user" class="label">Username</label> <input onChange={handleUsername} value={username} id="userRegister" type="text" class="input" placeholder="Crea un Username"></input></div>
+                                        <div class="group"> <label for="pass" class="label">Password</label> <input onChange={handlePassword} value={password} id="passRegister" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
                                         <div class="group"> <label for="pass" class="label">Ripeti Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Ripeti la password"></input> </div>
-                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input /*onChange={handleEmail} value={email}*/ id="passRegister" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input onChange={handleEmail} value={email} id="passRegister" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
                                         <div class="group"> <input onClick={handleSubmit} type="submit" class="button" value="Sign Up" ></input> </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="sign-up-form">
+                                        <div class="group"> <label for="user" class="label">Username</label> <input onChange={handleUsername} value={username} id="userRegister" type="text" class="input" placeholder="Crea un Username"></input></div>
+                                        <div class="group"> <label for="pass" class="label">Password</label> <input onChange={handlePassword} value={password} id="passRegister" type="password" class="input" data-type="password" placeholder="Inserisci una password"></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Ripeti Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Ripeti la password"></input> </div>
+                                        <div class="group"> <label for="pass" class="label">Indirizzo email</label> <input onChange={handleEmail} value={email} id="passRegister" type="text" class="input" placeholder="Inserisci la tua email"></input> </div>
+                                        <div class="group"> <input onClick={handleSubmit} type="submit" class="button" value="Sign Up" ></input> </div>
+                                    </div>
                 </div>
             </main>
 
         </html>
     )
-
-
-}
+}*/
+export default Login

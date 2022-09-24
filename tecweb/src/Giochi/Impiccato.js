@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Header from './impiccatoFiles/Header';
-import Figure from './impiccatoFiles/Figure';
-import WrongLetters from './impiccatoFiles/WrongLetters';
-import Word from './impiccatoFiles/Word';
-import Popup from './impiccatoFiles/Popup';
-import Notification from './impiccatoFiles/Notification';
-import { showNotification as show, checkWin } from './impiccatoFiles/helpers';
+import Header from './impiccatoFiles/Header.js';
+import Figure from './impiccatoFiles/Figure.js';
+import WrongLetters from './impiccatoFiles/WrongLetters.js';
+import Word from './impiccatoFiles/Word.js';
+import Popup from './impiccatoFiles/Popup.js';
+import Notification from './impiccatoFiles/Notification.js';
+import { showNotification as show, checkWin } from './impiccatoFiles/helpers.js';
 import './impiccato.css';
 
 
