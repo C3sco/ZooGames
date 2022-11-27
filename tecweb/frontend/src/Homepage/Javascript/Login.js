@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './login.css'
+import './Style/login.css'
 import { LoginHelper } from './LoginHelper';
 import { ReigsterHandler } from './RegisterHandler';
 //import * as fs from 'fs';
-import utenti from '../JSON/utenti.json';
+import utenti from '../../JSON/utenti.json';
 import {loadJSON} from '../JsonReader';
 
 import AuthService from "./services/auth.service";

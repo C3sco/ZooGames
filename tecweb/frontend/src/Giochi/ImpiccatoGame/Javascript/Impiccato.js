@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Header from './impiccatoFiles/Header.js';
-import Figure from './impiccatoFiles/Figure.js';
-import WrongLetters from './impiccatoFiles/WrongLetters.js';
-import Word from './impiccatoFiles/Word.js';
-import Popup from './impiccatoFiles/Popup.js';
-import Notification from './impiccatoFiles/Notification.js';
-import { showNotification as show, checkWin } from './impiccatoFiles/helpers.js';
-import './impiccato.css';
+import Header from './ImpiccatoGame/Javascript/Header.js';
+import Figure from './ImpiccatoGame/Javascript/Figure.js';
+import WrongLetters from './ImpiccatoGame/Javascript/WrongLetters.js';
+import Word from './ImpiccatoGame/Javascript/Word.js';
+import Popup from './ImpiccatoGame/Javascript/Popup.js';
+import Notification from './ImpiccatoGame/Javascript/Notification.js';
+import { showNotification as show, checkWin } from './ImpiccatoGame/Javascript/helpers.js';
+import './ImpiccatoGame/Style/impiccato.css';
 
 
 const words = ['application', 'programming', 'interface', 'wizard'];
