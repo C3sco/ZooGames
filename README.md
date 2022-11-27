@@ -7,6 +7,10 @@ Open shell and install dependencies inside ```application``` folder with:
 ```shell
 npm install 
 ```
+and
+```shell
+npm install react-bootstrap bootstrap
+```
 
 Then, to run the server, move to ```backend``` folder and run ```index.js```:
 ```shell
