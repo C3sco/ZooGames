@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./styleCard.css"
+import "./notiziaStyle.css"
 
 const AnimalNews = () => {
     let newsArray = connect();
