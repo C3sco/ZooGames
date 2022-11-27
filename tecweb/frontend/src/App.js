@@ -2,15 +2,15 @@ import React from "react";
 import './App.css';
 import './App.js';
 import { Routes, Route } from "react-router-dom";
-import Homepage from './Homepage/Homepage.js'
-import Giochi from './Homepage/Giochi.js'
-import Curiosita from './Homepage/Curiosita.js'
+import Homepage from './Homepage/Javascript/Homepage.js'
+import Giochi from './Homepage/Javascript/Giochi.js'
+import Curiosita from './Homepage/Javascript/Curiosita.js'
 import Navbar from './components/Navbar.js'
 //import Login from "./Homepage/Login";
-import Comunita from "./Homepage/Comunita.js";
+import Comunita from "./Homepage/Javascript/Comunita.js";
 import Notizie from "./Giochi/Notizie.js"
 import Video from "./Giochi/Video.js"
-import Impiccato from "./Giochi/Impiccato.js"
+import Impiccato from "./Giochi/ImpiccatoGame/Javascript/Impiccato.js"
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Dashboard from "./components/Dashboard.js";
