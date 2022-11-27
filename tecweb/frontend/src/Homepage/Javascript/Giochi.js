@@ -1,7 +1,7 @@
 import React, { Component, withRouter } from "react";
 //import './withRouter.js';
 import { Link } from 'react-router-dom'
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 //class Homepage extends Component {
