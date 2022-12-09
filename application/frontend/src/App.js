@@ -14,6 +14,7 @@ import Impiccato from "./Giochi/ImpiccatoGame/Javascript/Impiccato.js"
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Dashboard from "./components/Dashboard.js";
+import Quiz from "./Giochi/Quiz.js";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/Homepage/Homepage" index element={<Homepage />} />
+          <Route path="/Homepage" index element={<Homepage />} />
           <Route path="/Homepage/Giochi" element={<Giochi />} />
           <Route path="/components/Login" element={<Login />} />
           <Route path="/Homepage/Curiosita" element={<Curiosita />} />
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Giochi/Impiccato" element={<Impiccato />} />
           <Route path="/components/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/Giochi/Quiz" element={<Quiz />} />
         </Routes>
       </div>
 

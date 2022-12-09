@@ -16,12 +16,12 @@ export default function Navbar(){
     }
     return <nav class="navbar">
         <ul>
-            <CustomLink class="a" id="title" to="/Homepage/Homepage">Animal Party</CustomLink>
+            <CustomLink class="a" id="title" to="/Homepage">Animal Party</CustomLink>
             <CustomLink class="a" to="/Homepage/Giochi">Giochi</CustomLink>
             <CustomLink class="a"  to="/Giochi/Notizie">News</CustomLink>
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/components/Login">Login</CustomLink>
-            <CustomLink class="a" to="/Giochi/Impiccato">Test</CustomLink>
+            <CustomLink class="a" to="/Giochi/Quiz">Quiz</CustomLink>
             <CustomLink class="a" to="/components/Register">Register</CustomLink>
             <button onClick={Logout} className="button is-light">
                                     Log Out
