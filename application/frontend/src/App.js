@@ -33,7 +33,7 @@ function App() {
           <Route path="/components/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Giochi/Quiz" element={<Quiz />} />
-          <Route path="/Giochi/ImpiccatoGame/Impiccato" element={<Impiccato/>} />
+          <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
         </Routes>
       </div>
 
