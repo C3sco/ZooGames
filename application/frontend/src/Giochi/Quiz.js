@@ -115,7 +115,6 @@ const Quiz = () => {
 
     return (
         <>
-
             <body>
                 <div class="container">
                     <div id="loader"></div>
