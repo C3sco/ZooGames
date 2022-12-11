@@ -8,12 +8,17 @@ Open shell and install dependencies inside ```application``` folder with:
 npm install 
 ```
 
-Then, to run the server, move to ```backend``` folder and run ```index.js```:
+Then, to run the server, move to ```backend``` folder and run:
 ```shell
-node index.js
+json-server --watch db.json
 ```
 
 Once the server is running, move again to frontend directory ```cd frontend``` and run the application:
 ```shell
 npm start
 ```
+
+Project members:
+- Giacomo Fantato
+- Francesco Montanari
+- Nicolò Sghinolfi
