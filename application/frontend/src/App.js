@@ -34,6 +34,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Giochi/Quiz" element={<Quiz />} />
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
+          <Route path="/components/Dashboard" element={<Dashboard/>} />
         </Routes>
       </div>
 

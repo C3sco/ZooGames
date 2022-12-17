@@ -88,7 +88,7 @@ const Quiz = () => {
     fetch('https://opentdb.com/api.php?amount=10&category=27')
         .then(res => {
             return res.json();
-        })
+        })/*
         .then(loadedQuestions => {
             console.log(loadedQuestions.results);
             questions = loadedQuestions.results.map(loadedQuestions => {
@@ -107,7 +107,7 @@ const Quiz = () => {
                 return formattedQuestion;
             });
             startGame();
-        })
+        })*/
         .catch(err => {
             console.error(err);
         });
