@@ -1,57 +1,59 @@
-import { useState } from 'react'
-import { supabase } from './Database.js'
+import { useRef, useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from './Auth.js'
 
 export default function Login() {
-  const [loading, setLoading] = useState(false)
-  const [email, setEmail] = useState('')
+  const emailRef = useRef()
+  const passwordRef = useRef()
 
-  const handleLogin = async (e) => {
+  // Get signUp function from the auth context
+  const { signIn } = useAuth()
+
+  const history = useNavigate()
+
+  async function handleSubmit(e) {
     e.preventDefault()
 
-    try {
-      setLoading(true)
-      const { error } = await supabase.auth.signInWithOtp({ email })
-      if (error) throw error
-      alert('Check your email for the login link!')
-    } catch (error) {
-      alert(error.error_description || error.message)
-    } finally {
-      setLoading(false)
+    // Get email and password input values
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
+
+    // Calls `signIn` function from the context
+    const { error } = await signIn({ email, password })
+
+    if (error) {
+      alert('error signing in')
+    } else {
+      // Redirect user to Dashboard
+      history.push('/')
     }
   }
 
   return (
-    <div className="row flex-center flex">
-      <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">Sign in via magic link with your email below</p>
-        {loading ? (
-          'Sending magic link...'
-        ) : (
-          <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className="inputField"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button className="button block" aria-live="polite">
-              Send magic link
-            </button>
-          </form>
-        )}
-      </div>
-    </div>
+    <>
+      <form onSubmit={handleSubmit}>
+      <label htmlFor="input-email">Email</label>
+        <input id="input-email" type="email" ref={emailRef} />
+
+        <label htmlFor="input-password">Password</label>
+        <input id="input-password" type="password" ref={passwordRef} />
+
+        <br />
+
+        <button type="submit">Login</button>
+      </form>
+    </>
   )
 }
+
+
+
 
 /*
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from './Database.js'
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -62,10 +64,21 @@ const Login = () => {
     const Auth = async (e) => {
         e.preventDefault();
         try {
+            var user = await supabase
+            .from('users')
+            .select('*')
+            .where('email',email)
+            .andWhere('password',password)
+            
             await axios.get('http://localhost:3000/users', {
                 email: email,
                 password: password
-            });
+            }); 
+            if(user.data.length>0){
+              //dentro
+            }else{
+              
+            }
             history.push("/components/Dashboard");
         } catch (error) {
             if (error.response) {
