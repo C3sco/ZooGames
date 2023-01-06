@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      {/* Change it to display the user ID too 👇*/}
+      {/* Change it to display the user ID*/}
       <p>Welcome, {user?.id}!</p>
       <button onClick={handleSignOut}>Sign out</button>
     </div>
