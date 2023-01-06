@@ -59,12 +59,7 @@ function App() {
           <Route path="/Giochi/Impiccato" element={<Impiccato />} />
           <Route path="/Giochi/Quiz" element={<Quiz />} />
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
-          <Route path="/userPages" element={<PrivateRoute/>}>
-            <Route path="/userPages">
-              
-
-              </Route>
-          </Route>
+          
           <Route path="/userPages/Dashbboard" element={<Dashboard/>}/>
           <Route path="/components/LoginSupabase" element={<LoginSupabase />} />
         </Routes>
@@ -84,7 +79,12 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 
 
+<Route path="/userPages" element={<PrivateRoute/>}>
+            <Route path="/userPages">
+              
 
+              </Route>
+          </Route>
 <Route path="/userPages/Dashbboard" element={<Dashboard/>}/>
 
 
