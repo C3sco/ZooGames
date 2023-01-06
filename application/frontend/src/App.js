@@ -29,7 +29,7 @@ function App() {
   const [session, setSession] = useState(null)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
     })
 
@@ -39,14 +39,16 @@ function App() {
   }, [])
   
   /*
-  ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  )*/
+
+
+    {!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}
+
+  */
   
   return (
+    
     <>
+    
       <Navbar />
       <div className="container">
         <Routes>
@@ -60,8 +62,8 @@ function App() {
           <Route path="/Giochi/Quiz" element={<Quiz />} />
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
           
-          <Route path="/userPages/Dashbboard" element={<Dashboard/>}/>
-          <Route path="/components/LoginSupabase" element={<LoginSupabase />} />
+          <Route path="/userPages/Dashboard" element={<Dashboard/>}/>
+          <Route path="/components/LoginSupabase" element={ <LoginSupabase />} />
         </Routes>
       </div>
 

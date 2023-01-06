@@ -5,7 +5,7 @@ import { useAuth } from '../components/Auth.js'
 import { supabase } from '../components/Database.js';
 
 
-const Dashboard = ({ session }) => {
+const Dashboard = async ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [website, setWebsite] = useState(null)
@@ -21,8 +21,8 @@ const Dashboard = ({ session }) => {
       const { user } = session
 
       let { data, error, status } = await supabase
-        .from('profiles')
-        .select(`username, website, avatar_url`)
+        .from('users')
+        .select(`email`)
         .eq('id', user.id)
         .single()
 

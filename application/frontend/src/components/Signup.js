@@ -3,31 +3,31 @@ import { useRef, useState } from 'react'
 import { useAuth } from './Auth.js'
 
 export default async function Signup() {
-    const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-    },
-        {
-            data: {
-                username
-            }
-        });
-    if (error) {
-        setRMsg(error.message)
-    } else {
-        setRMsg('User created successfully')
-        setUser(data.user)
-    }
-    return (
-        <div className="App">
-            <h1>Register User</h1>
-            email:<input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" /><br />
-            Password:<input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" /><br />
-            username:<input type="text" onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" /><br />
-            <button onClick={Register}>Register</button><br></br>
-        </div>
+    // const { data, error } = await supabase.auth.signUp({
+    //     email,
+    //     password,
+    // },
+    //     {
+    //         data: {
+    //             username
+    //         }
+    //     });
+    // if (error) {
+    //     setRMsg(error.message)
+    // } else {
+    //     setRMsg('User created successfully')
+    //     setUser(data.user)
+    // }
+    // return (
+    //     <div className="App">
+    //         <h1>Register User</h1>
+    //         email:<input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" /><br />
+    //         Password:<input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" /><br />
+    //         username:<input type="text" onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" /><br />
+    //         <button onClick={Register}>Register</button><br></br>
+    //     </div>
 
-    )
+    // )
 }
 
 
