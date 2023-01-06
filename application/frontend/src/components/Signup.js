@@ -1,7 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import { useAuth } from './Auth.js'
-
+/*
 export function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()

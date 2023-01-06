@@ -20,7 +20,7 @@ export default function Navbar(){
             <CustomLink class="a" to="/Homepage/Giochi">Giochi</CustomLink>
             <CustomLink class="a"  to="/Giochi/Notizie">News</CustomLink>
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
-            <CustomLink class="a"  to="/components/Login">Login</CustomLink>
+            <CustomLink class="a"  to="/components/LoginSupabase">Login</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz">Quiz</CustomLink>
             <CustomLink class="a" to="/components/Register">Register</CustomLink>
             <CustomLink class="a" to="/Giochi/ImpiccatoGame/Javascript/Impiccato">Impiccato</CustomLink>
@@ -28,7 +28,6 @@ export default function Navbar(){
                                     Log Out
                                 </button>
         </ul>
-
     </nav>
 
     function CustomLink({ to, children, ...props}){

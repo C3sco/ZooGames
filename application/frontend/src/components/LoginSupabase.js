@@ -2,18 +2,22 @@ import { useState } from 'react'
 import { supabase } from './Database.js'
 
 
-export default function Login() {
+export default function LoginSupabase() {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
+
 
   const handleLogin = async (e) => {
     e.preventDefault()
 
     try {
       setLoading(true)
-      const { error } = await supabase.auth.signInWithOtp({ email })
+      const { error } = await supabase.auth.signInWithOtp({ email,
+        options: {
+          emailRedirectTo: 'http://localhost:3000/userPages/Dashboard',
+        }, })
       if (error) throw error
-      alert('Check your email for the login link!')
+      alert('Perfavore conferma il tuo account tramite il link che hai ricevuto per mail!')
     } catch (error) {
       alert(error.error_description || error.message)
     } finally {
@@ -30,7 +34,7 @@ export default function Login() {
           'Sending magic link...'
         ) : (
           <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email </label>
             <input
               id="email"
               className="inputField"

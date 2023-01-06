@@ -1,9 +1,13 @@
 import React from 'react'
-import { Route, Navigate } from 'react-router-dom'
+import { Route, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from './Auth.js'
+import Auth from './Auth.js'
 
 export function PrivateRoute({ component: Component, ...rest }) {
-  const { user } = useAuth()
+  /*
+  const navigate = useNavigate();
+    
+  const auth = Auth.getInstance();
 
   return (
     <Route
@@ -14,5 +18,5 @@ export function PrivateRoute({ component: Component, ...rest }) {
         return user ? <Component {...props} /> : <Navigate to="/login" />
       }}
     ></Route>
-  )
+  )*/
 }
