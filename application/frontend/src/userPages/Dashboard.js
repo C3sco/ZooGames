@@ -5,7 +5,7 @@ import { useAuth } from '../components/Auth.js'
 import { supabase } from '../components/Database.js';
 
 
-const Dashboard = async ({ session }) => {
+const Dashboard = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [website, setWebsite] = useState(null)
@@ -32,8 +32,8 @@ const Dashboard = async ({ session }) => {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
+        //setWebsite(data.website)
+        //setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
       alert(error.message)
@@ -52,12 +52,12 @@ const Dashboard = async ({ session }) => {
       const updates = {
         id: user.id,
         username,
-        website,
-        avatar_url,
+        //website,
+        //avatar_url,
         updated_at: new Date(),
       }
 
-      let { error } = await supabase.from('profiles').upsert(updates)
+      let { error } = await supabase.from('users').upsert(updates)
 
       if (error) {
         throw error

@@ -27,9 +27,9 @@ import { useState, useEffect } from 'react'
 function App() {
 
   const [session, setSession] = useState(null)
-
+try{
   useEffect(() => {
-     supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
     })
 
@@ -37,12 +37,16 @@ function App() {
       setSession(session)
     })
   }, [])
+}catch(err){
+  console.log(err);
+}
   
   /*
 
 
     {!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}
-
+    <Route path="/userPages/Dashboard" element={!session ? <Dashboard/> : <Dashboard key={session.user.id} session={session} />}/>
+ <Route path="/userPages/Dashboard" element={ <Dashboard/> }/>
   */
   
   return (
@@ -61,9 +65,9 @@ function App() {
           <Route path="/Giochi/Impiccato" element={<Impiccato />} />
           <Route path="/Giochi/Quiz" element={<Quiz />} />
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
-          
           <Route path="/userPages/Dashboard" element={<Dashboard/>}/>
-          <Route path="/components/LoginSupabase" element={ <LoginSupabase />} />
+         
+          <Route path="/components/LoginSupabase" element= { !session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}/>
         </Routes>
       </div>
 
@@ -80,6 +84,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 
+{ !session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}
 
 <Route path="/userPages" element={<PrivateRoute/>}>
             <Route path="/userPages">
@@ -87,7 +92,7 @@ import Register from "./components/Register";
 
               </Route>
           </Route>
-<Route path="/userPages/Dashbboard" element={<Dashboard/>}/>
+<Route path="/userPages/Dashboard" element={<Dashboard/>}/>
 
 
  

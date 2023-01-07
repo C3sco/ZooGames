@@ -3,16 +3,18 @@ import './navbar.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from "./Database.js";
 
 export default function Navbar(){
     const history = useNavigate();
     const Logout = async () => {
-        try {
-            await axios.delete('http://localhost:5000/logout');
-            history.push("/");
-        } catch (error) {
-            console.log(error);
+        try{
+            await supabase.auth.signOut();
+            alert("Logout effettuato!");
+        }catch(err){
+            alert("errore!");
         }
+        
     }
     return <nav class="navbar">
         <ul>
