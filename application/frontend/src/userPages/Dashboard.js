@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../components/Auth.js'
 import { supabase } from '../components/Database.js';
+import ProfileImage from './ProfileImage.js';
 
 
 const Dashboard = ({ session }) => {
@@ -75,6 +76,16 @@ const Dashboard = ({ session }) => {
         'Saving ...'
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
+          <ProfileImage
+            url={avatar_url}
+            size={150}
+            onUpload={(url) => {
+              setAvatarUrl(url)
+              updateProfile({ username, website, avatar_url: url })
+            }}
+          />
+          <br></br>
+
           <div>Email: {session.user.email}</div>
           <div>
             <label htmlFor="username">Name</label>
@@ -96,13 +107,13 @@ const Dashboard = ({ session }) => {
           </div>
           <div>
             <button className="button primary block" disabled={loading}>
-              Update profile
+              Aggiorna profilo
             </button>
           </div>
         </form>
       )}
       <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
-        Sign Out
+        Logout
       </button>
     </div>
   )
