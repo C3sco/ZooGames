@@ -11,7 +11,7 @@ export default function ProfileImage({ url, size, onUpload }) {
 
   const downloadImage = async (path) => {
     try {
-      const { data, error } = await supabase.storage.from('avatars').download(path)
+      const { data, error } = await supabase.storage.from('images').download(path)
       if (error) {
         throw error
       }
@@ -27,7 +27,7 @@ export default function ProfileImage({ url, size, onUpload }) {
       setUploading(true)
 
       if (!event.target.files || event.target.files.length === 0) {
-        throw new Error('You must select an image to upload.')
+        throw new Error('Devi selezionare un\' immagine')
       }
 
       const file = event.target.files[0]
@@ -62,7 +62,7 @@ export default function ProfileImage({ url, size, onUpload }) {
       ) : (
         <>
           <label className="button primary block" htmlFor="single">
-            Upload an avatar
+            Cambia immagine (CLICK)
           </label>
           <div className="visually-hidden">
             <input

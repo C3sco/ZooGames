@@ -5,6 +5,17 @@ import { useAuth } from '../components/Auth.js'
 import { supabase } from '../components/Database.js';
 import ProfileImage from './ProfileImage.js';
 
+/* 
+Questa è la schermata che appare all'utente una volta loggato.
+Bisogna sistemare l'html in modo da renderla un po' più bella, il js funziona.
+Ci sono delle textbox in cui puoi scrivere le solite cose da modificare (username)
+C'è la possibilità di mettere un immagine profilo però non è ancora collegata al db quella quindi non si vede però
+ho già setuppato il label in cui uscirà.
+Bisogna aggiungere le textbox per nome, cognome e data di nascita.
+
+*/
+
+
 
 const Dashboard = ({ session }) => {
   const [loading, setLoading] = useState(true)
@@ -76,7 +87,7 @@ const Dashboard = ({ session }) => {
         'Saving ...'
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
-          <ProfileImage
+          <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
             url={avatar_url}
             size={150}
             onUpload={(url) => {
@@ -88,7 +99,7 @@ const Dashboard = ({ session }) => {
 
           <div>Email: {session.user.email}</div>
           <div>
-            <label htmlFor="username">Name</label>
+            <label htmlFor="username">Username</label>
             <input
               id="username"
               type="text"
@@ -96,18 +107,10 @@ const Dashboard = ({ session }) => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div>
-            <label htmlFor="website">Website</label>
-            <input
-              id="website"
-              type="url"
-              value={website || ''}
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-          </div>
+          
           <div>
             <button className="button primary block" disabled={loading}>
-              Aggiorna profilo
+              Aggiorna Profilo
             </button>
           </div>
         </form>
@@ -120,3 +123,16 @@ const Dashboard = ({ session }) => {
 }
 
 export default Dashboard;
+
+
+/* <div>
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              type="url"
+              value={website || ''}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
+
+          */

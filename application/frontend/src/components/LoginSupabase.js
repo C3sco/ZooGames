@@ -14,7 +14,7 @@ export default function LoginSupabase() {
       const { error } = await supabase.auth.signInWithOtp({ email,
         
         options: {
-          emailRedirectTo: 'http://localhost:3000/userPages/Dashboard',
+          emailRedirectTo: 'http://localhost:3000/components/LoginSupabase',
         }, })
       if (error) throw error
       alert('Perfavore conferma il tuo account tramite il link che hai ricevuto per mail!')
