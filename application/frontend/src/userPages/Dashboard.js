@@ -98,27 +98,18 @@ const Dashboard = ({ session }) => {
           <br></br>
 
           <div>Email: {session.user.email}</div>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
+          <label for="name">Nome:</label><br/>
+          <input type="text" id="name" name="name"/><br/>
+          <label for="surname">Cognome:</label><br/>
+          <input type="text" id="surname" name="surname"/><br/>
+          <label for="username">Username:</label><br/>
+          <input id="username"
               type="text"
               value={username || ''}
               onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Nome</label>
-            <input id = "nome" type= "text" ></input>
-          </div>
-          <div>
-            <label>Cognome</label>
-            <input id = "cognome" type= "text" ></input>
-          </div>
-          <div>
-            <label>Data di Nascita</label>
-            <input id = "data_di_nascita" type= "text" ></input>
-          </div>
+            /><br/>
+          <label for="dob">Data di nascita:</label><br/>
+          <input type="date" id="dob" name="dob"/><br/><br/>          
           <div>
             <button className="button primary block" disabled={loading}>
               Aggiorna Profilo
