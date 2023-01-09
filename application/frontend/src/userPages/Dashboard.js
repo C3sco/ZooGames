@@ -107,7 +107,18 @@ const Dashboard = ({ session }) => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          
+          <div>
+            <label>Nome</label>
+            <input id = "nome" type= "text" ></input>
+          </div>
+          <div>
+            <label>Cognome</label>
+            <input id = "cognome" type= "text" ></input>
+          </div>
+          <div>
+            <label>Data di Nascita</label>
+            <input id = "data_di_nascita" type= "text" ></input>
+          </div>
           <div>
             <button className="button primary block" disabled={loading}>
               Aggiorna Profilo
@@ -115,6 +126,7 @@ const Dashboard = ({ session }) => {
           </div>
         </form>
       )}
+      <br></br>
       <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
         Logout
       </button>
