@@ -19,6 +19,7 @@ import LoginSupabase from "./components/LoginSupabase.js";
 import { supabase } from "./components/Database.js";
 import { useState, useEffect } from 'react'
 import QuizFinal from "./Giochi/Quiz/QuizFinal.js";
+import AdminPage from "./components/AdminPage.js";
 
 
 function App() {
@@ -64,6 +65,8 @@ try{
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
           <Route path="/userPages/Dashboard" element={<Dashboard/>}/>
           <Route path="/Giochi/Quiz/QuizFinal" element={<QuizFinal/>}/>
+          <Route path="/components/AdminPage" element={<AdminPage/>}/>
+
          
           <Route path="/components/LoginSupabase" element= { !session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}/>
         </Routes>

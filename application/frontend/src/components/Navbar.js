@@ -24,6 +24,7 @@ export default function Navbar(){
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/components/LoginSupabase">Login</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz">Quiz</CustomLink>
+            <CustomLink class="a" to="/components/AdminPage">AdminPage</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz/QuizFinal">Real Quiz</CustomLink>
             <CustomLink class="a" to="/components/Register">Register</CustomLink>
             <CustomLink class="a" to="/Giochi/ImpiccatoGame/Javascript/Impiccato">Impiccato</CustomLink>
