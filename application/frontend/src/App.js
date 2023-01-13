@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from 'react-dom'
 import './App.css';
 import './App.js';
 import { Routes, Route } from "react-router-dom";
@@ -37,20 +36,9 @@ try{
   }, [])
 }catch(err){
   console.log(err);
-}
-  
-  /*
-
-
-    {!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}
-    <Route path="/userPages/Dashboard" element={!session ? <Dashboard/> : <Dashboard key={session.user.id} session={session} />}/>
- <Route path="/userPages/Dashboard" element={ <Dashboard/> }/>
-  */
-  
+} 
   return (
-    
     <>
-    
       <Navbar />
       <div className="container">
         <Routes>
@@ -65,15 +53,15 @@ try{
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
           <Route path="/userPages/Dashboard" element={<Dashboard/>}/>
           <Route path="/Giochi/Quiz/QuizFinal" element={<QuizFinal/>}/>
-          <Route path="/components/AdminPage" element={<AdminPage/>}/>
-
          
+
+
+          <Route path="/components/AdminPage" element={ !session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />}/>
+
           <Route path="/components/LoginSupabase" element= { !session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}/>
         </Routes>
       </div>
-
     </>
-
   );
 }
 

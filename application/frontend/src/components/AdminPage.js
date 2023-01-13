@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useNavigate  } from 'react';
+import { Navigate } from 'react-router-dom';
 import { supabase } from './Database.js';
 import Modal from './Modal.js';
 import './table.css';
@@ -9,29 +10,40 @@ Pagina con table con tutti gli user, possibilità di cercare user e di modificar
 
 const db = supabase;
 
-// async function getSingleUser(username) {
 
-//     try {
-//         var user = await db.from('users').select('*').eq('username', username);
-//     } catch (err) {
-//         console.log("Connessione al database fallita: " + err);
-//     }
-//     return user
-// }
+export default function AdminPage({ session }) {
 
-// async function deleteUser(username) {
+    const [loading, setLoading] = useState(true)
 
-//     try {
-//         await db.from('users').delete('*').eq('username', username);
-//     } catch (err) {
-//         console.log("Connessione al database fallita: " + err);
-//     }
-//     console.log("L'utente " + username + " è stato eliminato correttamente");
+    useEffect(() => {
+        getProfile()
+      }, [session])
 
-// }
-
-
-export default function AdminPage() {
+      const getProfile = async () => {
+        try {
+          setLoading(true)
+          const { user } = session
+    
+          let { data, error, status } = await supabase
+            .from('users')
+            .select(`email`)
+            .eq('id', user.id)
+            .single()
+    
+          if (error && status !== 406) {
+            throw error
+          }
+    
+          if (data.admin==0) {
+            //useNavigate("./loginSupabase");
+            //redirect to login??
+          }
+        } catch (error) {
+          alert(error.message)
+        } finally {
+          setLoading(false)
+        }
+      }
 
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
