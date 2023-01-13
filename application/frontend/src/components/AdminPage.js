@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './Database.js';
 import Modal from './Modal.js';
+import './table.css';
+
 /*
 Pagina con table con tutti gli user, possibilità di cercare user e di modificare i dati
 */
@@ -89,6 +91,7 @@ export default function AdminPage() {
                 <thead>
                     <tr>
                         <th>Username</th>
+                        <th>Password</th>
                         <th>Email</th>
                         <th>Nome</th>
                         <th>Cognome</th>
@@ -99,6 +102,7 @@ export default function AdminPage() {
                     {users.map((user) => (
                         <tr key={user.id}>
                             <td>{user.username}</td>
+                            <td>{user.password}</td>
                             <td>{user.email}</td>
                             <td>{user.name}</td>
                             <td>{user.surname}</td>
@@ -119,6 +123,11 @@ export default function AdminPage() {
                         type="text"
                         value={editingUser.username}
                         onChange={handleChange('username')}
+                    />
+                    <input
+                        type="text"
+                        value={editingUser.password}
+                        onChange={handleChange('password')}
                     />
                     <input
                         type="text"
