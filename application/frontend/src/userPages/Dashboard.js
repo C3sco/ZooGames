@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { useAuth } from '../components/Auth.js'
 import { supabase } from '../components/Database.js';
 import ProfileImage from './ProfileImage.js';
+
+import './dashboard.css'
 
 /* 
 Questa è la schermata che appare all'utente una volta loggato.
@@ -20,7 +21,9 @@ Bisogna aggiungere le textbox per nome, cognome e data di nascita.
 const Dashboard = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
+  const [name, setName] = useState(null)
+  const [surname, setSurname] = useState(null)
+  const [birthday, setBirthday] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
 
   useEffect(() => {
@@ -44,7 +47,9 @@ const Dashboard = ({ session }) => {
 
       if (data) {
         setUsername(data.username)
-        //setWebsite(data.website)
+        setName(data.name)
+        setSurname(data.surname)
+        setBirthday(data.birthday)
         //setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
@@ -64,7 +69,9 @@ const Dashboard = ({ session }) => {
       const updates = {
         id: user.id,
         username,
-        //website,
+        name,
+        surname,
+        birthday,
         //avatar_url,
         updated_at: new Date(),
       }
@@ -82,7 +89,7 @@ const Dashboard = ({ session }) => {
   }
 
   return (
-    <div aria-live="polite">
+    <div  aria-live="polite">
       {loading ? (
         'Saving ...'
       ) : (
@@ -92,33 +99,37 @@ const Dashboard = ({ session }) => {
             size={150}
             onUpload={(url) => {
               setAvatarUrl(url)
-              updateProfile({ username, website, avatar_url: url })
+              updateProfile({ username, name, surname, birthday })
             }}
           />
           <br></br>
 
-          <div>Email: {session.user.email}</div>
+          <div >Email: {session.user.email}</div>
+          <br></br>
           <label for="name">Nome:</label><br/>
-          <input type="text" id="name" name="name"/><br/>
+          <input type="text" id="name" name="name" value={name || ''}
+              onChange={(e) => setName(e.target.value)}/><br/>
           <label for="surname">Cognome:</label><br/>
-          <input type="text" id="surname" name="surname"/><br/>
+          <input type="text" id="surname" name="surname"  value={surname || ''}
+              onChange={(e) => setSurname(e.target.value)}/><br/>
           <label for="username">Username:</label><br/>
           <input id="username"
               type="text"
               value={username || ''}
               onChange={(e) => setUsername(e.target.value)}
             /><br/>
-          <label for="dob">Data di nascita:</label><br/>
-          <input type="date" id="dob" name="dob"/><br/><br/>          
+          <label class='lbl' for="dob">Data di nascita:</label><br/>
+          <input type="date" id="dob" name="dob" value={birthday || ''}
+              onChange={(e) => setBirthday(e.target.value)}/><br/><br/>          
           <div>
-            <button className="button primary block" disabled={loading}>
-              Aggiorna Profilo
+            <button className="btn" disabled={loading}>
+              Aggiorna Informazioni
             </button>
           </div>
         </form>
       )}
       <br></br>
-      <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
+      <button type="button" className="btn" onClick={() => supabase.auth.signOut()}>
         Logout
       </button>
     </div>
@@ -126,16 +137,3 @@ const Dashboard = ({ session }) => {
 }
 
 export default Dashboard;
-
-
-/* <div>
-            <label htmlFor="website">Website</label>
-            <input
-              id="website"
-              type="url"
-              value={website || ''}
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-          </div>
-
-          */

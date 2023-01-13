@@ -51,6 +51,7 @@ export default function ProfileImage({ url, size, onUpload }) {
 
   return (
     <div style={{ width: size }} aria-live="polite">
+      <br></br>
       <img
         src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
         alt={avatarUrl ? 'Avatar' : 'No image'}

@@ -12,16 +12,13 @@ import Comunita from "./Homepage/Javascript/Comunita.js";
 import Notizie from "./Giochi/Notizie.js"
 import Video from "./Giochi/Video.js"
 import Impiccato from "./Giochi/ImpiccatoGame/Javascript/Impiccato.js"
-import Login from "./components/Login.js";
 import Dashboard from "./userPages/Dashboard.js";
 import Quiz from "./Giochi/Quiz.js";
-import { AuthProvider } from "./components/Auth.js";
-import { PrivateRoute } from "./components/PrivateRoute.js";
-import { Signup } from "./components/Signup.js";
 import LoginSupabase from "./components/LoginSupabase.js";
 
 import { supabase } from "./components/Database.js";
 import { useState, useEffect } from 'react'
+import QuizFinal from "./Giochi/Quiz/QuizFinal.js";
 
 
 function App() {
@@ -66,6 +63,7 @@ try{
           <Route path="/Giochi/Quiz" element={<Quiz />} />
           <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato/>} />
           <Route path="/userPages/Dashboard" element={<Dashboard/>}/>
+          <Route path="/Giochi/Quiz/QuizFinal" element={<QuizFinal/>}/>
          
           <Route path="/components/LoginSupabase" element= { !session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />}/>
         </Routes>
