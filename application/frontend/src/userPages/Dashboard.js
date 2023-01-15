@@ -11,8 +11,6 @@ Bisogna sistemare l'html in modo da renderla un po' più bella, il js funziona.
 Sistemare lo score e l'avatar
 */
 
-
-
 const Dashboard = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)

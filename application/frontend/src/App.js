@@ -22,6 +22,7 @@ import AdminNavbar from "./components/AdminNavbar.js";
 import Leaderboard from "./userPages/Leaderboard.js";
 import Shop from "./userPages/Shop.js";
 import AdminShop from "./components/AdminShop.js";
+import Forum from "./userPages/Forum.js";
 
 
 function App() {
@@ -42,22 +43,22 @@ function App() {
   } catch (err) {
     console.log(err);
   }
-  try {
-    useEffect(() => {
-      // check if the user is logged in
-      if (supabase.auth.currentUser()) {
-        // check if the user has the necessary role
-        if (supabase.auth.currentUser().role === 'admin') {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
-      }
-    }, [supabase.auth.currentUser()]);
+  // try {
+  //   useEffect(() => {
+  //     // check if the user is logged in
+  //     if (supabase.auth.currentUser()) {
+  //       // check if the user has the necessary role
+  //       if (supabase.auth.currentUser().role === 'admin') {
+  //         setIsAdmin(true);
+  //       } else {
+  //         setIsAdmin(false);
+  //       }
+  //     }
+  //   }, [supabase.auth.currentUser()]);
 
-  } catch (err) {
-    console.log(err);
-  }
+  // } catch (err) {
+  //   console.log(err);
+  // }
   return (
     <>
 
@@ -76,13 +77,14 @@ function App() {
             <Route path="/Giochi/Video" element={<Video />} />
             <Route path="/Giochi/Impiccato" element={<Impiccato />} />
             <Route path="/Giochi/Quiz" element={<Quiz />} />
-            <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={<Impiccato />} />
+            <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={!session ? <LoginSupabase /> : <Impiccato key={session.user.id} session={session} />} />
             <Route path="/userPages/Dashboard" element={<Dashboard />} />
             <Route path="/Giochi/Quiz/QuizFinal" element={<QuizFinal />} />
             <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
             <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
-            <Route path="/components/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
+            <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />
 
+            <Route path="/components/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
             <Route path="/components/AdminPage" element={!session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />} />
             <Route path="/components/LoginSupabase" element={!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />} />
           </Routes>

@@ -10,17 +10,79 @@ import '../Style/impiccato.css';
 import { supabase } from '../../../components/Database.js';
 
 const db = supabase;
-db.from("")
-const words = ['application', 'programming', 'interface', 'wizard'];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-function Impiccato() {
+function Impiccato({ session }) {
+  const [words, setWords] = useState([]);
+  const [selectedWord, setRandomWord] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [points, setScore] = useState(null);
+  const id = session.user.id;
+  
+  //console.log("ID " + session);
+
+  const fetchValue = async () => {
+    const response = await supabase
+    .from('users')
+    .select(`score`)
+    .eq('id', id)
+    .single()
+    setScore(response);
+  }
+  useEffect(() => {
+    fetchValue();
+  }, []);
+
+  
+
+  // const getProfile = async () => {
+  //   try {
+  //     setLoading(true)
+  //     const { user } = session
+
+  //     let { data, error, status } = await supabase
+  //       .from('users')
+  //       .select(`score`)
+  //       .eq('id', user.id)
+  //       .single()
+
+  //     if (error && status !== 406) {
+  //       throw error
+  //     }
+  //   } catch (error) {
+  //     alert(error.message)
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
+  
+  useEffect(() => {
+    const fetchWords = async () => {
+      try {
+        const response = await db.from('animals').select();
+        setWords(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchWords();
+  }, []);
+ 
+   useEffect(() => {
+    if (!loading && words.length > 0) {
+      const randomIndex = Math.floor(Math.random() * words.length);
+      setRandomWord(words[randomIndex].Nome.toLowerCase());
+    }
+   }, [words, loading]);
+
+
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
+    
     const handleKeydown = event => {
       const { key, keyCode } = event;
       if (playable && keyCode >= 65 && keyCode <= 90) {
@@ -47,28 +109,29 @@ function Impiccato() {
 
   function playAgain() {
     setPlayable(true);
-
-    // Empty Arrays
     setCorrectLetters([]);
     setWrongLetters([]);
 
-    const random = Math.floor(Math.random() * words.length);
-    selectedWord = words[random];
+    if (!loading && words.length > 0) {
+      const randomIndex = Math.floor(Math.random() * words.length);
+      setRandomWord(words[randomIndex].Nome.toLowerCase());
+    }
   }
 
   return (
-    <>
+    <div>
+    
       <Header />
       <div className="game-container">
         <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
-      <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
+      <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} score={points} id ={id}/>
       <Notification showNotification={showNotification} />
-    </>
+      </div>
   );
 }
-  
-  
+
+
 export default Impiccato;  

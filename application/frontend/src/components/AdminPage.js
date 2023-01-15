@@ -34,7 +34,7 @@ export default function AdminPage({ session }) {
             throw error
           }
     
-          if (data.admin==0) {
+          if (data.admin===0) {
             //useNavigate("./loginSupabase");
             //redirect to login??
           }

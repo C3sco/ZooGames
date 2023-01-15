@@ -1,18 +1,39 @@
 import React, { useEffect } from 'react';
 import { checkWin } from './helpers.js';
+import { supabase } from '../../../components/Database.js';
 
-const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAgain}) => {
+const db = supabase;
+
+
+async function updateScore(points,id){
+  await db.from('users').update({points},'score').eq('id',{id});
+}
+
+const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAgain, points, id}) => {
+
+  const score = async () => {
+    await db
+    .from('users')
+    .select(`score`)
+    .eq('id', id)
+    .single()
+  }
+
   let finalMessage = '';
   let finalMessageRevealWord = '';
   let playable = true;
 
   if( checkWin(correctLetters, wrongLetters, selectedWord) === 'win' ) {
-    finalMessage = 'Congratulations! You won! 😃';
+    finalMessage = 'Congratulazioni! Hai vinto 10 punti! 😃';
     playable = false;
+    points += 10;
+    updateScore(points,id)
   } else if( checkWin(correctLetters, wrongLetters, selectedWord) === 'lose' ) {
-    finalMessage = 'Unfortunately you lost. 😕';
-    finalMessageRevealWord = `...the word was: ${selectedWord}`;
+    finalMessage = 'Sfortunatamente non hai indovinato, hai perso 10 punti 😕';
+    finalMessageRevealWord = `...la parola era: ${selectedWord}`;
     playable = false;
+    points -= 10;
+    updateScore(points,id)
   }
 
   useEffect(() => {

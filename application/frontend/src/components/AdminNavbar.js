@@ -29,6 +29,7 @@ export default function AdminNavbar(){
             <CustomLink class="a" to="/userPages/Shop">Shop</CustomLink>
             <CustomLink class="a" to="/userPages/Leaderboard">Leaderboard</CustomLink>
             <CustomLink class="a" to="/components/AdminShop">AdminShop</CustomLink>
+            <CustomLink class="a" to="/userPages/Forum">Forum</CustomLink>
             <button onClick={Logout} className="button is-light">
                                     Log Out
                                 </button>
