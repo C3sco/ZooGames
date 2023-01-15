@@ -7,8 +7,10 @@ import Popup from './Popup.js';
 import Notification from './Notification.js';
 import { showNotification as show, checkWin } from './helpers.js';
 import '../Style/impiccato.css';
+import { supabase } from '../../../components/Database.js';
 
-
+const db = supabase;
+db.from("")
 const words = ['application', 'programming', 'interface', 'wizard'];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 

@@ -27,6 +27,8 @@ export default function Navbar(){
             <CustomLink class="a" to="/Giochi/Quiz/QuizFinal">Real Quiz</CustomLink>
             <CustomLink class="a" to="/components/Register">Register</CustomLink>
             <CustomLink class="a" to="/Giochi/ImpiccatoGame/Javascript/Impiccato">Impiccato</CustomLink>
+            <CustomLink class="a" to="/userPages/Shop">Shop</CustomLink>
+            <CustomLink class="a" to="/userPages/Leaderboard">Leaderboard</CustomLink>
             <button onClick={Logout} className="button is-light">
                                     Log Out
                                 </button>

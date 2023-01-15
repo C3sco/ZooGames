@@ -34,6 +34,7 @@ const Giochi = () => {
               <div class="card shadow-sm">
                 <img src="quiz.png" width="100%" height="225"></img>
                 <div class="card-body">
+                  
                   <p class="card-text">Quiz e indovinelli sul mondo animale. In bocca al lupo!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">

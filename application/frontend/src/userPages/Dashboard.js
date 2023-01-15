@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
 import { supabase } from '../components/Database.js';
 import ProfileImage from './ProfileImage.js';
 
@@ -9,11 +8,7 @@ import './dashboard.css'
 /* 
 Questa è la schermata che appare all'utente una volta loggato.
 Bisogna sistemare l'html in modo da renderla un po' più bella, il js funziona.
-Ci sono delle textbox in cui puoi scrivere le solite cose da modificare (username)
-C'è la possibilità di mettere un immagine profilo però non è ancora collegata al db quella quindi non si vede però
-ho già setuppato il label in cui uscirà.
-Bisogna aggiungere le textbox per nome, cognome e data di nascita.
-
+Sistemare lo score e l'avatar
 */
 
 
@@ -29,7 +24,7 @@ const Dashboard = ({ session }) => {
   useEffect(() => {
     getProfile()
   }, [session])
-
+  
   const getProfile = async () => {
     try {
       setLoading(true)
@@ -105,6 +100,7 @@ const Dashboard = ({ session }) => {
           <br></br>
 
           <div >Email: {session.user.email}</div>
+          <div >Punteggio: {session.user.score}</div>
           <br></br>
           <label for="name">Nome:</label><br/>
           <input type="text" id="name" name="name" value={name || ''}
