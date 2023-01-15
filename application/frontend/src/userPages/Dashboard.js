@@ -37,7 +37,7 @@ const Dashboard = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from('users')
-        .select(`email`)
+        .select(`*`)
         .eq('id', user.id)
         .single()
 

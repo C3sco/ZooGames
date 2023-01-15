@@ -7,8 +7,9 @@ export default function Modal({ children, isOpen, onClose }) {
       {isOpen && (
         <div className="modal-backdrop">
           <div className="modal-window">
-            <button onClick={onClose}>Close</button>
+            
             {children}
+            <button onClick={onClose}>Close</button>
           </div>
         </div>
       )}

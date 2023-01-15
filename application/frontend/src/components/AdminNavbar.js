@@ -1,12 +1,11 @@
 import {Link, useMatch, useResolvedPath} from "react-router-dom"
 import './navbar.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from "./Database.js";
 
-export default function Navbar(){
-    const history = useNavigate();
+export default function AdminNavbar(){
+
     const Logout = async () => {
         try{
             await supabase.auth.signOut();
@@ -24,6 +23,7 @@ export default function Navbar(){
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/components/LoginSupabase">Login</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz">Quiz</CustomLink>
+            <CustomLink class="a" to="/components/AdminPage">AdminPage</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz/QuizFinal">Real Quiz</CustomLink>
             <CustomLink class="a" to="/components/Register">Register</CustomLink>
             <CustomLink class="a" to="/Giochi/ImpiccatoGame/Javascript/Impiccato">Impiccato</CustomLink>
@@ -45,8 +45,5 @@ export default function Navbar(){
             </li>
         )
     }
-
-
-
 
 }

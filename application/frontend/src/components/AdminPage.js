@@ -95,6 +95,15 @@ export default function AdminPage({ session }) {
         }
     }
 
+    const updateRole = async (userId, role) => {
+        try {
+          const response = await supabase.from('users').update({isAdmin:role}).eq('id',userId);
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
 
     return (
         <>
@@ -124,6 +133,9 @@ export default function AdminPage({ session }) {
                             </td>
                             <td>
                                 <button onClick={() => handleDelete(user.id)}>Elimina</button>
+                            </td>
+                            <td>
+                                <button onClick={() => updateRole(user.id, '1')}>Admin</button>
                             </td>
                         </tr>
                     ))}
