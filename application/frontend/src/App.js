@@ -23,6 +23,7 @@ import Leaderboard from "./userPages/Leaderboard.js";
 import Shop from "./userPages/Shop.js";
 import AdminShop from "./components/AdminShop.js";
 import Forum from "./userPages/Forum.js";
+import CreatePost from "./userPages/CreatePost.js";
 
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
             <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
             <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
             <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />
+            <Route path="/userPages/CreatePost" element={!session ? <LoginSupabase /> : <CreatePost key={session.user.id} session={session} />} />
 
             <Route path="/components/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
             <Route path="/components/AdminPage" element={!session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />} />

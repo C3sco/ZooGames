@@ -2,7 +2,6 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { supabase } from '../components/Database.js';
 import ProfileImage from './ProfileImage.js';
-
 import './dashboard.css'
 
 /* 
