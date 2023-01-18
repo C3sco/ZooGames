@@ -6,6 +6,9 @@ import './forum.css'
 
 const db = supabase
 
+// DA FARE!
+// Aggiungere l'id dell'utente al post quando viene creato e mostrare il nome utente di chi lo ha creato
+
 const Forum = ({ session }) => {
     const [posts, setPosts] = useState([])
 
