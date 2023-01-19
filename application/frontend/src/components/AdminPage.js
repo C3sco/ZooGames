@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useNavigate  } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, useEffect, useNavigate } from 'react';
 import { supabase } from './Database.js';
 import Modal from './Modal.js';
 import './table.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 /*
 Pagina con table con tutti gli user, possibilità di cercare user e di modificare i dati
@@ -14,41 +14,60 @@ const db = supabase;
 export default function AdminPage({ session }) {
 
     const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        getProfile()
-      }, [session])
-
-      const getProfile = async () => {
-        try {
-          setLoading(true)
-          const { user } = session
-    
-          let { data, error, status } = await supabase
-            .from('users')
-            .select(`email`)
-            .eq('id', user.id)
-            .single()
-    
-          if (error && status !== 406) {
-            throw error
-          }
-    
-          if (data.admin===0) {
-            //useNavigate("./loginSupabase");
-            //redirect to login??
-          }
-        } catch (error) {
-          alert(error.message)
-        } finally {
-          setLoading(false)
-        }
-      }
-
+    const [search, setSearch] = useState('');
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState({});
+    const [userError, setUserError] = useState('');
+
+    const handleChangeSearch = e => {
+        setSearch(e.target.value);
+    };
+
+    const handleSearch = async () => {
+        const allUsers = await db.from('users').select()
+        const filteredUsers = allUsers.data.filter(user =>
+            user.username.toLowerCase().includes(search.toLowerCase())
+        );
+        console.log(filteredUsers);
+        if (filteredUsers.length == 0) {
+            setUserError('Impossibile trovare un utente con questo username')
+        } else {
+            setUserError('')
+        }
+        setUsers(filteredUsers);
+    };
+
+    useEffect(() => {
+        getProfile()
+    }, [session])
+
+    const getProfile = async () => {
+        try {
+            setLoading(true)
+            const { user } = session
+
+            let { data, error, status } = await supabase
+                .from('users')
+                .select(`email`)
+                .eq('id', user.id)
+                .single()
+
+            if (error && status !== 406) {
+                throw error
+            }
+
+            if (data.admin === 0) {
+                //useNavigate("./loginSupabase");
+                //redirect to login??
+            }
+        } catch (error) {
+            alert(error.message)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
         db.from('users').select().then((response) => {
@@ -97,17 +116,23 @@ export default function AdminPage({ session }) {
 
     const updateRole = async (userId, role) => {
         try {
-          const response = await supabase.from('users').update({isAdmin:role}).eq('id',userId);
-          console.log(response);
+            const response = await supabase.from('users').update({ isAdmin: role }).eq('id', userId);
+            console.log(response);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      }
+    }
 
 
     return (
         <>
-            UTENTI
+            <h1>UTENTI</h1>
+            <form class='center'>
+                <input type="text" id="search" onChange={handleChangeSearch} />
+                <button type="submit" className="" onClick={handleSearch}>Cerca</button>
+            </form>
+            {userError && <div className="text-danger">{userError}</div>}
+            <br></br>
             <table>
                 <thead>
                     <tr>
@@ -144,32 +169,36 @@ export default function AdminPage({ session }) {
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <form onSubmit={handleSubmit}>
                     <input
+                        placeholder='username'
                         type="text"
                         value={editingUser.username}
                         onChange={handleChange('username')}
-                    />
+                    /> <br></br><br></br>
                     <input
+                        placeholder='password'
                         type="text"
                         value={editingUser.password}
                         onChange={handleChange('password')}
-                    />
+                    /> <br></br><br></br>
                     <input
+                        placeholder='nome'
                         type="text"
                         value={editingUser.name}
                         onChange={handleChange('name')}
-                    />
+                    /><br></br><br></br>
                     <input
+                        placeholder='cognome'
                         type="text"
                         value={editingUser.surname}
                         onChange={handleChange('surname')}
-                    />
-                    
+                    /> <br></br><br></br>
                     <input
+                        placeholder='birthday'
                         type="date"
                         value={editingUser.birthday}
                         onChange={handleChange('birthday')}
-                    />
-                    <button type="submit">Salva</button>
+                    /> <br></br><br></br>
+                    <button type="submit" className='btn btn-success'>Salva</button>
                 </form>
             </Modal>
             {error && <div className="error-message">{error}</div>}

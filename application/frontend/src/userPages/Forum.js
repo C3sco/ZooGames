@@ -33,7 +33,7 @@ const Forum = ({ session }) => {
         <div className="container">
             <br></br>
             <div class="center">
-                <Link to='/userPages/CreatePost'><button type="submit" className="btn btn-primary" >Crea Nuovo Post</button></Link>
+                <button type="submit" className="btn btn-primary" ><Link style={{ textDecoration: 'none' }} to='/userPages/CreatePost'>Crea Nuovo Post</Link></button>
             </div>
             <br></br>
             <br></br>

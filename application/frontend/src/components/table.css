@@ -3,6 +3,11 @@
     Modificare le ultime due colonne dove ci sono i buttons, mettere i bottoni più belli e togliere i bordi
 */
 
+input[type=text] {
+  border: 2px inset lightgray;
+  border-radius: 5px;
+}
+
 
 table {
     width: 100%;

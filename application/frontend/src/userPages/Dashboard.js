@@ -16,10 +16,10 @@ const Dashboard = ({ session }) => {
   const [name, setName] = useState(null)
   const [surname, setSurname] = useState(null)
   const [birthday, setBirthday] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
+  const [image, setImage] = useState(null)
+  const [score, setScore] = useState(null)
 
   const id = session.user.id
-  console.log(id);
 
   useEffect(() => {
     getProfile()
@@ -45,7 +45,8 @@ const Dashboard = ({ session }) => {
         setName(data.name)
         setSurname(data.surname)
         setBirthday(data.birthday)
-        //setAvatarUrl(data.avatar_url)
+        setImage(data.image)
+        setScore(data.score)
       }
     } catch (error) {
       alert(error.message)
@@ -68,7 +69,7 @@ const Dashboard = ({ session }) => {
         name,
         surname,
         birthday,
-        //avatar_url,
+        image,
         updated_at: new Date(),
       }
 
@@ -91,18 +92,18 @@ const Dashboard = ({ session }) => {
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
           <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
-            url={avatar_url}
+            url={image}
             id = {id}
             size={150}
             onUpload={(url) => {
-              // setAvatarUrl(url)
-              // updateProfile({ username, name, surname, birthday })
+            setImage(url)
+            updateProfile({ username, name, surname, birthday })
             }}
           />
           <br></br>
 
           <div >Email: {session.user.email}</div>
-          <div >Punteggio: {session.user.score}</div>
+          <div >Punteggio: {score}</div>
           <br></br>
           <label for="name">Nome:</label><br/>
           <input type="text" id="name" name="name" value={name || ''}

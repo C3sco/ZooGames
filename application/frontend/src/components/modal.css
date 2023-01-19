@@ -16,4 +16,5 @@
     background-color: white;
     padding: 1rem;
     z-index: 11;
+    border: inset lightgray 5px
   }
