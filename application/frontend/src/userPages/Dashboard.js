@@ -18,6 +18,9 @@ const Dashboard = ({ session }) => {
   const [birthday, setBirthday] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
 
+  const id = session.user.id
+  console.log(id);
+
   useEffect(() => {
     getProfile()
   }, [session])
@@ -57,6 +60,7 @@ const Dashboard = ({ session }) => {
     try {
       setLoading(true)
       const { user } = session
+      
 
       const updates = {
         id: user.id,
@@ -88,10 +92,11 @@ const Dashboard = ({ session }) => {
         <form onSubmit={updateProfile} className="form-widget">
           <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
             url={avatar_url}
+            id = {id}
             size={150}
             onUpload={(url) => {
-              setAvatarUrl(url)
-              updateProfile({ username, name, surname, birthday })
+              // setAvatarUrl(url)
+              // updateProfile({ username, name, surname, birthday })
             }}
           />
           <br></br>

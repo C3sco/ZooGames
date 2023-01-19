@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../components/Database.js'
 
-export default function ProfileImage({ url, size, onUpload }) {
+export default function ProfileImage({ url, id, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
-    if (url) downloadImage(url)
+    if (url) downloadImage(url,id)
   }, [url])
 
-  const downloadImage = async (path) => {
+  async function downloadImage(url,id) {
     try {
-      const { data, error } = await supabase.storage.from('images').download(path)
+      const { data, error } = await supabase.storage.from('images').download(id+"/")  //list(id + "/", {limit:1,offset:0,sortBy:{column:"name",order:"asc"}}) //.download(path)
       if (error) {
         throw error
       }
       const url = URL.createObjectURL(data)
       setAvatarUrl(url)
+      // await supabase.from('users').update({image:url}).eq(id,id)
     } catch (error) {
       console.log('Error downloading image: ', error.message)
     }
@@ -35,13 +36,15 @@ export default function ProfileImage({ url, size, onUpload }) {
       const fileName = `${Math.random()}.${fileExt}`
       const filePath = `${fileName}`
 
-      let { error: uploadError } = await supabase.storage.from('images').upload(filePath, file)
+      let { data,error: uploadError } = await supabase.storage.from('images').upload(id + "/",file)
+
+      // let { error: uploadError } = await supabase.storage.from('images').upload(filePath, file)
 
       if (uploadError) {
         throw uploadError
       }
 
-      onUpload(filePath)
+      // onUpload(filePath)
     } catch (error) {
       alert(error.message)
     } finally {
@@ -65,6 +68,9 @@ export default function ProfileImage({ url, size, onUpload }) {
           <label className="button primary block" htmlFor="single">
             Cambia immagine (CLICK)
           </label>
+          {/* <Form.Group className="mb-3" style={{maxWidth:"500px"}}>
+
+          </Form.Group> */}
           <div className="visually-hidden">
             <input
               type="file"
