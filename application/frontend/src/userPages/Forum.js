@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { supabase } from '../components/Database.js';
 import { Link } from 'react-router-dom'
-import './forum.css'
+import '../buttons.css'
+import { Button } from 'react-bootstrap';
 
 const db = supabase
 
@@ -32,8 +33,9 @@ const Forum = ({ session }) => {
     return (
         <div className="container">
             <br></br>
-            <div class="center">
-                <button type="submit" className="btn btn-primary" ><Link style={{ textDecoration: 'none' }} to='/userPages/CreatePost'>Crea Nuovo Post</Link></button>
+            <div>
+                <Link style={{ textDecoration: 'none',color:'white'}} to='/userPages/CreatePost'><button type="submit" className="c3-succ">Crea Nuovo Post</button></Link>
+                
             </div>
             <br></br>
             <br></br>

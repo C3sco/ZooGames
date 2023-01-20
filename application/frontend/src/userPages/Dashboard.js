@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../components/Database.js';
 import ProfileImage from './ProfileImage.js';
 import './dashboard.css'
+import '../buttons.css'
 
 /* 
 Questa è la schermata che appare all'utente una volta loggato.
@@ -121,16 +122,17 @@ const Dashboard = ({ session }) => {
           <input type="date" id="dob" name="dob" value={birthday || ''}
               onChange={(e) => setBirthday(e.target.value)}/><br/><br/>          
           <div>
-            <button className="btn" disabled={loading}>
+            <button className="c3-succ" disabled={loading}>
               Aggiorna Informazioni
             </button>
+            <button type="button" className="c3-err" onClick={() => supabase.auth.signOut()}>
+        Logout
+      </button>
           </div>
         </form>
       )}
-      <br></br>
-      <button type="button" className="btn" onClick={() => supabase.auth.signOut()}>
-        Logout
-      </button>
+      
+      
     </div>
   )
 }

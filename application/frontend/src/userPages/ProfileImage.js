@@ -64,7 +64,7 @@ export default function ProfileImage({ url, id, size, onUpload }) {
         'Uploading...'
       ) : (
         <><br></br><br></br>
-          <label className="button primary block" htmlFor="single"><button className="btn">
+          <label className="button primary block" htmlFor="single"><button className="c3-succ">
           Carica immagine
           </button>
           </label>

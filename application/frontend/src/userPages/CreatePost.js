@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { supabase } from '../components/Database.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import './forum.css'
+import '../buttons.css'
 
 const db = supabase
 
@@ -98,9 +98,8 @@ const CreatePost = ({ session }) => {
 
                 <br></br>
                 <div class='line'>
-                <button type="submit" className="btn btn-success">Crea Post</button>
-                <br></br>
-                <Link to ='/userPages/Forum'><button type="submit" className="btn btn-danger">Indietro</button></Link>
+                <button type="submit" className="c3-succ">Crea Post</button>
+                <Link to ='/userPages/Forum'><button type="button" className="c3-err">Indietro</button></Link>
                 </div>
             </form>
         </div>
