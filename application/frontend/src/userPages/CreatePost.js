@@ -3,10 +3,13 @@ import { supabase } from '../components/Database.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import '../buttons.css'
+import PostImage from './PostImage.js';
 
 const db = supabase
 
 const CreatePost = ({ session }) => {
+
+    const id = session.user.id
 
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -42,20 +45,13 @@ const CreatePost = ({ session }) => {
             setCategoryError('')
         }
 
-        const imageUrl = await uploadImage(image)
-
-        await db.from('posts').insert({ title: title, content: body, category: category })
+        await db.from('posts').insert({ title: title, content: body, category: category, image: image})
 
         setTitle('')
         setBody('')
         setCategory('')
         setImage('')
         setSuccessAlert('Post creato con successo!')
-    }
-
-    async function uploadImage(){
-        // DA FARE
-        // usare un servizio di cloud per storare l'immmagine e ricevere indietro l'url, si dovrebbe poter usare supabase storage
     }
 
     const handleImageChange = (e) => {
@@ -88,6 +84,14 @@ const CreatePost = ({ session }) => {
                     {categoryError && <div className="text-danger">{categoryError}</div>}
                 </div>
                 <br></br>
+                <PostImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
+                    url={image}
+                    id={id}
+                    size={200}
+                    onUpload={(url) => {
+                        setImage(url)
+                    }}
+                />
                 <div className="form-group">
                     <label>Immagine</label><br></br>
                     <input type="file" className="form-control-file" onChange={handleImageChange} />
@@ -98,8 +102,8 @@ const CreatePost = ({ session }) => {
 
                 <br></br>
                 <div class='line'>
-                <button type="submit" className="c3-succ">Crea Post</button>
-                <Link to ='/userPages/Forum'><button type="button" className="c3-err">Indietro</button></Link>
+                    <button type="submit" className="c3-succ">Crea Post</button>
+                    <Link to='/userPages/Forum'><button type="button" className="c3-err">Indietro</button></Link>
                 </div>
             </form>
         </div>

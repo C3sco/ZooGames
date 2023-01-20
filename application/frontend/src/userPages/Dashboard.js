@@ -95,16 +95,16 @@ const Dashboard = ({ session }) => {
           <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
             url={image}
             id = {id}
-            size={150}
+            size={200}
             onUpload={(url) => {
             setImage(url)
-            updateProfile({ username, name, surname, birthday })
+            updateProfile()
             }}
           />
           <br></br>
 
-          <div >Email: {session.user.email}</div>
-          <div >Punteggio: {score}</div>
+          <div style={{fontSize:20}}><b>Email: </b> <i>{session.user.email}</i><br></br>
+          <b>Punteggio:</b> {score}</div>
           <br></br>
           <label for="name">Nome:</label><br/>
           <input type="text" id="name" name="name" value={name || ''}
@@ -131,7 +131,8 @@ const Dashboard = ({ session }) => {
           </div>
         </form>
       )}
-      
+      <br></br>
+      <br></br>
       
     </div>
   )
