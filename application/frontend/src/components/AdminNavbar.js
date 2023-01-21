@@ -21,9 +21,8 @@ export default function AdminNavbar(){
             <CustomLink class="a"  to="/Giochi/Notizie">News</CustomLink>
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/components/LoginSupabase">Dashboard</CustomLink>
-            <CustomLink class="a" to="/Giochi/Quiz">Quiz</CustomLink>
             <CustomLink class="a" to="/components/AdminPage">AdminPage</CustomLink>
-            <CustomLink class="a" to="/Giochi/Quiz/QuizFinal">Real Quiz</CustomLink>
+            <CustomLink class="a" to="/Giochi/Quiz/QuizPage">Quiz</CustomLink>
             <CustomLink class="a" to="/components/Register">Register</CustomLink>
             <CustomLink class="a" to="/Giochi/ImpiccatoGame/Javascript/Impiccato">Impiccato</CustomLink>
             <CustomLink class="a" to="/userPages/Shop">Shop</CustomLink>

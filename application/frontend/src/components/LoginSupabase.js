@@ -28,8 +28,8 @@ export default function LoginSupabase() {
   return (
     <div className="row flex-center flex">
       <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">Sign in via magic link with your email below</p>
+        <h1 className="header">LOGIN ZOOGAMES</h1>
+        <p className="description">Perfavore inserisci la tua mail per continuare, ti verrà inviato un link per poter confermare il tuo accountcd</p>
         {loading ? (
           'Sending magic link...'
         ) : (

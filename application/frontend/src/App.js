@@ -11,12 +11,11 @@ import Notizie from "./Giochi/Notizie.js"
 import Video from "./Giochi/Video.js"
 import Impiccato from "./Giochi/ImpiccatoGame/Javascript/Impiccato.js"
 import Dashboard from "./userPages/Dashboard.js";
-import Quiz from "./Giochi/Quiz.js";
 import LoginSupabase from "./components/LoginSupabase.js";
 
 import { supabase } from "./components/Database.js";
 import { useState, useEffect } from 'react'
-import QuizFinal from "./Giochi/Quiz/QuizFinal.js";
+import QuizPage from "./Giochi/Quiz/QuizPage.js";
 import AdminPage from "./components/AdminPage.js";
 import AdminNavbar from "./components/AdminNavbar.js";
 import Leaderboard from "./userPages/Leaderboard.js";
@@ -77,10 +76,9 @@ function App() {
             <Route path="/Giochi/Notizie" element={<Notizie />} />
             <Route path="/Giochi/Video" element={<Video />} />
             <Route path="/Giochi/Impiccato" element={<Impiccato />} />
-            <Route path="/Giochi/Quiz" element={<Quiz />} />
             <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={!session ? <LoginSupabase /> : <Impiccato key={session.user.id} session={session} />} />
             <Route path="/userPages/Dashboard" element={<Dashboard />} />
-            <Route path="/Giochi/Quiz/QuizFinal" element={<QuizFinal />} />
+            <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage />} />
             <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
             <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
             <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />
