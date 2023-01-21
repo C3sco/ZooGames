@@ -1,21 +1,7 @@
 import { useState } from "react";
-// import useSound from "use-sound";
 import random from "./Random.js";
 import './quiz.css'
-// import correctSound from "./sfx/131660__bertrof__game-sound-correct.wav";
-// import incorrectSound from "./sfx/131657__bertrof__game-sound-wrong.wav";
-// import "./trivia-item.css";
 
-/**
- * The QuizItem component renders an individual trivia question and waits for a user's answer.
- * @param {object} props
- * @param {string} props.correctAnswer
- * @param {string[]} props.incorrectAnswers
- * @param {string} props.question
- * @param {"easy" | "medium" | "hard"} props.difficulty
- * @param {() => void} props.onNextClick
- * @param {(boolean) => void} props.onAnswerSelected
- */
 function QuizItem({
   correctAnswer,
   incorrectAnswers,
@@ -26,11 +12,8 @@ function QuizItem({
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const hasPickedAnswer = selectedAnswer !== null;
-//   const [playCorrect] = useSound(correctSound, { volume: 0.5 });
-//   const [playIncorrect] = useSound(incorrectSound, { volume: 0.5 });
 
   const allAnswers = [correctAnswer, ...incorrectAnswers];
-  // useState can take a function that is run only when the state is initialized:
   const [shuffledAnswers] = useState(() => random(allAnswers));
 
   let nextButtonClassName = "trivia-item__button trivia-item__next-button";
@@ -40,14 +23,12 @@ function QuizItem({
     const playerAnswer = event.target.innerHTML;
     setSelectedAnswer(playerAnswer);
     const wasPlayerCorrect = playerAnswer === correctAnswer;
-    // if (wasPlayerCorrect) playCorrect();
-    // else playIncorrect();
     onAnswerSelected(wasPlayerCorrect, difficulty);
   };
 
   return (
     <div>
-      <p className="trivia-item__difficulty">Difficulty: {difficulty}</p>
+      <p className="trivia-item__difficulty">Difficoltà: {difficulty}</p>
       <p className="trivia-item__question">{question}</p>
       <ul className="trivia-item__answers">
         {shuffledAnswers.map((answer, i) => {
@@ -74,7 +55,7 @@ function QuizItem({
         })}
       </ul>
       <button className={nextButtonClassName} onClick={onNextClick} disabled={!hasPickedAnswer}>
-        Next ➡
+        Next
       </button>
     </div>
   );

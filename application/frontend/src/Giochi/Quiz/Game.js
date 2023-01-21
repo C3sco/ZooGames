@@ -2,7 +2,7 @@ import { useState } from "react";
 import EndScreen from "./EndScreen.js";
 import Score from "./Score.js";
 import QuizItem from "./QuizItem.js";
-//import { FadeTransition, FadeWrapper } from "./fade-transition";
+import { supabase } from "../../components/Database.js";
 
 function convertDifficultyToPoints(difficulty) {
   if (difficulty === "easy") return 1;
@@ -11,10 +11,23 @@ function convertDifficultyToPoints(difficulty) {
   else throw new Error(`Invalid difficulty setting: ${difficulty}`);
 }
 
-/**
- * The Game is responsible for orchestrating the flow of the quiz game.
- */
-function Game({quizData}) {
+function Game({ quizData, session }) {
+
+  let userId = session.user.id;
+
+  async function setScore(score) {
+    if (userId != null) {
+      try {
+        let finalScore = 0
+        const userScore = await supabase.from('users').select('score').eq('id', userId);
+        finalScore = score + userScore;
+        await supabase.from('users').upsert({score: finalScore}).eq('id', userId);
+      } catch (err) {
+        console.log("Errore nell'aggiornamento del punteggio: " + err);
+      }
+    }
+  }
+
   const [gameState, setGameState] = useState({
     score: 0,
     triviaIndex: 0,
@@ -40,7 +53,6 @@ function Game({quizData}) {
     if (triviaIndex >= quizData.length - 1) {
       setGameState({ ...gameState, isGameOver: true });
     } else {
-      // Using the spread operator to copy the gameState and override the triviaIndex.
       setGameState({ ...gameState, triviaIndex: triviaIndex + 1 });
     }
   };
@@ -67,6 +79,9 @@ function Game({quizData}) {
         playTime={playTimeInSeconds}
       />
     );
+
+    setScore(score);
+
   } else {
     pageKey = triviaIndex;
     const triviaQuestion = quizData[triviaIndex];
@@ -86,10 +101,9 @@ function Game({quizData}) {
 
   return (
     <>
+      <br></br>
       <Score score={score} questionNumber={questionNumber} totalQuestions={numQuestions} />
-      {pageContent/* <FadeWrapper>
-        <FadeTransition key={pageKey}>{pageContent}</FadeTransition>
-      </FadeWrapper> */}
+      {pageContent}
     </>
   );
 }

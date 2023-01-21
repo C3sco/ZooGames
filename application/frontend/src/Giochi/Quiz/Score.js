@@ -1,6 +1,6 @@
 import './quiz.css'
 
-function Score({ label, value }) {
+function Stat({ label, value }) {
     return (
       <li className="stats__stat-container">
         <div className="stats__stat-label">{label}:</div>
@@ -9,18 +9,11 @@ function Score({ label, value }) {
     );
   }
   
-  /**
-   * The Stats component renders the score and current question number.
-   * @param {object} props
-   * @param {number} props.score
-   * @param {number} props.questionNumber
-   * @param {number} props.totalQuestions
-   */
-  function Stats({ score, questionNumber, totalQuestions }) {
+  function Score({ score, questionNumber, totalQuestions }) {
     return (
       <ul className="stats">
-        <Score label="Score" value={score} />
-        <Score label="Question" value={`${questionNumber} / ${totalQuestions}`} />
+        <Stat label="Punteggio" value={score} />
+        <Stat label="Domanda" value={`${questionNumber} / ${totalQuestions}`} />
       </ul>
     );
   }

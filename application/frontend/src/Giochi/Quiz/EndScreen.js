@@ -37,7 +37,7 @@ function EndStat({ label, value }) {
         {/* <EndStat label="Best Score" value={bestScore} /> */}
         <EndStat label="Tempo" value={timeString} />
 
-        <button className="end-screen__button" onClick={onRetryClick}>
+        <button className="c3-play" onClick={onRetryClick}>
           Riprova
         </button>
       </div>

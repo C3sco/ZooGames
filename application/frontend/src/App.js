@@ -78,7 +78,7 @@ function App() {
             <Route path="/Giochi/Impiccato" element={<Impiccato />} />
             <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={!session ? <LoginSupabase /> : <Impiccato key={session.user.id} session={session} />} />
             <Route path="/userPages/Dashboard" element={<Dashboard />} />
-            <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage />} />
+            <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage session={session}/>} />
             <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
             <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
             <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />

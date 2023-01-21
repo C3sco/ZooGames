@@ -2,9 +2,10 @@ import Game from './Game.js'
 import Loading from './Loading.js'
 import Error from './Error.js'
 import { useState, useEffect } from 'react'
+import he from 'he'; //per decodificare le stringhe html ricevute dall'api che se no presentano caratteri speciali
 
 
-function QuizPage() {
+function QuizPage({session}) {
 
     // const [isLoading, setLoading]
     const [quiz, setQuiz] = useState({ isLoading: true, error: "", data: null });
@@ -29,10 +30,19 @@ function QuizPage() {
                     throw new Error("Errore nella richiesta api, nessun risultato")
                 }
 
+                const decoded = results.map((item) => {
+                    return {
+                        ...item,
+                        question: he.decode(item.question),
+                        correct_answer: he.decode(item.correct_answer),
+                        incorrect_answers: item.incorrect_answers.map((incorrect) => he.decode(incorrect)),
+                    }
+                })
+
                 setQuiz({
                     isLoading: false,
                     error: "",
-                    data: results
+                    data: decoded
                 })
 
                 console.log(json)
@@ -54,14 +64,14 @@ function QuizPage() {
     } else if (error !== "") {
         contents = <Error>Qualcosa non ha funzionato</Error>
     } else {
-        contents = <Game quizData={data} />
+        contents = <Game quizData={data} session={session}/>
     }
 
 
     return (
-        <main>
+        <>
             {contents}
-        </main>
+        </>
     )
 
 }
