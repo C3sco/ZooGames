@@ -1,5 +1,5 @@
 import Game from './Game.js'
-import Loading from './Loading.js'
+import Loading from '../../components/Loading.js'
 import Error from './Error.js'
 import { useState, useEffect } from 'react'
 import he from 'he'; //per decodificare le stringhe html ricevute dall'api che se no presentano caratteri speciali
@@ -9,8 +9,8 @@ function QuizPage({session}) {
 
     // const [isLoading, setLoading]
     const [quiz, setQuiz] = useState({ isLoading: true, error: "", data: null });
+    const [alert, setAlert] = useState('');
     const { isLoading, error, data } = quiz;
-
 
     useEffect(() => {
 
@@ -70,6 +70,7 @@ function QuizPage({session}) {
 
     return (
         <>
+        {alert && <div className="text-danger">{alert}</div>}
             {contents}
         </>
     )

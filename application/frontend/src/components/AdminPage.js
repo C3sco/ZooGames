@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useNavigate } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from './Database.js';
 import Modal from './Modal.js';
 import './table.css';
@@ -75,6 +75,7 @@ export default function AdminPage({ session }) {
             setUsers(response.data);
         });
     }, []);
+
     async function getAllUsers(){
         let response = await db.from('users').select()
         setUsers(response.data);

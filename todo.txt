@@ -1,44 +1,6 @@
-giochi:
-    -che animale sei
-      -domande a caso
-      -pool randomica finale della risposta
-      -0.1% esce vitali
-  
-    -impiccato
-  
-    -quiz
+To DO:
 
-servizi:
-    -e-commerce:
-      -negozio online di
-       animali
-      -gadjet per animali
-      -prenota un canile
-  
-    -dog sitter:
-      -registrati (opzionale)
-      -trova
-      -contatta
-      -prenota
-
-    -adotta un animale
-      -seleziona un animale da una pool
-      -aggiungere info sul animale
-      -mettere link a paypal per adozione
-      
-curiosità:    
-    -trova uno zoo
-    
-    -genera un animale a caso con info
-    
-    -generatore meme animali
-
-comunità:
-    -login NECESSARIO 
-      -finesta moldale di avertimento
-    -chat con altri utenti
-    -controllo prenotazioni
-    
-aggiustare:
-    -apertura barra in modalità mobile
-    
+- fixare l'upload dell'immagine nei points
+- fixare la navbar in modo che cambi per gli admin
+- E-commerce
+- E-commerce lato admin

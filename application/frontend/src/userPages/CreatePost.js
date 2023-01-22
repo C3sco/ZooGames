@@ -94,6 +94,7 @@ const CreatePost = ({ session }) => {
                     <Link to='/userPages/Forum'><button type="button" className="c3-err">Indietro</button></Link>
                 </div>
             </form>
+            {successAlert && <div className="text-success">{successAlert}</div>}
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { supabase } from '../components/Database.js';
 import ProfileImage from './ProfileImage.js';
 import './dashboard.css'
 import '../buttons.css'
+import Loading from '../components/Loading.js';
 
 /* 
 Questa è la schermata che appare all'utente una volta loggato.
@@ -21,6 +22,7 @@ const Dashboard = ({ session }) => {
   const [score, setScore] = useState(null)
 
   const id = session.user.id
+  console.log(id);
 
   useEffect(() => {
     getProfile()
@@ -89,7 +91,7 @@ const Dashboard = ({ session }) => {
   return (
     <div  aria-live="polite">
       {loading ? (
-        'Caricamento ...'
+        <Loading />
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
           <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */

@@ -12,7 +12,7 @@ import Video from "./Giochi/Video.js"
 import ImpiccatoPage from "./Giochi/Impiccato/ImpiccatoPage.js"
 import Dashboard from "./userPages/Dashboard.js";
 import LoginSupabase from "./components/LoginSupabase.js";
-
+// import Register from "./components/Register.js"
 import { supabase } from "./components/Database.js";
 import { useState, useEffect } from 'react'
 import QuizPage from "./Giochi/Quiz/QuizPage.js";
@@ -24,7 +24,6 @@ import AdminShop from "./components/AdminShop.js";
 import Forum from "./userPages/Forum.js";
 import CreatePost from "./userPages/CreatePost.js";
 
-
 function App() {
 
   const [isAdmin, setIsAdmin] = useState(false);
@@ -33,7 +32,7 @@ function App() {
     useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
-        getAdmin();
+        // getAdmin();
       })
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
@@ -44,21 +43,21 @@ function App() {
     console.log(err);
   }
 
-  async function getAdmin() {
-    if (session != null) {
-      try {
-        const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
-        // check se l'utente è admin
-        if (adminN === 1) {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }
+  // async function getAdmin() {
+  //   if (session != null) {
+  //     try {
+  //       const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
+  //       // check se l'utente è admin
+  //       if (adminN === 1) {
+  //         setIsAdmin(true);
+  //       } else {
+  //         setIsAdmin(false);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // }
   return (
     <>
 

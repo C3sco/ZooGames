@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EndScreen from "./EndScreen.js";
 import Score from "./Score.js";
 import QuizItem from "./QuizItem.js";
 import { supabase } from "../../components/Database.js";
-import { updateScore } from "../../components/UpdateScore.js"
+// import { updateScore } from "../../components/UpdateScore.js"
 
 function convertDifficultyToPoints(difficulty) {
   if (difficulty === "easy") return 1;
@@ -13,8 +13,7 @@ function convertDifficultyToPoints(difficulty) {
 }
 
 function Game({ quizData, session }) {
-
-  let userId = session.user.id;
+  const[scoreDone,setScoreDone] = useState();
 
   const [gameState, setGameState] = useState({
     score: 0,
@@ -27,6 +26,13 @@ function Game({ quizData, session }) {
   const questionNumber = triviaIndex + 1;
   const numQuestions = quizData.length;
   const playTimeInSeconds = (performance.now() - startTime) / 1000;
+
+  let userId;
+
+  if(session!=null){
+    userId = session.user.id;
+  }
+  
 
   const restartGame = () => {
     setGameState({
@@ -58,6 +64,25 @@ function Game({ quizData, session }) {
   let finalScore;
   let pageContent;
   let pageKey;
+
+  useEffect(() =>{ 
+    async function updateScore(userId, score) {
+      if (userId != null && isGameOver) {
+          try {
+              finalScore = 0
+              const userScore = await supabase.from('users').select('score').eq('id', userId);
+              console.log("userscore: " + userScore)
+              finalScore = parseInt(score + userScore);
+              console.log("Punteggio attuale: " + finalScore);
+              await supabase.from('users').update({ score: finalScore }).eq('id', userId);
+          } catch (err) {
+              console.log("Errore nell'aggiornamento del punteggio: " + err);
+          }
+      }
+    }
+    updateScore(score);
+  })
+
   if (isGameOver) {
     pageKey = "EndScreen";
     console.log("score: " + score)

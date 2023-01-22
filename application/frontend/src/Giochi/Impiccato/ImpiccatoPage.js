@@ -20,7 +20,10 @@ function Impiccato({ session }) {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
-  const id = session.user.id;
+  let id;
+  if(session!=null){
+    id =session.user.id;
+  }
   
   //console.log("ID " + session);
 
