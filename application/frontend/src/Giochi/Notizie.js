@@ -9,7 +9,7 @@ const AnimalNews = () => {
     const [filteredResults, setFilteredResults] = useState([]);
 
     const NewsCard = (props) => {
-        return(
+        return (
             <div className="notizia" key={props.element.url}>
                 <div className="card-body">
                     <div className="float-end ms-5 p-3" style={imageContainerStyle}>
@@ -18,10 +18,10 @@ const AnimalNews = () => {
                     <h5 className="card-title">{props.element.title}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{formatDate(props.element.publishedAt)}</h6>
                     <p className="card-text">{props.element.content}</p>
-                    <a 
-                        href={props.element.url} 
-                        className="btn btn-outline-primary fs-5">
-                            Continua a leggere
+                    <a
+                        href={props.element.url}
+                        className="btn btn-outline-primary fs-5" target={'_blank'}>
+                        Continua a leggere
                     </a>
                 </div>
             </div>
@@ -33,7 +33,7 @@ const AnimalNews = () => {
         height: "100%",
         objectFit: "contain",
     }
-    
+
     const imageContainerStyle = {
         width: "30%",
         height: "100%",
@@ -43,7 +43,7 @@ const AnimalNews = () => {
     const searchItems = (searchValue) => {
         setSearchInput(searchValue);
 
-        if(searchInput !== '') {
+        if (searchInput !== '') {
             const filteredData = newsArray.filter((item) => {
                 return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
             })
@@ -52,15 +52,15 @@ const AnimalNews = () => {
             setFilteredResults(newsArray);
         }
     }
-    
-    return(
+
+    return (
         <div id="News" className="container">
             <h1>Notizie sugli animali</h1>
             <form className="d-flex my-3" role="search" onSubmit={(e) => e.preventDefault()}>
-                <input 
-                    className="form-control me-2" 
-                    type="search" 
-                    placeholder="Cerca.." 
+                <input
+                    className="form-control me-2"
+                    type="search"
+                    placeholder="Cerca.."
                     aria-label="Search"
                     onChange={(e) => searchItems(e.target.value)}
                 />
@@ -68,49 +68,49 @@ const AnimalNews = () => {
             </form>
             <div className="d-flex flex-column flex-wrap">
                 {
-                    searchInput.length > 1 ? 
+                    searchInput.length > 1 ?
                         filteredResults
                             .map((element, index) => (
                                 <NewsCard key={index} element={element} />
-                            )) : 
+                            )) :
                         newsArray
-                            .slice(0,10)
-                            .sort((a,b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
+                            .slice(0, 10)
+                            .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
                             .map((element, index) => (
                                 <NewsCard key={index} element={element} />
                             ))
                 }
-               
+
             </div>
         </div>
     )
 }
 
-function connect(){
+function connect() {
     //API_KEY -> 2c965b0e26694da49d9b0ecbdbb41348
     let myConnection = new XMLHttpRequest();
-    myConnection.open("GET", "https://newsapi.org/v2/everything?q=animal&apiKey=2c965b0e26694da49d9b0ecbdbb41348", false);
+    myConnection.open("GET", "https://newsapi.org/v2/everything?q=animal&apiKey=8739329819f94fcfbbef4893bb9fd32a", false);
     myConnection.send("null");
     let response = myConnection.responseText;
 
-    return(
+    return (
         showNews(response).data
     )
 }
 
-function showNews(rawData){
+function showNews(rawData) {
     let data = (JSON.parse(rawData))["articles"];
 
-    return(
-        {data}
+    return (
+        { data }
     )
 }
 
-function formatDate(rawDate){
+function formatDate(rawDate) {
     let dataMillisec = Date.parse(rawDate);
     let dataFormattata = new Date(dataMillisec).toUTCString();
 
-    return(
+    return (
         dataFormattata
     )
 }

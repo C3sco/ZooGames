@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { supabase } from '../components/Database.js';
 import { Link } from 'react-router-dom'
 import '../buttons.css'
-import { Button } from 'react-bootstrap';
 
 const db = supabase
 

@@ -23,6 +23,7 @@ import Shop from "./userPages/Shop.js";
 import AdminShop from "./components/AdminShop.js";
 import Forum from "./userPages/Forum.js";
 import CreatePost from "./userPages/CreatePost.js";
+import Checkout from "./userPages/Checkout.js";
 
 function App() {
 
@@ -42,6 +43,8 @@ function App() {
   } catch (err) {
     console.log(err);
   }
+
+  let cart ='';
 
   // async function getAdmin() {
   //   if (session != null) {
@@ -77,14 +80,18 @@ function App() {
             <Route path="/Giochi/Impiccato/ImpiccatoPage" element={<ImpiccatoPage session={session} />} />
             <Route path="/userPages/Dashboard" element={<Dashboard />} />
             <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage session={session} />} />
-            <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
-            <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
-            <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />
-            <Route path="/userPages/CreatePost" element={!session ? <LoginSupabase /> : <CreatePost key={session.user.id} session={session} />} />
 
             <Route path="/components/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
             <Route path="/components/AdminPage" element={!session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />} />
             <Route path="/components/LoginSupabase" element={!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />} />
+
+
+            <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
+            <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
+            <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />
+            <Route path="/userPages/CreatePost" element={!session ? <LoginSupabase /> : <CreatePost key={session.user.id} session={session} />} />
+            <Route path="/userPages/Checkout" element={!session ? <LoginSupabase /> : <Checkout key={session.user.id} session={session} />} />
+            
           </Routes>
         </div>
       </div>

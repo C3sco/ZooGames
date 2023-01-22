@@ -12,9 +12,9 @@ export default function Leaderboard({ session }) {
     const [users, setUsers] = useState([]);
     const [userError, setUserError] = useState('');
 
-    useEffect(() => {
-        getProfile()
-    }, [session])
+    // useEffect(() => {
+    //     getProfile()
+    // }, [session])
 
     const handleChangeSearch = e => {
         setSearch(e.target.value);
@@ -34,31 +34,31 @@ export default function Leaderboard({ session }) {
         setUsers(filteredUsers);
     };
 
-    const getProfile = async () => {
-        try {
-            setLoading(true)
-            const { user } = session
+    // const getProfile = async () => {
+    //     try {
+    //         setLoading(true)
+    //         const { user } = session
 
-            let { data, error, status } = await supabase
-                .from('users')
-                .select(`email`)
-                .eq('id', user.id)
-                .single()
+    //         let { data, error, status } = await supabase
+    //             .from('users')
+    //             .select(`email`)
+    //             .eq('id', user.id)
+    //             .single()
 
-            if (error && status !== 406) {
-                throw error
-            }
+    //         if (error && status !== 406) {
+    //             throw error
+    //         }
 
-            if (data.admin === 0) {
-                //useNavigate("./loginSupabase");
-                //redirect to login??
-            }
-        } catch (error) {
-            alert(error.message)
-        } finally {
-            setLoading(false)
-        }
-    }
+    //         if (data.admin === 0) {
+    //             //useNavigate("./loginSupabase");
+    //             //redirect to login??
+    //         }
+    //     } catch (error) {
+    //         alert(error.message)
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // }
 
     useEffect(() => {
         db.from('users').select().then((response) => {
@@ -71,6 +71,9 @@ export default function Leaderboard({ session }) {
         setUsers(response.data);
 
     }
+
+    setTimeout(() => setUserError(''), 3000)
+
 
 
     return (
