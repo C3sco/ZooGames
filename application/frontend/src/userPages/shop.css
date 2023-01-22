@@ -23,15 +23,18 @@
     outline: 0;
     padding: 12px;
     color: white;
-    background-color: #000;
+    background-color: grey;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    opacity: 0.7;
 }
 
-.cardBtn {
-    opacity: 0.7;
+.cardBtn:hover {
+    background-color: black;
+    opacity: 1;
+    
 }
 
 .cart {

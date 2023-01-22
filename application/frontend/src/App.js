@@ -2,11 +2,9 @@ import React from "react";
 import './App.css';
 import './App.js';
 import { Routes, Route } from "react-router-dom";
-import Homepage from './Homepage/Javascript/Homepage.js'
-import Giochi from './Homepage/Javascript/Giochi.js'
-import Curiosita from './Homepage/Javascript/Curiosita.js'
+import Homepage from './components/Homepage.js'
+import Giochi from './components/Giochi.js'
 import Navbar from './components/Navbar.js'
-import Comunita from "./Homepage/Javascript/Comunita.js";
 import Notizie from "./Giochi/Notizie.js"
 import Video from "./Giochi/Video.js"
 import ImpiccatoPage from "./Giochi/Impiccato/ImpiccatoPage.js"
@@ -71,10 +69,8 @@ function App() {
 
         <div className="container">
           <Routes>
-            <Route path="/Homepage" index element={<Homepage />} />
-            <Route path="/Homepage/Giochi" element={<Giochi />} />
-            <Route path="/Homepage/Curiosita" element={<Curiosita />} />
-            <Route path="/Homepage/Comunita" element={<Comunita />} />
+            <Route path="/" index element={<Homepage />} />
+            <Route path="/components/Giochi" element={<Giochi />} />
             <Route path="/Giochi/Notizie" element={<Notizie />} />
             <Route path="/Giochi/Video" element={<Video />} />
             <Route path="/Giochi/Impiccato/ImpiccatoPage" element={<ImpiccatoPage session={session} />} />
