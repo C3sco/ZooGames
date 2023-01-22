@@ -9,7 +9,7 @@ import Navbar from './components/Navbar.js'
 import Comunita from "./Homepage/Javascript/Comunita.js";
 import Notizie from "./Giochi/Notizie.js"
 import Video from "./Giochi/Video.js"
-import Impiccato from "./Giochi/ImpiccatoGame/Javascript/Impiccato.js"
+import ImpiccatoPage from "./Giochi/Impiccato/ImpiccatoPage.js"
 import Dashboard from "./userPages/Dashboard.js";
 import LoginSupabase from "./components/LoginSupabase.js";
 
@@ -33,8 +33,8 @@ function App() {
     useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
+        getAdmin();
       })
-
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
       })
@@ -43,26 +43,26 @@ function App() {
   } catch (err) {
     console.log(err);
   }
-  // try {
-  //   useEffect(() => {
-  //     // check if the user is logged in
-  //     if (supabase.auth.currentUser()) {
-  //       // check if the user has the necessary role
-  //       if (supabase.auth.currentUser().role === 'admin') {
-  //         setIsAdmin(true);
-  //       } else {
-  //         setIsAdmin(false);
-  //       }
-  //     }
-  //   }, [supabase.auth.currentUser()]);
 
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  async function getAdmin() {
+    if (session != null) {
+      try {
+        const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
+        // check se l'utente è admin
+        if (adminN === 1) {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
   return (
     <>
 
-      {isAdmin ? <AdminNavbar /> : <AdminNavbar />}
+      {isAdmin ? <AdminNavbar /> : <Navbar />}
 
 
       <div>
@@ -75,10 +75,9 @@ function App() {
             <Route path="/Homepage/Comunita" element={<Comunita />} />
             <Route path="/Giochi/Notizie" element={<Notizie />} />
             <Route path="/Giochi/Video" element={<Video />} />
-            <Route path="/Giochi/Impiccato" element={<Impiccato />} />
-            <Route path="/Giochi/ImpiccatoGame/Javascript/Impiccato" element={!session ? <LoginSupabase /> : <Impiccato key={session.user.id} session={session} />} />
+            <Route path="/Giochi/Impiccato/ImpiccatoPage" element={<ImpiccatoPage session={session} />} />
             <Route path="/userPages/Dashboard" element={<Dashboard />} />
-            <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage session={session}/>} />
+            <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage session={session} />} />
             <Route path="userPages/Leaderboard" element={!session ? <LoginSupabase /> : <Leaderboard key={session.user.id} session={session} />} />
             <Route path="userPages/Shop" element={!session ? <LoginSupabase /> : <Shop key={session.user.id} session={session} />} />
             <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />

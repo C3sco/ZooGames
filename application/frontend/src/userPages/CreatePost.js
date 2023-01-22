@@ -54,10 +54,6 @@ const CreatePost = ({ session }) => {
         setSuccessAlert('Post creato con successo!')
     }
 
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0])
-    }
-
     setTimeout(() => setSuccessAlert(''), 10000)
 
     return (
@@ -92,14 +88,6 @@ const CreatePost = ({ session }) => {
                         setImage(url)
                     }}
                 />
-                <div className="form-group">
-                    <label>Immagine</label><br></br>
-                    <input type="file" className="form-control-file" onChange={handleImageChange} />
-                    {successAlert && <div className="alert alert-success">{successAlert}</div>}
-
-                </div>
-
-
                 <br></br>
                 <div class='line'>
                     <button type="submit" className="c3-succ">Crea Post</button>

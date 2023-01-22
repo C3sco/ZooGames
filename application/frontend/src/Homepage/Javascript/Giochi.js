@@ -26,7 +26,7 @@ const Giochi = () => {
                   <p class="card-text">Quiz e indovinelli sul mondo animale. In bocca al lupo!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                    <Link to='../../Giochi/ImpiccatoGame/Javascript/Impiccato'><button type="button" class="c3-play">Gioca</button></Link>
+                    <Link to='../../Giochi/Quiz/QuizPage'><button type="button" class="c3-play">Gioca</button></Link>
                     </div>
                   </div>
                 </div>
@@ -39,7 +39,7 @@ const Giochi = () => {
                   <p class="card-text">Il classico gioco dell'impiccato relativo agli animali!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                    <Link to='../../Giochi/ImpiccatoGame/Javascript/Impiccato'><button type="button" class="c3-play">Gioca</button></Link>
+                    <Link to='../../Giochi/Impiccato/ImpiccatoPage'><button type="button" class="c3-play">Gioca</button></Link>
                     </div>
                   </div>
                 </div>

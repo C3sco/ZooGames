@@ -6,8 +6,8 @@ import Word from './Word.js';
 import Popup from './Popup.js';
 import Notification from './Notification.js';
 import { showNotification as show, checkWin } from './helpers.js';
-import '../Style/impiccato.css';
-import { supabase } from '../../../components/Database.js';
+import './impiccato.css';
+import { supabase } from '../../components/Database.js';
 
 const db = supabase;
 
@@ -16,6 +16,10 @@ function Impiccato({ session }) {
   const [selectedWord, setRandomWord] = useState('');
   const [loading, setLoading] = useState(true);
   const [points, setScore] = useState(null);
+  const [playable, setPlayable] = useState(true);
+  const [correctLetters, setCorrectLetters] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
   const id = session.user.id;
   
   //console.log("ID " + session);
@@ -76,10 +80,7 @@ function Impiccato({ session }) {
    }, [words, loading]);
 
 
-  const [playable, setPlayable] = useState(true);
-  const [correctLetters, setCorrectLetters] = useState([]);
-  const [wrongLetters, setWrongLetters] = useState([]);
-  const [showNotification, setShowNotification] = useState(false);
+  
 
   useEffect(() => {
     

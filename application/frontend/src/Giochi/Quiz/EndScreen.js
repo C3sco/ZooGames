@@ -8,15 +8,7 @@ function EndStat({ label, value }) {
       </div>
     );
   }
-  
-  /**
-   * EndScreen renders the final game stats.
-   * @param {object} props
-   * @param {number} props.score
-   * @param {number} props.bestScore
-   * @param {() => void} props.onRetryClick A function to run when the retry button is clicked.
-   * @param {number} props.playTime Total play time in seconds
-   */
+
   function EndScreen({ score, bestScore, onRetryClick, playTime }) {
     const minutes = `${Math.floor(playTime / 60)}`.padStart(2, "0");
     const seconds = `${Math.floor(playTime % 60)}`.padStart(2, "0");

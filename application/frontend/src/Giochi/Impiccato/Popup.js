@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { checkWin } from './helpers.js';
-import { supabase } from '../../../components/Database.js';
+import { supabase } from '../../components/Database.js';
 
 const db = supabase;
 

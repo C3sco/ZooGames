@@ -23,8 +23,7 @@ export default function AdminNavbar(){
             <CustomLink class="a"  to="/components/LoginSupabase">Dashboard</CustomLink>
             <CustomLink class="a" to="/components/AdminPage">AdminPage</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz/QuizPage">Quiz</CustomLink>
-            <CustomLink class="a" to="/components/Register">Register</CustomLink>
-            <CustomLink class="a" to="/Giochi/ImpiccatoGame/Javascript/Impiccato">Impiccato</CustomLink>
+            <CustomLink class="a" to="/Giochi/Impiccato/ImpiccatoPage">Impiccato</CustomLink>
             <CustomLink class="a" to="/userPages/Shop">Shop</CustomLink>
             <CustomLink class="a" to="/userPages/Leaderboard">Leaderboard</CustomLink>
             <CustomLink class="a" to="/components/AdminShop">AdminShop</CustomLink>

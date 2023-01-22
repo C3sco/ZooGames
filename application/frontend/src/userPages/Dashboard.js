@@ -89,7 +89,7 @@ const Dashboard = ({ session }) => {
   return (
     <div  aria-live="polite">
       {loading ? (
-        'Saving ...'
+        'Caricamento ...'
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
           <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */

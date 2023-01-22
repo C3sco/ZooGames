@@ -20,6 +20,11 @@ export default function AdminPage({ session }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState({});
     const [userError, setUserError] = useState('');
+    const [adminUpdate, setAdminUpdate] = useState('');
+
+    useEffect(() => {
+        getProfile()
+    }, [session])
 
     const handleChangeSearch = e => {
         setSearch(e.target.value);
@@ -38,10 +43,6 @@ export default function AdminPage({ session }) {
         }
         setUsers(filteredUsers);
     };
-
-    useEffect(() => {
-        getProfile()
-    }, [session])
 
     const getProfile = async () => {
         try {
@@ -74,6 +75,14 @@ export default function AdminPage({ session }) {
             setUsers(response.data);
         });
     }, []);
+    async function getAllUsers(){
+        let response = await db.from('users').select()
+        setUsers(response.data);
+
+    }
+
+    setTimeout(() => setAdminUpdate(''), 10000)
+
 
 
     async function handleDelete(id) {
@@ -114,10 +123,21 @@ export default function AdminPage({ session }) {
         }
     }
 
-    const updateRole = async (userId, role) => {
+    const updateAdmin = async (userId, role, name) => {
         try {
-            const response = await supabase.from('users').update({ isAdmin: role }).eq('id', userId);
+            const response = await supabase.from('users').update({ admin: role }).eq('id', userId);
             console.log(response);
+            setAdminUpdate('Utente [ ' + name + ' ] reso admin con successo!');
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const removeAdmin = async (userId, role, name) => {
+        try {
+            const response = await supabase.from('users').update({ admin: role }).eq('id', userId);
+            console.log(response);
+            setAdminUpdate('Utente [ ' + name + ' ] non più admin');
         } catch (error) {
             console.error(error);
         }
@@ -129,7 +149,9 @@ export default function AdminPage({ session }) {
             <h1>UTENTI</h1>
             <form class='center'>
                 <input type="text" id="search" onChange={handleChangeSearch} />
-                <button type="submit" className="" onClick={handleSearch}>Cerca</button>
+                <button type="button" className="c3-search" onClick={handleSearch}>Cerca</button>
+                <button type="reset" className="" onClick={getAllUsers}>Reset</button>
+                
             </form>
             {userError && <div className="text-danger">{userError}</div>}
             <br></br>
@@ -160,12 +182,16 @@ export default function AdminPage({ session }) {
                                 <button onClick={() => handleDelete(user.id)}>Elimina</button>
                             </td>
                             <td>
-                                <button onClick={() => updateRole(user.id, '1')}>Admin</button>
+                                <button onClick={() => updateAdmin(user.id, '1',user.username)}>Set Admin</button>
+                            </td>
+                            <td>
+                                <button onClick={() => removeAdmin(user.id, '0',user.username)}>Remove Admin</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table >
+            {adminUpdate && <div className="text-danger">{adminUpdate}</div>}
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <form onSubmit={handleSubmit}>
                     <input

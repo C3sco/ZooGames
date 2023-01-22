@@ -3,6 +3,7 @@ import EndScreen from "./EndScreen.js";
 import Score from "./Score.js";
 import QuizItem from "./QuizItem.js";
 import { supabase } from "../../components/Database.js";
+import { updateScore } from "../../components/UpdateScore.js"
 
 function convertDifficultyToPoints(difficulty) {
   if (difficulty === "easy") return 1;
@@ -14,19 +15,6 @@ function convertDifficultyToPoints(difficulty) {
 function Game({ quizData, session }) {
 
   let userId = session.user.id;
-
-  async function setScore(score) {
-    if (userId != null) {
-      try {
-        let finalScore = 0
-        const userScore = await supabase.from('users').select('score').eq('id', userId);
-        finalScore = score + userScore;
-        await supabase.from('users').upsert({score: finalScore}).eq('id', userId);
-      } catch (err) {
-        console.log("Errore nell'aggiornamento del punteggio: " + err);
-      }
-    }
-  }
 
   const [gameState, setGameState] = useState({
     score: 0,
@@ -67,21 +55,22 @@ function Game({ quizData, session }) {
     }
   };
 
+  let finalScore;
   let pageContent;
   let pageKey;
   if (isGameOver) {
     pageKey = "EndScreen";
-    pageContent = (
-      <EndScreen
-        score={score}
-        bestScore={0}
-        onRetryClick={restartGame}
-        playTime={playTimeInSeconds}
-      />
-    );
-
-    setScore(score);
-
+    console.log("score: " + score)
+    // finalScore = updateScore(userId, score).then(() => {
+      pageContent = (
+        <EndScreen
+          score={score}
+          bestScore={0}
+          onRetryClick={restartGame}
+          playTime={playTimeInSeconds}
+        />
+      );
+    // });
   } else {
     pageKey = triviaIndex;
     const triviaQuestion = quizData[triviaIndex];

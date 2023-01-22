@@ -12,7 +12,7 @@ const db = supabase
 
 const Forum = ({ session }) => {
     const [posts, setPosts] = useState([])
-
+    const [postUrl, setPostUrl] = useState()
     const [categoryFilter, setCategoryFilter] = useState('')
     // const [successAlert, setSuccessAlert] = useState('')
 
@@ -22,7 +22,25 @@ const Forum = ({ session }) => {
             setPosts(posts.data)
         }
         fetchData()
+        
     }, [])
+
+
+    async function downloadImage(path) {
+        try {
+            console.log(path);
+            const { data, error } = await supabase.storage.from('posts').download(path)
+            if (error) {
+                throw error
+            }
+            const url = URL.createObjectURL(data)
+            setPostUrl(url)
+            return url
+        } catch (error) {
+            console.log('Error downloading image: ', error.message)
+        }
+    }
+    
 
     const handleCategoryFilter = (e) => {
         setCategoryFilter(e.target.value)
@@ -51,7 +69,7 @@ const Forum = ({ session }) => {
                 <div className="card" style={{ margin: '20px 0' }}>
                     <div className="card-body">
                         <div key={post.id}>
-                            <img src={post.image_url} alt={post.title} />
+                            <img src={downloadImage(post.image)} alt={post.title} />
                             <h2 className="card-title">{post.title}</h2>
                             <p className="card-text">{post.content}</p>
                             <p className="card-text">Categoria: {post.category}</p>
