@@ -3,7 +3,6 @@ import './App.css';
 import './App.js';
 import { Routes, Route } from "react-router-dom";
 import Homepage from './components/Homepage.js'
-import Giochi from './components/Giochi.js'
 import Navbar from './components/Navbar.js'
 import Notizie from "./Giochi/Notizie.js"
 import Video from "./Giochi/Video.js"
@@ -70,7 +69,6 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" index element={<Homepage />} />
-            <Route path="/components/Giochi" element={<Giochi />} />
             <Route path="/Giochi/Notizie" element={<Notizie />} />
             <Route path="/Giochi/Video" element={<Video />} />
             <Route path="/Giochi/Impiccato/ImpiccatoPage" element={<ImpiccatoPage session={session} />} />

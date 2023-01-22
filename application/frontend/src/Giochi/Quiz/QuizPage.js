@@ -7,7 +7,6 @@ import he from 'he'; //per decodificare le stringhe html ricevute dall'api che s
 
 function QuizPage({session}) {
 
-    // const [isLoading, setLoading]
     const [quiz, setQuiz] = useState({ isLoading: true, error: "", data: null });
     const [alert, setAlert] = useState('');
     const { isLoading, error, data } = quiz;

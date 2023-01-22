@@ -8,6 +8,7 @@ import Notification from './Notification.js';
 import { showNotification as show, checkWin } from './helpers.js';
 import './impiccato.css';
 import { supabase } from '../../components/Database.js';
+import Loading from '../../components/Loading.js';
 
 const db = supabase;
 
@@ -20,27 +21,25 @@ function Impiccato({ session }) {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
+
   let id;
-  if(session!=null){
-    id =session.user.id;
+  if (session != null) {
+    id = session.user.id;
   }
-  
+
   //console.log("ID " + session);
 
-  const fetchValue = async () => {
-    const response = await supabase
-    .from('users')
-    .select(`score`)
-    .eq('id', id)
-    .single()
-    setScore(response);
-  }
-  useEffect(() => {
-    fetchValue();
-  }, []);
-
-  
-
+  // const fetchValue = async () => {
+  //   const response = await supabase
+  //     .from('users')
+  //     .select(`score`)
+  //     .eq('id', id)
+  //     .single()
+  //   setScore(response);
+  // }
+  // useEffect(() => {
+  //   fetchValue();
+  // }, []);
   // const getProfile = async () => {
   //   try {
   //     setLoading(true)
@@ -61,7 +60,7 @@ function Impiccato({ session }) {
   //     setLoading(false)
   //   }
   // }
-  
+
   useEffect(() => {
     const fetchWords = async () => {
       try {
@@ -74,19 +73,16 @@ function Impiccato({ session }) {
     }
     fetchWords();
   }, []);
- 
-   useEffect(() => {
+
+  useEffect(() => {
     if (!loading && words.length > 0) {
       const randomIndex = Math.floor(Math.random() * words.length);
       setRandomWord(words[randomIndex].Nome.toLowerCase());
     }
-   }, [words, loading]);
-
-
-  
+  }, [words, loading]);
 
   useEffect(() => {
-    
+
     const handleKeydown = event => {
       const { key, keyCode } = event;
       if (playable && keyCode >= 65 && keyCode <= 90) {
@@ -122,18 +118,27 @@ function Impiccato({ session }) {
     }
   }
 
+  let contents;
+  if (loading) {
+    contents = <Loading />
+  } else {
+    contents =
+      <div>
+        <Header />
+        <div className="game-container">
+          <Figure wrongLetters={wrongLetters} />
+          <WrongLetters wrongLetters={wrongLetters} />
+          <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+        </div>
+        <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} score={points} id={id} />
+        <Notification showNotification={showNotification} />
+      </div>
+  }
+
   return (
-    <div>
-    
-      <Header />
-      <div className="game-container">
-        <Figure wrongLetters={wrongLetters} />
-        <WrongLetters wrongLetters={wrongLetters} />
-        <Word selectedWord={selectedWord} correctLetters={correctLetters} />
-      </div>
-      <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} score={points} id ={id}/>
-      <Notification showNotification={showNotification} />
-      </div>
+    <>
+    {contents}
+    </>
   );
 }
 

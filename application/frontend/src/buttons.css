@@ -2,14 +2,14 @@
     text-align: center;
 }
 
-.c3-succ{
+.c3-succ {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
     border-radius: 500px;
-    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-property: background-color, border-color, color, box-shadow, filter;
     transition-duration: .3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
@@ -23,43 +23,45 @@
     background-color: lightgreen;
     height: 48px;
 }
-.c3-succ:hover{
+
+.c3-succ:hover {
     background-color: green;
 }
 
-.c3-err{
-display: inline-block;
-outline: none;
-cursor: pointer;
-font-size: 14px;
-line-height: 1;
-border-radius: 500px;
-transition-property: background-color,border-color,color,box-shadow,filter;
-transition-duration: .3s;
-border: 1px solid transparent;
-letter-spacing: 2px;
-min-width: 160px;
-text-transform: uppercase;
-white-space: normal;
-font-weight: 700;
-text-align: center;
-padding: 16px 14px 18px;
-color: #fff;
-background-color: lightcoral;
-height: 48px;
-}
-.c3-err:hover{
-    background-color: red;
-}
-
-.c3-wait{
+.c3-err {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
     border-radius: 500px;
-    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #fff;
+    background-color: lightcoral;
+    height: 48px;
+}
+
+.c3-err:hover {
+    background-color: red;
+}
+
+.c3-wait {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
     transition-duration: .3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
@@ -73,18 +75,19 @@ height: 48px;
     background-color: yellow;
     height: 48px;
 }
-.c3-wait:hover{
+
+.c3-wait:hover {
     background-color: orange;
 }
 
-.c3-play{
+.c3-play {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
     border-radius: 500px;
-    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-property: background-color, border-color, color, box-shadow, filter;
     transition-duration: .3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
@@ -99,18 +102,18 @@ height: 48px;
     height: 48px;
 }
 
-.c3-play:hover{
+.c3-play:hover {
     background-color: blue;
 }
 
-.c3-logout{
+.c3-logout {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
     border-radius: 5px;
-    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-property: background-color, border-color, color, box-shadow, filter;
     transition-duration: .3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
@@ -123,4 +126,58 @@ height: 48px;
     color: #fff;
     background-color: grey;
     height: 48px;
+}
+
+#titolo {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+:root {
+    --gold: #ffb338;
+    --light-shadow: #77571d;
+    --dark-shadow: #3e2904;
+}
+
+.wrapper {
+    background: radial-gradient(#272727, #1b1b1b);
+    display: grid;
+    grid-template-areas: 'overlap';
+    place-content: center;
+    text-transform: uppercase;
+    height: 20vh;
+    border-radius: 50px;
+}
+
+.wrapper>div {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #363833;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    font-size: 60px;
+    grid-area: overlap;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 4px transparent;
+}
+
+.bg {
+    background-image: repeating-linear-gradient(105deg,
+            var(--gold) 0%,
+            var(--dark-shadow) 5%,
+            var(--gold) 12%);
+    color: transparent;
+    filter: drop-shadow(5px 15px 15px black);
+    transform: scaleY(1.05);
+    transform-origin: top;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: lightblue;
+    color: white;
+    text-align: center;
 }

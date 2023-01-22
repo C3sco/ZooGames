@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./notiziaStyle.css"
+import '../buttons.css'
 
 const AnimalNews = () => {
     let newsArray = connect();
@@ -63,8 +64,9 @@ const AnimalNews = () => {
                     placeholder="Cerca.."
                     aria-label="Search"
                     onChange={(e) => searchItems(e.target.value)}
-                />
-                <button className="btn btn-outline-success" type="submit">Cerca</button>
+                /> 
+                <button className="c3-play" type="submit">Cerca</button>
+               
             </form>
             <div className="d-flex flex-column flex-wrap">
                 {
