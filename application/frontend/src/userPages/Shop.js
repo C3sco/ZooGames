@@ -62,7 +62,7 @@ export default function Shop() {
         <br></br>
             <div className='shop-page'>
                 {products.map((product) => (
-                    <div class = 'card' key={product.id}>
+                    <div class = 'card-shop' key={product.id}>
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p class='price'>{product.price} €</p>

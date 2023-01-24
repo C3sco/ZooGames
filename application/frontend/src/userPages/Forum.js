@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { supabase } from '../components/Database.js';
 import { Link } from 'react-router-dom'
 import '../buttons.css'
+import ForumImage from './ForumImage.js';
 
 const db = supabase
 
@@ -21,25 +22,8 @@ const Forum = ({ session }) => {
             setPosts(posts.data)
         }
         fetchData()
-        
+
     }, [])
-
-
-    async function downloadImage(path) {
-        try {
-            console.log(path);
-            const { data, error } = await supabase.storage.from('posts').download(path)
-            if (error) {
-                throw error
-            }
-            const url = URL.createObjectURL(data)
-            setPostUrl(url)
-            return url
-        } catch (error) {
-            console.log('Error downloading image: ', error.message)
-        }
-    }
-    
 
     const handleCategoryFilter = (e) => {
         setCategoryFilter(e.target.value)
@@ -51,8 +35,8 @@ const Forum = ({ session }) => {
         <div className="container">
             <br></br>
             <div>
-                <Link style={{ textDecoration: 'none',color:'white'}} to='/userPages/CreatePost'><button type="submit" className="c3-succ">Crea Nuovo Post</button></Link>
-                
+                <Link style={{ textDecoration: 'none', color: 'white' }} to='/userPages/CreatePost'><button type="submit" className="c3-succ">Crea Nuovo Post</button></Link>
+
             </div>
             <br></br>
             <br></br>
@@ -68,7 +52,7 @@ const Forum = ({ session }) => {
                 <div className="card" style={{ margin: '20px 0' }}>
                     <div className="card-body">
                         <div key={post.id}>
-                            <img src={downloadImage(post.image)} alt={post.title} />
+                            <ForumImage url={post.image} size={200}/>
                             <h2 className="card-title">{post.title}</h2>
                             <p className="card-text">{post.content}</p>
                             <p className="card-text">Categoria: {post.category}</p>

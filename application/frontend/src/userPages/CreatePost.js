@@ -10,6 +10,7 @@ const db = supabase
 const CreatePost = ({ session }) => {
 
     const id = session.user.id
+    
 
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -21,6 +22,14 @@ const CreatePost = ({ session }) => {
     const [bodyError, setBodyError] = useState('')
     const [titleError, setTitleError] = useState('')
     const [categoryError, setCategoryError] = useState('')
+    const [username,setUsername] = useState('')
+
+    let user;
+    async function getUser(){
+        user =  await db.from('users').select('username').eq(id,id)
+        setUsername(username) 
+    }
+    console.log(username);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -45,7 +54,11 @@ const CreatePost = ({ session }) => {
             setCategoryError('')
         }
 
-        await db.from('posts').insert({ title: title, content: body, category: category, image: image})
+        getUser();
+
+        console.log(image)
+
+        await db.from('posts').insert({ title: title, content: body, category: category, image: image, author: username})
 
         setTitle('')
         setBody('')

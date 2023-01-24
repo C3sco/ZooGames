@@ -13,7 +13,16 @@ function convertDifficultyToPoints(difficulty) {
 }
 
 function Game({ quizData, session }) {
-  const[scoreDone,setScoreDone] = useState();
+  // const [playerScore,setPlayerScore] = useState('')
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//         const userScore = await supabase.from('users').select('score').eq('id',session.user.id)
+//         setPlayerScore(userScore)
+//     }
+//     fetchData()
+
+// }, [])
 
   const [gameState, setGameState] = useState({
     score: 0,
@@ -61,41 +70,36 @@ function Game({ quizData, session }) {
     }
   };
 
-  let finalScore;
   let pageContent;
   let pageKey;
-
-  useEffect(() =>{ 
-    async function updateScore(userId, score) {
-      if (userId != null && isGameOver) {
-          try {
-              finalScore = 0
-              const userScore = await supabase.from('users').select('score').eq('id', userId);
-              console.log("userscore: " + userScore)
-              finalScore = parseInt(score + userScore);
-              console.log("Punteggio attuale: " + finalScore);
-              await supabase.from('users').update({ score: finalScore }).eq('id', userId);
-          } catch (err) {
-              console.log("Errore nell'aggiornamento del punteggio: " + err);
-          }
-      }
+  let finalScore;
+  async function updateScore(userId, score) {
+    if (userId != null && isGameOver) {
+        try {
+            finalScore = 0
+            const userScore = await supabase.from('users').select('score').eq('id', userId);
+            console.log("userscore: " + userScore)
+            finalScore = parseInt(score + userScore);
+            console.log("Punteggio attuale: " + finalScore);
+            await supabase.from('users').update({ score: finalScore }).eq('id', userId);
+        } catch (err) {
+            console.log("Errore nell'aggiornamento del punteggio: " + err);
+        }
     }
-    updateScore(score);
-  })
+  }
 
   if (isGameOver) {
     pageKey = "EndScreen";
     console.log("score: " + score)
-    // finalScore = updateScore(userId, score).then(() => {
+    updateScore(session.user.id,score)
       pageContent = (
         <EndScreen
           score={score}
-          bestScore={0}
           onRetryClick={restartGame}
           playTime={playTimeInSeconds}
+          session = {session}
         />
       );
-    // });
   } else {
     pageKey = triviaIndex;
     const triviaQuestion = quizData[triviaIndex];
