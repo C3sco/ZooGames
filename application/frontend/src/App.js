@@ -21,6 +21,7 @@ import AdminShop from "./components/AdminShop.js";
 import Forum from "./userPages/Forum.js";
 import CreatePost from "./userPages/CreatePost.js";
 import Checkout from "./userPages/Checkout.js";
+import AdminForum from "./components/AdminForum.js";
 
 function App() {
 
@@ -61,7 +62,7 @@ function App() {
   return (
     <>
 
-      {isAdmin ? <AdminNavbar /> : <Navbar />}
+      {isAdmin ? <AdminNavbar /> : <AdminNavbar />}
 
 
       <div>
@@ -77,6 +78,7 @@ function App() {
 
             <Route path="/components/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
             <Route path="/components/AdminPage" element={!session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />} />
+            <Route path="/components/AdminForum" element={!session ? <LoginSupabase /> : <AdminForum key={session.user.id} session={session} />} />
             <Route path="/components/LoginSupabase" element={!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />} />
 
 

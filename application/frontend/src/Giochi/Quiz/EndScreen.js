@@ -19,14 +19,14 @@ function EndScreen({ score, onRetryClick, playTime, session }) {
 
 
   // useEffect(() => {
-  //   const updateScore = async () => {
-  //     const points = await supabase.from('users').select('score').eq('id',session.user.id)
-  //     // setPlayerScore(points);
-  //     let newScore = points + score;
-  //     console.log(newScore);
-  //     await supabase.from('users').update({score: newScore});
-  //     console.log("Punteggio aggiornato!")
-  //     }
+    const updateScore = async () => {
+      const points = await supabase.from('users').select('score').eq('id',session.user.id)
+      // setPlayerScore(points);
+      let newScore = points + score;
+      console.log(newScore);
+      await supabase.from('users').update('score', newScore).eq('id',session.user.id);
+      console.log("Punteggio aggiornato!")
+      }
   //     updateScore();
   // }, [])
 
@@ -46,6 +46,11 @@ function EndScreen({ score, onRetryClick, playTime, session }) {
 
       <button className="c3-play" onClick={onRetryClick}>
         Riprova
+      </button>
+      <br></br>
+      <br></br>
+      <button className="c3-succ" onClick={() => updateScore(score)}>
+        Aggiorna punteggio
       </button>
     </div>
   );
