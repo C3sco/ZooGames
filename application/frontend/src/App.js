@@ -31,11 +31,12 @@ function App() {
     useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
-        // getAdmin();
+        getAdmin();
       })
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
       })
+
     }, [])
 
   } catch (err) {
@@ -44,25 +45,27 @@ function App() {
 
   let cart ='';
 
-  // async function getAdmin() {
-  //   if (session != null) {
-  //     try {
-  //       const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
-  //       // check se l'utente è admin
-  //       if (adminN === 1) {
-  //         setIsAdmin(true);
-  //       } else {
-  //         setIsAdmin(false);
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // }
+  async function getAdmin() {
+    if (session != null) {
+      try {
+        const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
+        // check se l'utente è admin
+        if (adminN.data[0].admin === 1) {
+          setIsAdmin(true);
+          console.log("Benvenuto Admin!")
+        } else {
+          setIsAdmin(false);
+          console.log("Non sei un admin!")
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
   return (
     <>
 
-      {isAdmin ? <AdminNavbar /> : <AdminNavbar />}
+      {isAdmin ? <AdminNavbar /> : <Navbar />}
 
 
       <div>

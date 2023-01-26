@@ -1,7 +1,4 @@
 To DO:
 
-- fixare l'upload dell'immagine nei points
-- fixare la navbar in modo che cambi per gli admin
-- E-commerce immagine
-- E-commerce lato admin
 - Forum mostrare id creatore post
+- fixare lo score
