@@ -65,7 +65,7 @@ const AnimalNews = () => {
                     aria-label="Search"
                     onChange={(e) => searchItems(e.target.value)}
                 /> 
-                <button className="c3-play" type="submit">Cerca</button>
+                {/* <button className="c3-play" type="submit">Cerca</button> */}
                
             </form>
             <div className="d-flex flex-column flex-wrap">

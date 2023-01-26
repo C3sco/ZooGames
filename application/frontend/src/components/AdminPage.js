@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from './Database.js';
 import Modal from './Modal.js';
 import './table.css';
+import '../buttons.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 /*
@@ -76,7 +77,7 @@ export default function AdminPage({ session }) {
         });
     }, []);
 
-    async function getAllUsers(){
+    async function getAllUsers() {
         let response = await db.from('users').select()
         setUsers(response.data);
 
@@ -110,6 +111,20 @@ export default function AdminPage({ session }) {
             setEditingUser({ ...editingUser, [field]: event.target.value });
         };
     }
+
+    const updateUser = async (id) => {
+        try {
+            console.log(id)
+            await supabase.from('users').update().eq('id', id)
+            db.from('users').select().then((response) => {
+                setUsers(response.data);
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async function handleSubmit(event) {
         event.preventDefault();
         try {
@@ -151,8 +166,8 @@ export default function AdminPage({ session }) {
             <form class='center'>
                 <input type="text" id="search" onChange={handleChangeSearch} />
                 <button type="button" className="c3-search" onClick={handleSearch}>Cerca</button>
-                <button type="reset" className="" onClick={getAllUsers}>Reset</button>
-                
+                <button type="reset" className="c3-err" onClick={getAllUsers}>Reset</button>
+
             </form>
             {userError && <div className="text-danger">{userError}</div>}
             <br></br>
@@ -177,16 +192,16 @@ export default function AdminPage({ session }) {
                             <td>{user.surname}</td>
                             <td>{user.birthday}</td>
                             <td>
-                                <button onClick={() => handleEdit(user)}>Modifica</button>
+                                <button className='c3-wait' onClick={() => handleEdit(user)}>Modifica</button>
                             </td>
                             <td>
-                                <button onClick={() => handleDelete(user.id)}>Elimina</button>
+                                <button className='c3-err' onClick={() => handleDelete(user.id)}>Elimina</button>
                             </td>
                             <td>
-                                <button onClick={() => updateAdmin(user.id, '1',user.username)}>Set Admin</button>
+                                <button onClick={() => updateAdmin(user.id, '1', user.username)}>Set Admin</button>
                             </td>
                             <td>
-                                <button onClick={() => removeAdmin(user.id, '0',user.username)}>Remove Admin</button>
+                                <button onClick={() => removeAdmin(user.id, '0', user.username)}>Remove Admin</button>
                             </td>
                         </tr>
                     ))}

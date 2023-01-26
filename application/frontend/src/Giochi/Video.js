@@ -47,7 +47,7 @@ const Youtube = () => {
                         placeholder="Cerca"
                         onChange={(e) => searchItems(e.target.value)}
                     />
-                    <button className="c3-search" type="submit">Cerca</button>
+                    {/* <button className="c3-search" type="submit">Cerca</button> */}
                 </form>
 
 

@@ -1,7 +1,7 @@
 import { supabase } from '../components/Database.js';
 import React, { useState, useEffect } from 'react';
 import '../userPages/shop.css'
-import ProductImage from '../userPages/ProductImage.js'
+import AdminProcutImage from './AdminProductImage.js';
 
 
 export default function AdminShop({session}) {
@@ -67,6 +67,7 @@ export default function AdminShop({session}) {
         setName('')
         setDescription('')
         setCategory('')
+        setPrice('')
         setImage('')
         setSuccessAlert('Post creato con successo!')
     }
@@ -92,13 +93,13 @@ export default function AdminShop({session}) {
                     <label>Categoria</label>
                     <select className="form-control" value={category} onChange={e => setCategory(e.target.value)}>
                         <option value="">--Select--</option>
+                        <option value="Cibo">Cibo</option>
+                        <option value="Giochi">Giochi</option>
                         <option value="Animali">Animali</option>
-                        <option value="Ambiente">Ambiente</option>
-                        <option value="Attualità">Svago</option>
                     </select>
                 </div>
                 <br></br>
-                <ProductImage
+                <AdminProcutImage
                     url={image}
                     id={id}
                     size={200}
@@ -108,13 +109,13 @@ export default function AdminShop({session}) {
                 />
 
                 <div class='line'>
-                    <button type="submit" className="c3-succ">Crea Post</button>
+                    <button type="submit" className="c3-succ">Aggiungi Prodotto</button>
                 </div>
             </form>
         <h1>CATALOGO</h1>
         <form class='center'>
                 <input type="text" id="search" onChange={handleChangeSearch} /> &nbsp; &nbsp;
-                <button type="button" className="c3-play" onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
+                <button type="button" className="c3-play" placeholder='cerca' onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
                 <button type="reset" className="c3-err" onClick={getProducts}>Reset</button>   
         </form>
         <br></br>

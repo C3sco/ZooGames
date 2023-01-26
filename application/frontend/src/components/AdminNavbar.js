@@ -15,9 +15,10 @@ export default function AdminNavbar(){
         
     }
     return <nav class="navbar">
-        <ul>
-            <CustomLink class="a" id="title" to="/Homepage">Animal Party</CustomLink>
-            <CustomLink class="a" to="/Homepage/Giochi">Giochi</CustomLink>
+        <ul><button onClick={Logout} className="c3-logout">
+                                    Logout
+                                </button>
+            <CustomLink class="a" to="/">Homepage</CustomLink>
             <CustomLink class="a"  to="/Giochi/Notizie">News</CustomLink>
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/components/LoginSupabase">Dashboard</CustomLink>
@@ -26,12 +27,9 @@ export default function AdminNavbar(){
             <CustomLink class="a" to="/Giochi/Impiccato/ImpiccatoPage">Impiccato</CustomLink>
             <CustomLink class="a" to="/userPages/Shop">Shop</CustomLink>
             <CustomLink class="a" to="/userPages/Leaderboard">Leaderboard</CustomLink>
+            <CustomLink class="a" to="/userPages/Forum">Forum</CustomLink>
             <CustomLink class="a" to="/components/AdminShop">AdminShop</CustomLink>
             <CustomLink class="a" to="/components/AdminForum">AdminForum</CustomLink>
-            <CustomLink class="a" to="/userPages/Forum">Forum</CustomLink>
-            <button onClick={Logout} className="button is-light">
-                                    Log Out
-                                </button>
         </ul>
     </nav>
 

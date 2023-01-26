@@ -2,6 +2,7 @@ import { supabase } from '../components/Database.js';
 import React, { useState, useEffect } from 'react';
 import './shop.css'
 import { Link } from 'react-router-dom';
+import ProductImage from './ProductImage.js';
 
 
 export default function Shop() {
@@ -11,6 +12,7 @@ export default function Shop() {
     const [productError, setProductError] = useState('');
     const [cart, setCart] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
+    const [categoryFilter, setCategoryFilter] = useState('')
 
     const handleChangeSearch = e => {
         setSearch(e.target.value);
@@ -36,7 +38,7 @@ export default function Shop() {
         setProducts(filteredProducts);
     };
 
-    async function getProducts(){
+    async function getProducts() {
         let response = await db.from('products').select()
         setProducts(response.data);
     }
@@ -45,34 +47,17 @@ export default function Shop() {
         setCart([...cart, product]);
     }
 
-    function removeFromCart(product){
+    function removeFromCart(product) {
         setCart(cart.filter((item) => item.id !== product));
+    }
+
+    const handleCategoryFilter = (e) => {
+        setCategoryFilter(e.target.value)
     }
 
     return (
         <>
-        <h1>CATALOGO</h1>
-        <form class='center'>
-                <input type="text" id="search" onChange={handleChangeSearch} /> &nbsp; &nbsp;
-                <button type="button" className="c3-play" onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
-                <button type="reset" className="c3-err" onClick={getProducts}>Reset</button>   
-        </form>
-        <br></br>
-        {productError && <div className="text-danger">{productError}</div>}
-        <br></br>
-            <div className='shop-page'>
-                {products.map((product) => (
-                    <div class = 'card-shop' key={product.id}>
-                        <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <p class='price'>{product.price} €</p>
-                        <p>{product.category}</p>
-                        <button className='cardBtn' onClick={async() => addToCart(product)}>Add to Cart</button>
-                    </div>
-                ))}
-            </div>
-            <br></br><br></br>
-            <div className='cart'>
+        <div className='cart'>
                 <h2>Carrello</h2>
                 <Link to='../userPages/Checkout' cart={cart}><button className='btn-checkout'>Checkout</button></Link>
                 <ul>
@@ -85,6 +70,38 @@ export default function Shop() {
                     ))}
                 </ul>
             </div>
+            <br></br>
+            <h1>CATALOGO</h1>
+            <form class='center'>
+                <input type="text" id="search" placeholder='Cerca' onChange={handleChangeSearch} /> &nbsp; &nbsp;
+                <button type="button" className="c3-play" onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
+                <button type="reset" className="c3-err" onClick={getProducts}>Reset</button>
+            </form>
+            <br></br>
+            {productError && <div className="text-danger">{productError}</div>}
+            <br></br>
+            <select className="form-control" value={categoryFilter} onChange={handleCategoryFilter}>
+                <option value="">--All--</option>
+                <option value="Cibo">Cibo</option>
+                <option value="Giochi">Giochi</option>
+                <option value="Animali">Animali</option>
+            </select>
+
+            <div className='shop-page'>
+
+                {products.filter(product => categoryFilter === '' || product.category === categoryFilter).map(product => (
+                    <div class='card-shop' key={product.id}>
+                        <ProductImage url={product.image} size={290} />
+                        <h2>{product.name}</h2>
+                        <p>{product.description}</p>
+                        <p class='price'>{product.price} €</p>
+                        <p>{product.category}</p>
+                        <button className='cardBtn' onClick={async () => addToCart(product)}>Add to Cart</button>
+                    </div>
+                ))}
+            </div>
+            
+            
         </>
     );
 }

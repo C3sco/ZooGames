@@ -3,8 +3,7 @@ import { supabase } from '../components/Database.js'
 import '../buttons.css'
 
 export default function ProductImage({ url, id, size, onUpload }) {
-    const [postUrl, setPostUrl] = useState(null)
-    const [uploading, setUploading] = useState(false)
+    const [productUrl, setProductUrl] = useState(null)
 
     useEffect(() => {
         if (url) downloadImage(url)
@@ -12,41 +11,14 @@ export default function ProductImage({ url, id, size, onUpload }) {
 
     const downloadImage = async (path) => {
         try {
-            const { data, error } = await supabase.storage.from('posts').download(path)
+            const { data, error } = await supabase.storage.from('products').download(path)
             if (error) {
                 throw error
             }
             const url = URL.createObjectURL(data)
-            setPostUrl(url)
+            setProductUrl(url)
         } catch (error) {
             console.log('Error downloading image: ', error.message)
-        }
-    }
-
-    const uploadPost = async (event) => {
-        try {
-            setUploading(true)
-
-            if (!event.target.files || event.target.files.length === 0) {
-                throw new Error('You must select an image to upload.')
-            }
-
-            const file = event.target.files[0]
-            const fileExt = file.name.split('.').pop()
-            const fileName = `${Math.random()}.${fileExt}`
-            const filePath = `${fileName}`
-
-            let { error: uploadError } = await supabase.storage.from('posts').upload(filePath, file)
-
-            if (uploadError) {
-                throw uploadError
-            }
-
-            onUpload(filePath)
-        } catch (error) {
-            alert(error.message)
-        } finally {
-            setUploading(false)
         }
     }
 
@@ -55,28 +27,11 @@ export default function ProductImage({ url, id, size, onUpload }) {
         <div style={{ width: size }} aria-live="polite">
             <br></br>
             <img
-                src={postUrl ? postUrl : `https://place-hold.it/${size}x${size}`}
-                alt={postUrl ? 'Post' : 'No image'}
-                className="post image"
+                src={productUrl ? productUrl : `https://place-hold.it/${size}x${size}`}
+                alt={productUrl ? 'Product' : 'No image'}
+                className="product image"
                 style={{ height: size, width: size }}
             />
-
-            {uploading ? (
-                'Uploading...'
-            ) : (
-                <><br></br><br></br>
-                    <label className="c3-wait" htmlFor="single">Carica Immagine</label>
-                    <div className="visually-hidden">
-                        <input
-                            type="file"
-                            id="single"
-                            accept="image/*"
-                            onChange={uploadPost}
-                            disabled={uploading}
-                        />
-                    </div>
-                </>
-            )}
         </div>
     )
 }

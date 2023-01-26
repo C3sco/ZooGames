@@ -4,8 +4,7 @@ import '../buttons.css'
 
 export default function PostImage({ url, id, size, onUpload }) {
     const [postUrl, setPostUrl] = useState(null)
-    const [uploading, setUploading] = useState(false)
-
+    
     useEffect(() => {
         if (url) downloadImage(url)
     }, [url])
@@ -20,33 +19,6 @@ export default function PostImage({ url, id, size, onUpload }) {
             setPostUrl(url)
         } catch (error) {
             console.log('Error downloading image: ', error.message)
-        }
-    }
-
-    const uploadPost = async (event) => {
-        try {
-            setUploading(true)
-
-            if (!event.target.files || event.target.files.length === 0) {
-                throw new Error('You must select an image to upload.')
-            }
-
-            const file = event.target.files[0]
-            const fileExt = file.name.split('.').pop()
-            const fileName = `${Math.random()}.${fileExt}`
-            const filePath = `${fileName}`
-
-            let { error: uploadError } = await supabase.storage.from('posts').upload(filePath, file)
-
-            if (uploadError) {
-                throw uploadError
-            }
-
-            onUpload(filePath)
-        } catch (error) {
-            alert(error.message)
-        } finally {
-            setUploading(false)
         }
     }
 

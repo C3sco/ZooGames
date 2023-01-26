@@ -19,12 +19,15 @@ function Checkout({cart, setCart}) {
         // Send the order details to your server
         // ...
         // Clear the cart
-        setCart([]);
         alert('Ordine piazzato con successo!');
+        setCart([]);
+        
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+        <h1>Perfavore, completa i seguenti campi per completare l'acquisto</h1>
+        <form className='checkout' onSubmit={handleSubmit}>
             <label>
                 Name:
                 <input
@@ -59,6 +62,7 @@ function Checkout({cart, setCart}) {
             </label>
             <button type="submit">Place Order</button>
         </form>
+        </>
     );
 }
 
