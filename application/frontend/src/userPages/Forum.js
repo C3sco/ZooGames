@@ -7,12 +7,8 @@ import ForumImage from './ForumImage.js';
 
 const db = supabase
 
-// DA FARE!
-// Aggiungere l'id dell'utente al post quando viene creato e mostrare il nome utente di chi lo ha creato
-
 const Forum = ({ session }) => {
     const [posts, setPosts] = useState([])
-    const [postUrl, setPostUrl] = useState()
     const [categoryFilter, setCategoryFilter] = useState('')
     // const [successAlert, setSuccessAlert] = useState('')
 
@@ -55,7 +51,8 @@ const Forum = ({ session }) => {
                             <ForumImage url={post.image} size={200}/>
                             <h2 className="card-title">{post.title}</h2>
                             <p className="card-text">{post.content}</p>
-                            <p className="card-text">Categoria: {post.category}</p>
+                            <p className="card-text" style={{textAlign:'center'}}>Categoria: {post.category}</p>
+                            <p className ="card-text" style={{textAlign:'right'}}><i>Autore: {post.author}</i></p>
                         </div>
                     </div>
                 </div>

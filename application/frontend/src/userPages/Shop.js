@@ -95,7 +95,7 @@ export default function Shop() {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p class='price'>{product.price} €</p>
-                        <p>{product.category}</p>
+                        <p><i>{product.category}</i></p>
                         <button className='cardBtn' onClick={async () => addToCart(product)}>Add to Cart</button>
                     </div>
                 ))}

@@ -26,12 +26,34 @@ import AdminForum from "./components/AdminForum.js";
 function App() {
 
   const [isAdmin, setIsAdmin] = useState(false);
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState(null);
+
+
+  useEffect(() => {
+    async function getAdmin() {
+      if (session != null) {
+        try {
+          const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
+          // check se l'utente è admin
+          if (adminN.data[0].admin === 1) {
+            setIsAdmin(true);
+            console.log("Benvenuto Admin!")
+          } else {
+            setIsAdmin(false);
+            console.log("Non sei un admin!")
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    getAdmin();
+  })
+
   try {
     useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session)
-        getAdmin();
       })
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
@@ -43,25 +65,7 @@ function App() {
     console.log(err);
   }
 
-  let cart ='';
 
-  async function getAdmin() {
-    if (session != null) {
-      try {
-        const adminN = await supabase.from('users').select('admin').eq('id', session.user.id)
-        // check se l'utente è admin
-        if (adminN.data[0].admin === 1) {
-          setIsAdmin(true);
-          console.log("Benvenuto Admin!")
-        } else {
-          setIsAdmin(false);
-          console.log("Non sei un admin!")
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }
   return (
     <>
 
@@ -90,7 +94,7 @@ function App() {
             <Route path="/userPages/Forum" element={!session ? <LoginSupabase /> : <Forum key={session.user.id} session={session} />} />
             <Route path="/userPages/CreatePost" element={!session ? <LoginSupabase /> : <CreatePost key={session.user.id} session={session} />} />
             <Route path="/userPages/Checkout" element={!session ? <LoginSupabase /> : <Checkout key={session.user.id} session={session} />} />
-            
+
           </Routes>
         </div>
       </div>

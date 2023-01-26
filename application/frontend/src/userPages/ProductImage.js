@@ -30,7 +30,7 @@ export default function ProductImage({ url, id, size, onUpload }) {
                 src={productUrl ? productUrl : `https://place-hold.it/${size}x${size}`}
                 alt={productUrl ? 'Product' : 'No image'}
                 className="product image"
-                style={{ height: size, width: size }}
+                style={{ height: size, width: size,  borderColor:'black', borderWidth:'2px'}}
             />
         </div>
     )

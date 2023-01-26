@@ -12,10 +12,6 @@ export default function Leaderboard({ session }) {
     const [users, setUsers] = useState([]);
     const [userError, setUserError] = useState('');
 
-    // useEffect(() => {
-    //     getProfile()
-    // }, [session])
-
     const handleChangeSearch = e => {
         setSearch(e.target.value);
     };
@@ -33,32 +29,6 @@ export default function Leaderboard({ session }) {
         }
         setUsers(filteredUsers);
     };
-
-    // const getProfile = async () => {
-    //     try {
-    //         setLoading(true)
-    //         const { user } = session
-
-    //         let { data, error, status } = await supabase
-    //             .from('users')
-    //             .select(`email`)
-    //             .eq('id', user.id)
-    //             .single()
-
-    //         if (error && status !== 406) {
-    //             throw error
-    //         }
-
-    //         if (data.admin === 0) {
-    //             //useNavigate("./loginSupabase");
-    //             //redirect to login??
-    //         }
-    //     } catch (error) {
-    //         alert(error.message)
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // }
 
     useEffect(() => {
         db.from('users').select().then((response) => {
@@ -80,7 +50,7 @@ export default function Leaderboard({ session }) {
         <>
             <h1>LEADERBOARD</h1>
             <form class='center'>
-                <input type="text" id="search" onChange={handleChangeSearch} /> &nbsp; &nbsp;
+                <input type="text" id="search" placeholder='Cerca' onChange={handleChangeSearch} /> &nbsp; &nbsp;
                 <button type="button" className="c3-play" onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
                 <button type="reset" className="c3-err" onClick={getAllUsers}>Reset</button>
                 

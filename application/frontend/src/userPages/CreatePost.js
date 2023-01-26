@@ -26,10 +26,10 @@ const CreatePost = ({ session }) => {
 
     let user;
     async function getUser(){
-        user =  await db.from('users').select('username').eq(id,id)
-        setUsername(username) 
+        user =  await db.from('users').select('username').eq('id',id)
+        setUsername(user.data[0].username.toString()) 
+        console.log(username);
     }
-    console.log(username);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -54,11 +54,12 @@ const CreatePost = ({ session }) => {
             setCategoryError('')
         }
 
-        getUser();
+        // await getUser();
 
-        console.log(image)
+        user =  await db.from('users').select('username').eq('id',id)
+        let usertmp = user.data[0].username.toString()
 
-        await db.from('posts').insert({ title: title, content: body, category: category, image: image, author: username})
+        await db.from('posts').insert({ title: title, content: body, category: category, image: image, author: usertmp})
 
         setTitle('')
         setBody('')

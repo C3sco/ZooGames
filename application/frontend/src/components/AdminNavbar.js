@@ -22,12 +22,12 @@ export default function AdminNavbar(){
             <CustomLink class="a"  to="/Giochi/Notizie">News</CustomLink>
             <CustomLink class="a"  to="/Giochi/Video">Video</CustomLink>
             <CustomLink class="a"  to="/components/LoginSupabase">Dashboard</CustomLink>
-            <CustomLink class="a" to="/components/AdminPage">AdminPage</CustomLink>
             <CustomLink class="a" to="/Giochi/Quiz/QuizPage">Quiz</CustomLink>
             <CustomLink class="a" to="/Giochi/Impiccato/ImpiccatoPage">Impiccato</CustomLink>
             <CustomLink class="a" to="/userPages/Shop">Shop</CustomLink>
             <CustomLink class="a" to="/userPages/Leaderboard">Leaderboard</CustomLink>
             <CustomLink class="a" to="/userPages/Forum">Forum</CustomLink>
+            <CustomLink class="a" to="/components/AdminPage">AdminUsers</CustomLink>
             <CustomLink class="a" to="/components/AdminShop">AdminShop</CustomLink>
             <CustomLink class="a" to="/components/AdminForum">AdminForum</CustomLink>
         </ul>
