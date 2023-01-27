@@ -13,16 +13,6 @@ function convertDifficultyToPoints(difficulty) {
 }
 
 function Game({ quizData, session }) {
-  // const [playerScore,setPlayerScore] = useState('')
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//         const userScore = await supabase.from('users').select('score').eq('id',session.user.id)
-//         setPlayerScore(userScore)
-//     }
-//     fetchData()
-
-// }, [])
 
   const [gameState, setGameState] = useState({
     score: 0,
@@ -31,6 +21,8 @@ function Game({ quizData, session }) {
     startTime: performance.now(),
   });
 
+  const [scoreUpdated, setScoreUpdated] = useState()
+
   const { score, triviaIndex, isGameOver, startTime } = gameState;
   const questionNumber = triviaIndex + 1;
   const numQuestions = quizData.length;
@@ -38,10 +30,10 @@ function Game({ quizData, session }) {
 
   let userId;
 
-  if(session!=null){
+  if (session != null) {
     userId = session.user.id;
   }
-  
+
 
   const restartGame = () => {
     setGameState({
@@ -50,6 +42,7 @@ function Game({ quizData, session }) {
       isGameOver: false,
       startTime: performance.now(),
     });
+    setScoreUpdated(false);
   };
 
   const loadNextQuestion = () => {
@@ -74,32 +67,32 @@ function Game({ quizData, session }) {
   let pageKey;
   let finalScore;
   async function updateScore(userId, score) {
-    if (userId != null && isGameOver) {
-        try {
-            finalScore = 0
-            const userScore = await supabase.from('users').select('score').eq('id', userId);
-            console.log("userscore: " + userScore)
-            finalScore = parseInt(score + userScore);
-            console.log("Punteggio attuale: " + finalScore);
-            await supabase.from('users').update({ score: finalScore }).eq('id', userId);
-        } catch (err) {
-            console.log("Errore nell'aggiornamento del punteggio: " + err);
-        }
+    if (userId != null && isGameOver && !scoreUpdated) {
+      try {
+        setScoreUpdated(true)
+        finalScore = 0
+        const userScore = await supabase.from('users').select('score').eq('id', userId);
+        finalScore = parseInt(score + userScore.data[0].score);
+        await supabase.from('users').update({ 'score': finalScore }).eq('id', userId);
+        console.log("Punteggio Arggiornato! Ora hai: " + finalScore + " punti")
+
+      } catch (err) {
+        console.log("Errore nell'aggiornamento del punteggio: " + err);
+      }
     }
   }
 
   if (isGameOver) {
     pageKey = "EndScreen";
-    console.log("score: " + score)
-    updateScore(session.user.id,score)
-      pageContent = (
-        <EndScreen
-          score={score}
-          onRetryClick={restartGame}
-          playTime={playTimeInSeconds}
-          session = {session}
-        />
-      );
+    updateScore(session.user.id, score)
+    pageContent = (
+      <EndScreen
+        score={score}
+        onRetryClick={restartGame}
+        playTime={playTimeInSeconds}
+        session={session}
+      />
+    );
   } else {
     pageKey = triviaIndex;
     const triviaQuestion = quizData[triviaIndex];

@@ -1,22 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { checkWin } from './helpers.js';
 import { supabase } from '../../components/Database.js';
 
-const db = supabase;
-
-
-async function updateScore(points,id){
-  await db.from('users').update({points},'score').eq('id',{id});
-}
-
 const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAgain, points, id}) => {
+  const [scoreUpdated, setScoreUpdated] = useState(true)
 
-  const score = async () => {
-    await db
-    .from('users')
-    .select(`score`)
-    .eq('id', id)
-    .single()
+  let finalScore = 0
+  async function updateScore(userId, score) {
+    if (userId != null && !scoreUpdated) {
+      try {
+        setScoreUpdated(true)
+        finalScore = 0
+        const userScore = await supabase.from('users').select('score').eq('id', userId);
+        finalScore = parseInt(score + userScore.data[0].score);
+        await supabase.from('users').update({ 'score': finalScore }).eq('id', userId);
+        console.log("Punteggio Arggiornato! Ora hai: " + finalScore + " punti")
+
+      } catch (err) {
+        console.log("Errore nell'aggiornamento del punteggio: " + err);
+      }
+    }
   }
 
   let finalMessage = '';
@@ -24,16 +27,14 @@ const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAga
   let playable = true;
 
   if( checkWin(correctLetters, wrongLetters, selectedWord) === 'win' ) {
-    finalMessage = 'Congratulazioni! Hai vinto 10 punti! 😃';
+    finalMessage = 'Congratulazioni! Hai vinto 5 punti! 😃';
     playable = false;
-    points += 10;
-    updateScore(points,id)
+    points += 5;
+    updateScore(id,points)
   } else if( checkWin(correctLetters, wrongLetters, selectedWord) === 'lose' ) {
-    finalMessage = 'Sfortunatamente non hai indovinato, hai perso 10 punti 😕';
+    finalMessage = 'Sfortunatamente non hai indovinato! 😕';
     finalMessageRevealWord = `...la parola era: ${selectedWord}`;
     playable = false;
-    points -= 10;
-    updateScore(points,id)
   }
 
   useEffect(() => {

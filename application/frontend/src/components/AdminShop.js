@@ -114,7 +114,7 @@ export default function AdminShop({session}) {
             </form>
         <h1>CATALOGO</h1>
         <form class='center'>
-                <input type="text" id="search" onChange={handleChangeSearch} /> &nbsp; &nbsp;
+                <input type="text" id="search" placeholder='Cerca' onChange={handleChangeSearch} /> &nbsp; &nbsp;
                 <button type="button" className="c3-play" placeholder='cerca' onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
                 <button type="reset" className="c3-err" onClick={getProducts}>Reset</button>   
         </form>

@@ -27,40 +27,6 @@ function Impiccato({ session }) {
     id = session.user.id;
   }
 
-  //console.log("ID " + session);
-
-  // const fetchValue = async () => {
-  //   const response = await supabase
-  //     .from('users')
-  //     .select(`score`)
-  //     .eq('id', id)
-  //     .single()
-  //   setScore(response);
-  // }
-  // useEffect(() => {
-  //   fetchValue();
-  // }, []);
-  // const getProfile = async () => {
-  //   try {
-  //     setLoading(true)
-  //     const { user } = session
-
-  //     let { data, error, status } = await supabase
-  //       .from('users')
-  //       .select(`score`)
-  //       .eq('id', user.id)
-  //       .single()
-
-  //     if (error && status !== 406) {
-  //       throw error
-  //     }
-  //   } catch (error) {
-  //     alert(error.message)
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
   useEffect(() => {
     const fetchWords = async () => {
       try {

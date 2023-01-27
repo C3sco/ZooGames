@@ -17,19 +17,6 @@ function EndScreen({ score, onRetryClick, playTime, session }) {
   const seconds = `${Math.floor(playTime % 60)}`.padStart(2, "0");
   const timeString = `${minutes}:${seconds}`;
 
-
-  // useEffect(() => {
-    const updateScore = async () => {
-      const points = await supabase.from('users').select('score').eq('id',session.user.id)
-      // setPlayerScore(points);
-      let newScore = points + score;
-      console.log(newScore);
-      await supabase.from('users').update('score', newScore).eq('id',session.user.id);
-      console.log("Punteggio aggiornato!")
-      }
-  //     updateScore();
-  // }, [])
-
   return (
     <div className="end-screen">
       <h1>Quiz Finito!</h1>
@@ -48,10 +35,6 @@ function EndScreen({ score, onRetryClick, playTime, session }) {
         Riprova
       </button>
       <br></br>
-      <br></br>
-      <button className="c3-succ" onClick={() => updateScore(score)}>
-        Aggiorna punteggio
-      </button>
     </div>
   );
 }
