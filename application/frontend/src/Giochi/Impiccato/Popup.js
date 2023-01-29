@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { checkWin } from './helpers.js';
 import { supabase } from '../../components/Database.js';
 
-const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAgain, points, id}) => {
+const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAgain, id}) => {
   const [scoreUpdated, setScoreUpdated] = useState(true)
 
   let finalScore = 0
@@ -29,7 +29,7 @@ const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAga
   if( checkWin(correctLetters, wrongLetters, selectedWord) === 'win' ) {
     finalMessage = 'Congratulazioni! Hai vinto 5 punti! 😃';
     playable = false;
-    points += 5;
+    let points = 5;
     updateScore(id,points)
   } else if( checkWin(correctLetters, wrongLetters, selectedWord) === 'lose' ) {
     finalMessage = 'Sfortunatamente non hai indovinato! 😕';

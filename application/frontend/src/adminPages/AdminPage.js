@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from './Database.js';
-import Modal from './Modal.js';
-import './table.css';
+import { supabase } from '../components/Database.js';
+import Modal from '../components/Modal.js';
+import '../components/table.css';
 import '../buttons.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-/*
-Pagina con table con tutti gli user, possibilità di cercare user e di modificare i dati
-*/
+import Loading from '../components/Loading.js';
 
 const db = supabase;
 
-
-export default function AdminPage({ session }) {
+export default function AdminPage() {
 
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('');
@@ -22,10 +18,6 @@ export default function AdminPage({ session }) {
     const [editingUser, setEditingUser] = useState({});
     const [userError, setUserError] = useState('');
     const [adminUpdate, setAdminUpdate] = useState('');
-
-    useEffect(() => {
-        getProfile()
-    }, [session])
 
     const handleChangeSearch = e => {
         setSearch(e.target.value);
@@ -37,7 +29,7 @@ export default function AdminPage({ session }) {
             user.username.toLowerCase().includes(search.toLowerCase())
         );
         console.log(filteredUsers);
-        if (filteredUsers.length == 0) {
+        if (filteredUsers.length === 0) {
             setUserError('Impossibile trovare un utente con questo username')
         } else {
             setUserError('')
@@ -45,36 +37,12 @@ export default function AdminPage({ session }) {
         setUsers(filteredUsers);
     };
 
-    const getProfile = async () => {
-        try {
-            setLoading(true)
-            const { user } = session
-
-            let { data, error, status } = await supabase
-                .from('users')
-                .select(`email`)
-                .eq('id', user.id)
-                .single()
-
-            if (error && status !== 406) {
-                throw error
-            }
-
-            if (data.admin === 0) {
-                //useNavigate("./loginSupabase");
-                //redirect to login??
-            }
-        } catch (error) {
-            alert(error.message)
-        } finally {
-            setLoading(false)
-        }
-    }
-
     useEffect(() => {
+        setLoading(true)
         db.from('users').select().then((response) => {
             setUsers(response.data);
         });
+        setLoading(false)
     }, []);
 
     async function getAllUsers() {
@@ -84,8 +52,6 @@ export default function AdminPage({ session }) {
     }
 
     setTimeout(() => setAdminUpdate(''), 10000)
-
-
 
     async function handleDelete(id) {
         try {
@@ -105,31 +71,20 @@ export default function AdminPage({ session }) {
         setModalOpen(true);
     }
 
-
     function handleChange(field) {
         return (event) => {
             setEditingUser({ ...editingUser, [field]: event.target.value });
         };
     }
 
-    const updateUser = async (id) => {
-        try {
-            console.log(id)
-            await supabase.from('users').update().eq('id', id)
-            db.from('users').select().then((response) => {
-                setUsers(response.data);
-            });
-
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            await db.from('users').update(editingUser.id, { data: editingUser });
-            db.from('users').select().then((response) => {
+            await db.from('users').update({
+                'username': editingUser.username, 'password': editingUser.password, 'name': editingUser.name,
+                'surname': editingUser.surname, 'birthday': editingUser.birthday
+            }).eq('id', editingUser.id);
+            await db.from('users').select().then((response) => {
                 setUsers(response.data);
             });
             setModalOpen(false);
@@ -161,14 +116,18 @@ export default function AdminPage({ session }) {
 
 
     return (
-        <>
-            <h1>UTENTI</h1>
+        <><div>
+            {loading ? (
+                <Loading />
+            ) : (
+            
             <form class='center'>
+                <h1>UTENTI</h1>
                 <input type="text" id="search" onChange={handleChangeSearch} />
                 <button type="button" className="c3-search" onClick={handleSearch}>Cerca</button>
                 <button type="reset" className="c3-err" onClick={getAllUsers}>Reset</button>
 
-            </form>
+            </form>)}
             {userError && <div className="text-danger">{userError}</div>}
             <br></br>
             <table>
@@ -244,7 +203,7 @@ export default function AdminPage({ session }) {
                 </form>
             </Modal>
             {error && <div className="error-message">{error}</div>}
-
+            </div>
         </>
     );
 }

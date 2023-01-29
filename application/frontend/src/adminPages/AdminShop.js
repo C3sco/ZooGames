@@ -4,13 +4,12 @@ import '../userPages/shop.css'
 import AdminProcutImage from './AdminProductImage.js';
 
 
-export default function AdminShop({session}) {
+export default function AdminShop({ session }) {
     const id = session.user.id
     const db = supabase;
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
     const [productError, setProductError] = useState('');
-
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
@@ -42,15 +41,15 @@ export default function AdminShop({session}) {
         setProducts(filteredProducts);
     };
 
-    async function getProducts(){
+    async function getProducts() {
         let response = await db.from('products').select()
         setProducts(response.data);
     }
 
-    const deleteProduct = async(id) => {
+    const deleteProduct = async (id) => {
         try {
             console.log(id)
-            await supabase.from('products').delete().eq('id',id);
+            await supabase.from('products').delete().eq('id', id);
             db.from('products').select().then((response) => {
                 setProducts(response.data);
             });
@@ -62,21 +61,21 @@ export default function AdminShop({session}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await db.from('products').insert({ name: name, description: description, price:price, category: category, image: image})
+        await db.from('products').insert({ name: name, description: description, price: price, category: category, image: image })
 
         setName('')
         setDescription('')
         setCategory('')
         setPrice('')
         setImage('')
-        setSuccessAlert('Post creato con successo!')
+        setSuccessAlert('Prodotto creato con successo!')
     }
 
 
 
     return (
         <><br></br>
-        <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Titolo</label>
                     <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
@@ -112,27 +111,28 @@ export default function AdminShop({session}) {
                     <button type="submit" className="c3-succ">Aggiungi Prodotto</button>
                 </div>
             </form>
-        <h1>CATALOGO</h1>
-        <form class='center'>
+            {successAlert && <div className="text-success">{successAlert}</div>}
+            <h1>CATALOGO</h1>
+            <form class='center'>
                 <input type="text" id="search" placeholder='Cerca' onChange={handleChangeSearch} /> &nbsp; &nbsp;
                 <button type="button" className="c3-play" placeholder='cerca' onClick={handleSearch}>Cerca</button> &nbsp; &nbsp;
-                <button type="reset" className="c3-err" onClick={getProducts}>Reset</button>   
-        </form>
-        <br></br>
-        {productError && <div className="text-danger">{productError}</div>}
-        <br></br>
+                <button type="reset" className="c3-err" onClick={getProducts}>Reset</button>
+            </form>
+            <br></br>
+            {productError && <div className="text-danger">{productError}</div>}
+            <br></br>
             <div className='shop-page'>
                 {products.map((product) => (
-                    <div class = 'card-shop' key={product.id}>
+                    <div class='card-shop' key={product.id}>
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p class='price'>{product.price} €</p>
                         <p>{product.category}</p>
-                        <button className='c3-err' onClick={async() => deleteProduct(product.id)}>Elimina</button>
+                        <button className='c3-err' onClick={async () => deleteProduct(product.id)}>Elimina</button>
                     </div>
                 ))}
             </div>
-            
+
         </>
     );
 }

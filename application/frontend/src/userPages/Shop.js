@@ -11,7 +11,6 @@ export default function Shop() {
     const [search, setSearch] = useState('');
     const [productError, setProductError] = useState('');
     const [cart, setCart] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
     const [categoryFilter, setCategoryFilter] = useState('')
 
     const handleChangeSearch = e => {
@@ -30,7 +29,7 @@ export default function Shop() {
             product.name.toLowerCase().includes(search.toLowerCase())
         );
         console.log(filteredProducts);
-        if (filteredProducts.length == 0) {
+        if (filteredProducts.length === 0) {
             setProductError('Impossibile trovare un prodotto con questo nome')
         } else {
             setProductError('')

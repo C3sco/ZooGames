@@ -5,9 +5,6 @@ import '../buttons.css'
 
 export default function Leaderboard({ session }) {
 
-    const db = supabase;
-
-    const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('');
     const [users, setUsers] = useState([]);
     const [userError, setUserError] = useState('');
@@ -17,12 +14,12 @@ export default function Leaderboard({ session }) {
     };
 
     const handleSearch = async () => {
-        const allUsers = await db.from('users').select()
+        const allUsers = await supabase.from('users').select()
         const filteredUsers = allUsers.data.filter(user =>
             user.username.toLowerCase().includes(search.toLowerCase())
         );
         console.log(filteredUsers);
-        if (filteredUsers.length == 0) {
+        if (filteredUsers.length === 0) {
             setUserError('Impossibile trovare un utente con questo username')
         } else {
             setUserError('')
@@ -31,15 +28,14 @@ export default function Leaderboard({ session }) {
     };
 
     useEffect(() => {
-        db.from('users').select().then((response) => {
+        supabase.from('users').select().then((response) => {
             setUsers(response.data);
         });
     }, []);
     
     async function getAllUsers(){
-        let response = await db.from('users').select()
+        let response = await supabase.from('users').select()
         setUsers(response.data);
-
     }
 
     setTimeout(() => setUserError(''), 3000)

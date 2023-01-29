@@ -13,15 +13,15 @@ import LoginSupabase from "./components/LoginSupabase.js";
 import { supabase } from "./components/Database.js";
 import { useState, useEffect } from 'react'
 import QuizPage from "./Giochi/Quiz/QuizPage.js";
-import AdminPage from "./components/AdminPage.js";
+import AdminPage from "./adminPages/AdminPage.js";
 import AdminNavbar from "./components/AdminNavbar.js";
 import Leaderboard from "./userPages/Leaderboard.js";
 import Shop from "./userPages/Shop.js";
-import AdminShop from "./components/AdminShop.js";
+import AdminShop from "./adminPages/AdminShop.js";
 import Forum from "./userPages/Forum.js";
 import CreatePost from "./userPages/CreatePost.js";
 import Checkout from "./userPages/Checkout.js";
-import AdminForum from "./components/AdminForum.js";
+import AdminForum from "./adminPages/AdminForum.js";
 
 function App() {
 
@@ -83,9 +83,9 @@ function App() {
             <Route path="/userPages/Dashboard" element={<Dashboard />} />
             <Route path="/Giochi/Quiz/QuizPage" element={<QuizPage session={session} />} />
 
-            <Route path="/components/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
-            <Route path="/components/AdminPage" element={!session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />} />
-            <Route path="/components/AdminForum" element={!session ? <LoginSupabase /> : <AdminForum key={session.user.id} session={session} />} />
+            <Route path="/adminPages/AdminShop" element={!session ? <LoginSupabase /> : <AdminShop key={session.user.id} session={session} />} />
+            <Route path="/adminPages/AdminPage" element={!session ? <LoginSupabase /> : <AdminPage key={session.user.id} session={session} />} />
+            <Route path="/adminPages/AdminForum" element={!session ? <LoginSupabase /> : <AdminForum key={session.user.id} session={session} />} />
             <Route path="/components/LoginSupabase" element={!session ? <LoginSupabase /> : <Dashboard key={session.user.id} session={session} />} />
 
 

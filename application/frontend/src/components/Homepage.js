@@ -52,7 +52,7 @@ export default function Homepage() {
       </div>
     </div>
     <br></br><br></br><br></br>
-    <p className='footer'>Sito creato da </p>
+    <p className='footer'>© Copyright by ZooGames S.R.L </p>
 
 
   </>

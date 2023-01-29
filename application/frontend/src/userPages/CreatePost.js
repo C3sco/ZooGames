@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { supabase } from '../components/Database.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
@@ -11,25 +11,16 @@ const CreatePost = ({ session }) => {
 
     const id = session.user.id
     
-
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [image, setImage] = useState('')
     const [category, setCategory] = useState('')
-
     const [successAlert, setSuccessAlert] = useState('')
-
     const [bodyError, setBodyError] = useState('')
     const [titleError, setTitleError] = useState('')
     const [categoryError, setCategoryError] = useState('')
-    const [username,setUsername] = useState('')
 
     let user;
-    async function getUser(){
-        user =  await db.from('users').select('username').eq('id',id)
-        setUsername(user.data[0].username.toString()) 
-        console.log(username);
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -53,8 +44,6 @@ const CreatePost = ({ session }) => {
             setBodyError('')
             setCategoryError('')
         }
-
-        // await getUser();
 
         user =  await db.from('users').select('username').eq('id',id)
         let usertmp = user.data[0].username.toString()
