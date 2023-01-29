@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import './quiz.css'
-import { supabase } from '../../components/Database.js';
 
 function EndStat({ label, value }) {
   return (

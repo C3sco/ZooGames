@@ -1,13 +1,9 @@
 import {Link, useMatch, useResolvedPath} from "react-router-dom"
 import './navbar.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { supabase } from "./Database.js";
-// import '../buttons.css'
 
 export default function Navbar(){
-    const history = useNavigate();
     const Logout = async () => {
         try{
             await supabase.auth.signOut();

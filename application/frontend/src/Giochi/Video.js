@@ -22,14 +22,14 @@ const Youtube = () => {
         }
     }
 
-    if (videoList == "error") {
+    if (videoList === "error") {
         return (
             <div>
                 <br></br>
                 <h1>Hai superato il limite di richieste giornaliere!</h1>
                 <h1>Effettua l'abbonamento per poter continuare a vedere i video!</h1>
                 <br></br>
-                <img src={sadCat} width='50%' className="centered"></img>
+                <img src={sadCat} width='50%' className="centered" alt='error'></img>
             </div>
         )
     }
@@ -99,7 +99,7 @@ function connect() {
     myRequest.open("GET", "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=funny%20animals&key=AIzaSyC11EwTLWAtkam-iQP7tZ-zw-9HVAoeiKs", false);
     myRequest.send("null");
 
-    if (myRequest.status == 200) {
+    if (myRequest.status === 200) {
         let response = myRequest.responseText;
         response = JSON.parse(response);
 

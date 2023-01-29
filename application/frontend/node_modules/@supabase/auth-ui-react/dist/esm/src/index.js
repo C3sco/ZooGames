@@ -1,0 +1,11 @@
+export { default as Auth, getCssText } from './components/Auth/Auth.js';
+export { MagicLink } from './components/Auth/interfaces/MagicLink.js';
+export { SocialAuth } from './components/Auth/interfaces/SocialAuth.js';
+export { EmailAuth } from './components/Auth/interfaces/EmailAuth.js';
+export { ForgottenPassword } from './components/Auth/interfaces/ForgottenPassword.js';
+export { UpdatePassword } from './components/Auth/interfaces/UpdatePassword.js';
+export { ThemeMinimal, ThemeSupa } from '../common/theming/defaultThemes.js';
+export { default as de_formal } from '../common/lib/Localization/de_formal.json.js';
+export { default as de_informal } from '../common/lib/Localization/de_informal.json.js';
+export { default as en } from '../common/lib/Localization/en.json.js';
+export { default as ja } from '../common/lib/Localization/ja.json.js';

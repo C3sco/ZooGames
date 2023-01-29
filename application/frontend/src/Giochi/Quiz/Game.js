@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EndScreen from "./EndScreen.js";
 import Score from "./Score.js";
 import QuizItem from "./QuizItem.js";
 import { supabase } from "../../components/Database.js";
-// import { updateScore } from "../../components/UpdateScore.js"
 
 function convertDifficultyToPoints(difficulty) {
   if (difficulty === "easy") return 1;
@@ -27,13 +26,6 @@ function Game({ quizData, session }) {
   const questionNumber = triviaIndex + 1;
   const numQuestions = quizData.length;
   const playTimeInSeconds = (performance.now() - startTime) / 1000;
-
-  let userId;
-
-  if (session != null) {
-    userId = session.user.id;
-  }
-
 
   const restartGame = () => {
     setGameState({
@@ -84,7 +76,9 @@ function Game({ quizData, session }) {
 
   if (isGameOver) {
     pageKey = "EndScreen";
-    updateScore(session.user.id, score)
+    if (session != null) {
+      updateScore(session.user.id, score)
+    }
     pageContent = (
       <EndScreen
         score={score}

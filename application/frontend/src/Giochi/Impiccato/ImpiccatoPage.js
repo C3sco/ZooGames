@@ -5,7 +5,7 @@ import WrongLetters from './WrongLetters.js';
 import Word from './Word.js';
 import Popup from './Popup.js';
 import Notification from './Notification.js';
-import { showNotification as show, checkWin } from './helpers.js';
+import { showNotification as show } from './helpers.js';
 import './impiccato.css';
 import { supabase } from '../../components/Database.js';
 import Loading from '../../components/Loading.js';
@@ -16,7 +16,6 @@ function Impiccato({ session }) {
   const [words, setWords] = useState([]);
   const [selectedWord, setRandomWord] = useState('');
   const [loading, setLoading] = useState(true);
-  const [points, setScore] = useState(null);
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
@@ -96,7 +95,7 @@ function Impiccato({ session }) {
           <WrongLetters wrongLetters={wrongLetters} />
           <Word selectedWord={selectedWord} correctLetters={correctLetters} />
         </div>
-        <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} score={points} id={id} />
+        <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} id={id} />
         <Notification showNotification={showNotification} />
       </div>
   }
