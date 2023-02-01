@@ -19,8 +19,8 @@ Everyone can access:
 - Video : funny videos about animals
 - News : updated news about the animal world
 - Quiz : answer questions about animals and get points!
-- Impiccato: play the hangman game with animals names!
-<br><br>
+- Impiccato: play the hangman game with animals names! <br><br>
+
 Only logged users can access:
 - Dashboard : profile informations
 - Shop : buy products that you will need for your pet!
