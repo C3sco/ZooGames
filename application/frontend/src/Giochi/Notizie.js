@@ -11,17 +11,17 @@ const AnimalNews = () => {
 
     const NewsCard = (props) => {
         return (
-            <div className="notizia" key={props.element.url}>
+            <div className="notizia" style={{ backgroundColor:'lightsteelblue', border:'white' }} key={props.element.url}>
                 <div className="card-body">
                     <div className="float-end ms-5 p-3" style={imageContainerStyle}>
                         <img src={props.element.urlToImage} style={imageStyle} alt=''></img>
                     </div>
-                    <h5 className="card-title">{props.element.title}</h5>
+                    <h5 className="card-title" style={{ fontWeight:'bold' }}>{props.element.title}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{formatDate(props.element.publishedAt)}</h6>
                     <p className="card-text">{props.element.content}</p>
                     <a
                         href={props.element.url}
-                        className="btn btn-outline-primary fs-5" target={'_blank'}>
+                        className="btn btn-outline-primary" target={'_blank'}>
                         Continua a leggere
                     </a>
                 </div>

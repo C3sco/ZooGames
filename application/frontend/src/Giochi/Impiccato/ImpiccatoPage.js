@@ -96,7 +96,7 @@ function Impiccato({ session }) {
           <Word selectedWord={selectedWord} correctLetters={correctLetters} />
         </div>
         <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} id={id} />
-        <Notification showNotification={showNotification} />
+        <Notification showNotification={showNotification}/>
       </div>
   }
 
