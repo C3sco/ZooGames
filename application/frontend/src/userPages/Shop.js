@@ -89,7 +89,7 @@ export default function Shop() {
             <div className='shop-page'>
 
                 {products.filter(product => categoryFilter === '' || product.category === categoryFilter).map(product => (
-                    <div class='card-shop' key={product.id}>
+                    <div class='card-shop' key={product.id} >
                         <ProductImage url={product.image} size={290} />
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>

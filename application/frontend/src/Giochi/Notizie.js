@@ -56,6 +56,7 @@ const AnimalNews = () => {
 
     return (
         <div id="News" className="container">
+            <br></br>
             <h1>Notizie sugli animali</h1>
             <form className="d-flex my-3" role="search" onSubmit={(e) => e.preventDefault()}>
                 <input
