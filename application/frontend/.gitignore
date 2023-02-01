@@ -3,4 +3,4 @@
 .pnp.js
 # testing
 /coverage
-/node_modules/.cache
+application/frontend/node_modules
