@@ -26,7 +26,7 @@ Only logged users can access:
 - Shop : buy products that you will need for your pet!
 - Forum : write and read posts from users <br><br>
 
-To access admin pages you will need another admin authorization, otherwise you won't be able to see them <br>
+To access admin pages you will need another admin authorization, otherwise you won't be able to see them <br><br>
 
 Project members:
 - Francesco Montanari - francesco.montanar24@studio.unibo.it
