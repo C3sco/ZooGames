@@ -30,6 +30,6 @@ To access admin pages you will need another admin authorization, otherwise you w
 For testing purpose in the Dashboard you can set yourself as admin so that you will see admin pages <br><br>
 
 Project members:
-- Francesco Montanari - francesco.montanar24@studio.unibo.it
-- Giacomo Fantanto - giacomo.fantato@studio.unibo.it
-- Niccolo Sghinolfi - niccolo.sghinolfi@studio.unibo.it
+- Francesco Montanari - francesco.montanar24@studio.unibo.it 0000924491
+- Giacomo Fantanto - giacomo.fantato@studio.unibo.it 0000924979
+- Niccolo Sghinolfi - niccolo.sghinolfi@studio.unibo.it 0000915625
