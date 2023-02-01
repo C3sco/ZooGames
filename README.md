@@ -26,7 +26,8 @@ Only logged users can access:
 - Shop : buy products that you will need for your pet!
 - Forum : write and read posts from users <br><br>
 
-To access admin pages you will need another admin authorization, otherwise you won't be able to see them <br><br>
+To access admin pages you will need another admin authorization, otherwise you won't be able to see them <br>
+For testing purpose in the Dashboard you can set yourself as admin so that you will see admin pages <br><br>
 
 Project members:
 - Francesco Montanari - francesco.montanar24@studio.unibo.it
