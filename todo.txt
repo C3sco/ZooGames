@@ -1,5 +1,0 @@
-To DO:
-
-- Forum mostrare id creatore post
-- fixare lo score
-- modifica dati utente da parte di admin
