@@ -12,7 +12,6 @@ const Forum = ({ session }) => {
     const [categoryFilter, setCategoryFilter] = useState('')
     const [postError, setPostError] = useState('');
     const [search, setSearch] = useState('');
-    // const [successAlert, setSuccessAlert] = useState('')
 
     useEffect(() => {
         const fetchData = async () => {

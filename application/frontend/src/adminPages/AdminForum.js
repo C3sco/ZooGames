@@ -6,16 +6,13 @@ import ForumImage from '../userPages/ForumImage.js';
 
 const db = supabase
 
-// DA FARE!
-// Aggiungere l'id dell'utente al post quando viene creato e mostrare il nome utente di chi lo ha creato
-
 export default function AdminForum({ session }){
     const [posts, setPosts] = useState([])
     const [categoryFilter, setCategoryFilter] = useState('')
 
     useEffect(() => {
         const fetchData = async () => {
-            const posts = await db.from('posts').select().order('created_at', true)
+            const posts = await db.from('posts').select().order('created_at',{ascending:false} )
             setPosts(posts.data)
         }
         fetchData()
@@ -33,14 +30,11 @@ export default function AdminForum({ session }){
             db.from('posts').select().then((response) => {
                 setPosts(response.data);
             });
-            // setSuccessAlert('Post eliminato con successo!')
 
         } catch (error) {
             console.error(error);
         }
     }
-
-    // setTimeout(() => setSuccessAlert(''), 10000)
 
     return (
         <div className="container">

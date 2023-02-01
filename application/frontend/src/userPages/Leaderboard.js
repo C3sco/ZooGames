@@ -28,7 +28,7 @@ export default function Leaderboard({ session }) {
     };
 
     useEffect(() => {
-        supabase.from('users').select().then((response) => {
+        supabase.from('users').select().order('score',{ascending:false}).then((response) => {
             setUsers(response.data);
         });
     }, []);
