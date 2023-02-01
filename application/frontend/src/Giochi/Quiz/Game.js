@@ -56,7 +56,6 @@ function Game({ quizData, session }) {
   };
 
   let pageContent;
-  // let pageKey;
   let finalScore;
   async function updateScore(userId, score) {
     if (userId != null && isGameOver && !scoreUpdated) {
@@ -75,7 +74,6 @@ function Game({ quizData, session }) {
   }
 
   if (isGameOver) {
-    // pageKey = "EndScreen";
     if (session != null) {
       updateScore(session.user.id, score)
     }
@@ -88,7 +86,6 @@ function Game({ quizData, session }) {
       />
     );
   } else {
-    // pageKey = triviaIndex;
     const triviaQuestion = quizData[triviaIndex];
     const { correct_answer, incorrect_answers, question, difficulty } = triviaQuestion;
     pageContent = (

@@ -11,17 +11,12 @@ function Checkout({cart, setCart}) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // Validate form inputs
         if (!name || !address || !email || !phone) {
             alert('Perfavore riempi tutti i campi');
             return;
         }
-        // Send the order details to your server
-        // ...
-        // Clear the cart
         alert('Ordine piazzato con successo!');
         setCart([]);
-        
     }
 
     return (
@@ -29,7 +24,7 @@ function Checkout({cart, setCart}) {
         <h1>Perfavore, completa i seguenti campi per completare l'acquisto</h1>
         <form className='checkout' onSubmit={handleSubmit}>
             <label>
-                Name:
+                Nome:
                 <input
                     type="text"
                     value={name}
@@ -37,7 +32,7 @@ function Checkout({cart, setCart}) {
                 />
             </label>
             <label>
-                Address:
+                Indirizzo:
                 <input
                     type="text"
                     value={address}
@@ -53,7 +48,7 @@ function Checkout({cart, setCart}) {
                 />
             </label>
             <label>
-                Phone:
+                Telefono:
                 <input
                     type="tel"
                     value={phone}

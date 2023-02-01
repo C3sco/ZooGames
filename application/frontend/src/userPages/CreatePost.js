@@ -83,7 +83,7 @@ const CreatePost = ({ session }) => {
                     {categoryError && <div className="text-danger">{categoryError}</div>}
                 </div>
                 <br></br>
-                <PostImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
+                <PostImage
                     url={image}
                     id={id}
                     size={200}

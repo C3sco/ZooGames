@@ -90,7 +90,6 @@ const AnimalNews = () => {
 }
 
 function connect() {
-    //API_KEY -> 2c965b0e26694da49d9b0ecbdbb41348
     let myConnection = new XMLHttpRequest();
     myConnection.open("GET", "https://newsapi.org/v2/everything?q=animal&apiKey=8739329819f94fcfbbef4893bb9fd32a", false);
     myConnection.send("null");

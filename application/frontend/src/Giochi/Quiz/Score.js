@@ -2,9 +2,9 @@ import './quiz.css'
 
 function Stat({ label, value }) {
     return (
-      <li className="stats__stat-container">
-        <div className="stats__stat-label">{label}:</div>
-        <div className="stats__stat-value">{value}</div>
+      <li className="stats_container">
+        <div className="stats_label">{label}:</div>
+        <div className="stats_value">{value}</div>
       </li>
     );
   }

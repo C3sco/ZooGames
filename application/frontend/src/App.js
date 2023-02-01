@@ -9,7 +9,6 @@ import Video from "./Giochi/Video.js"
 import ImpiccatoPage from "./Giochi/Impiccato/ImpiccatoPage.js"
 import Dashboard from "./userPages/Dashboard.js";
 import LoginSupabase from "./components/LoginSupabase.js";
-// import Register from "./components/Register.js"
 import { supabase } from "./components/Database.js";
 import { useState, useEffect } from 'react'
 import QuizPage from "./Giochi/Quiz/QuizPage.js";

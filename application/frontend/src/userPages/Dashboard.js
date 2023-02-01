@@ -126,7 +126,7 @@ const Dashboard = ({ session }) => {
           {adminUpdate && <div className="text-success">{adminUpdate}</div>}
           {adminRemove && <div className="text-danger">{adminRemove}</div>}
           </div>
-          <ProfileImage /* Richiama la classe ProfileImage in cui c'è il return del form, quindi bisogna modificare l'html di quello */
+          <ProfileImage
             url={image}
             id={id}
             size={200}

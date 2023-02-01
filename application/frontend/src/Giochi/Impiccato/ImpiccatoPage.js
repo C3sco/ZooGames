@@ -47,6 +47,7 @@ function Impiccato({ session }) {
   }, [words, loading]);
 
   useEffect(() => {
+    console.log(selectedWord)
 
     const handleKeydown = event => {
       const { key, keyCode } = event;

@@ -16,8 +16,8 @@ function QuizItem({
   const allAnswers = [correctAnswer, ...incorrectAnswers];
   const [shuffledAnswers] = useState(() => random(allAnswers));
 
-  let nextButtonClassName = "trivia-item__button trivia-item__next-button";
-  if (!hasPickedAnswer) nextButtonClassName += " trivia-item__button--disabled";
+  let nextButtonClassName = "quiz_button quiz_next-button";
+  if (!hasPickedAnswer) nextButtonClassName += " quiz_button--disabled";
 
   const onAnswerClick = (event) => {
     const playerAnswer = event.target.innerHTML;
@@ -28,20 +28,20 @@ function QuizItem({
 
   return (
     <div>
-      <p className="trivia-item__difficulty">Difficoltà: {difficulty}</p>
-      <p className="trivia-item__question">{question}</p>
-      <ul className="trivia-item__answers">
+      <p className="quiz_difficulty">Difficoltà: {difficulty}</p>
+      <p className="quiz_question">{question}</p>
+      <ul className="quiz_answers">
         {shuffledAnswers.map((answer, i) => {
-          let className = "trivia-item__button";
+          let className = "quiz_button";
           if (hasPickedAnswer) {
             const pickedThisAnswer = answer === selectedAnswer;
             const isThisCorrect = answer === correctAnswer;
             if (pickedThisAnswer && isThisCorrect) {
-              className += " trivia-item__button--correct";
+              className += " quiz_button--correct";
             } else if (pickedThisAnswer && !isThisCorrect) {
-              className += " trivia-item__button--incorrect";
+              className += " quiz_button--incorrect";
             } else {
-              className += " trivia-item__button--disabled";
+              className += " quiz_button--disabled";
             }
           }
 

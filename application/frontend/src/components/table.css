@@ -1,6 +1,3 @@
-/*   
-    Modificare le ultime due colonne dove ci sono i buttons, mettere i bottoni più belli e togliere i bordi
-*/
 
 input[type=text] {
   border: 2px inset lightgray;
@@ -29,15 +26,4 @@ tr:hover {
 th {
   font-weight: bold;
   text-align: center;
-}
-
-@media only screen and (max-width: 600px) {
-  table {
-    width: 100%;
-  }
-
-  th:first-child,
-  td:first-child {
-    display: none;
-  }
 }
