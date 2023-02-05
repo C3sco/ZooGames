@@ -6,12 +6,6 @@ import './dashboard.css'
 import '../buttons.css'
 import Loading from '../components/Loading.js';
 
-/* 
-Questa è la schermata che appare all'utente una volta loggato.
-Bisogna sistemare l'html in modo da renderla un po' più bella, il js funziona.
-Sistemare lo score e l'avatar
-*/
-
 const Dashboard = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
