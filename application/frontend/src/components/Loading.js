@@ -6,7 +6,6 @@ function Loading(props) {
     borderWidth = "0.5em",
     spinnerColor = "#6060ff",
     backgroundColor = "rgba(86, 86, 86, 0.1)",
-    screenReaderMessage = "Loading...",
     style = {},
   } = props;
 
@@ -25,7 +24,6 @@ function Loading(props) {
       <div
         className="loading-spinner__spinner"
         style={loaderStyle}
-        aria-label={screenReaderMessage}
       />
       CARICAMENTO....
     </div>
