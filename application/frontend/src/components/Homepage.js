@@ -44,7 +44,7 @@ export default function Homepage() {
             <div class="card-body" style={{padding:'10px'}}>
               <p class="card-text" style={{fontWeight:'bold'}}>Video divertenti e buffi sugli animali. Dacci un'occhiata!</p>
               <div class="btn-group">
-                <Link to='../../Giochi/Impiccato/ImpiccatoPage'><button type="button" class="c3-play">Scopri</button></Link>
+                <Link to='../../Giochi/Video'><button type="button" class="c3-play">Scopri</button></Link>
               </div>
             </div>
           </div>
