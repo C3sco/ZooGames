@@ -29,6 +29,8 @@ Only logged users can access:
 To access admin pages you will need another admin authorization, otherwise you won't be able to see them <br>
 For testing purpose in the Dashboard you can set yourself as admin so that you will see admin pages <br><br>
 
+Inside Database.js connect your database (we used Supabase)
+
 Project members:
 - Francesco Montanari - francesco.montanar24@studio.unibo.it 0000924491
 - Giacomo Fantanto - giacomo.fantato@studio.unibo.it 0000924979
